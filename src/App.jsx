@@ -2,10 +2,12 @@ import "./App.css"
 
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
+import { Header } from "./components/atoms/Header"
+
 export const App = () => {
   return (
     <BrowserRouter>
-      <h1>Add here the application header</h1>
+      <Header />
       <main>
         <Routes>
           <Route path='/' element={<h2>Add here the home page</h2>} />
