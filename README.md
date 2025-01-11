@@ -3,13 +3,8 @@ This project contains the frontend part of the final ("*Full-Stack Developer*") 
 It has been developed with all gathered information and knowledge learnt from the master (React and JS).
 
 ## Table of Contents
-1. [How it was created](#how-it-was-created)
-2. [Additional dependencies installed](#additional-dependencies-installed)
-    1. [React Router](#1-react-router)
-    2. [React Hook Form](#2-react-hook-form)
-3. [How to run the project](#how-to-run-the-project)
-4. [Description](#description)
-5. [List of functions](#list-of-functions)
+1. [Description](#description)
+2. [Features](#features)
    1. [Users](#users)
       1. [Consumer](#consumer)
       2. [Store](#store)
@@ -21,8 +16,129 @@ It has been developed with all gathered information and knowledge learnt from th
       1. [Wine bottles](#wine-bottles)
 
    3. [General](#general)
+3. [How it was created](#how-it-was-created)
+4. [Additional dependencies installed](#additional-dependencies-installed)
+    1. [React Router](#1-react-router)
+    2. [React Hook Form](#2-react-hook-form)
+5. [How to run the project](#how-to-run-the-project)
+
+
 
 ---
+
+## Description
+
+This project is the user interface for the wine app, designed to provide an intuitive and personalized experience. Users can register, browse wines, rate bottles, and manage their profiles. The app is focused on consumers, wineries, and managers, with specific functions for each type of user.
+
+## Features
+
+   **Users**
+
+   1. **Consumer**
+
+      Register:
+
+      Must be over 18 years old.
+      Define geolocation.
+      Mandatory list of experience: Newbie, Apprentice, Expert, Master, Professional.
+      Optional descriptive text (with examples in the placeholders).
+      A confirmation email is sent upon registration.
+
+      Features:
+
+      Login and Logout.
+      Rate bottles of wine.
+      Filter bottles and wineries with detailed information.
+      Verification status.
+      Internal achievements (years of experience, reviewed bottles, time in the system).
+      User status (for example, "TOP").
+      Contact administrators.
+      Edit profile.
+      Delete account.
+      Subscription to notifications of new bottles of wine that meet certain parameters:
+      An email is sent when there is a new "match".
+      Receive a monthly email with an informative newsletter.
+
+    
+    2. **Store**
+       
+      Register:
+
+      You must be over 18 years old.
+      A confirmation email is sent upon registration.
+
+      Features:
+
+      Login and Logout.
+      Request approval to register wine bottles.
+      Request approval to offer information about the winery:
+      Website.
+      Location.
+      Filter bottles and wineries with detailed information.
+      Verification status.
+      Contact administrators.
+      Modify profile.
+
+
+    
+    3. **Administrator**
+
+      Register:
+
+      Team members can register as administrators.   
+
+      Features:
+
+      Login and Logout.
+      Accept or deny requests to register bottles from wineries.
+      Accept or deny requests to provide information from wineries.
+      Delete accounts of consumer users or wineries.
+      Contact consumer users and wineries.   
+ 
+
+
+    4. **Visitors**
+
+      Features:
+
+      Filter bottles and wineries with limited information.
+
+
+    5. **Registered users**
+
+      Features:
+         
+      Filter bottles and wineries with complete information.   
+
+    **Product**
+
+    1. **Wine bottles**
+
+      Features:
+
+      Rated by consumer users.
+      Associated with:
+      Wine regions (which offer additional information).
+      Denominations of Origin (DO), if applicable.
+      Registration requested by winery users and approved by administrators.
+      Initial database includes:
+      Data from Europe, America and Oceania.
+      Filtering   
+
+    **General**
+
+      Features:
+
+      Confirmation of age upon entering the application.
+      Confirmation of acceptance of cookies.
+      Application completely in Spanish.
+      Technologies Used
+      Backend Framework: [Framework name, for example, Django, Express.js, etc.]
+      Database: [Database name, for example, PostgreSQL, MongoDB, etc.]
+      Authentication: [JWT, OAuth2, etc.]
+      Email: [Mail service, for example, SendGrid, Nodemailer, etc.]
+      Geolocation: [API used, for example, Google Maps, OpenStreetMap, etc.]
+      DO/Regions: [Data source, for example, external databases, manual, etc.]
 
 ## How it was created
 
@@ -82,125 +198,3 @@ As this is a React (front-end) application, it is set to be launched simply with
 npm run dev
 ```
 Frontend should be running at **http://localhost:5173/**.
-
-
-## Description
-
-Este proyecto es la interfaz de usuario para la aplicación de vinos, diseñada para proporcionar una experiencia intuitiva y personalizada. Los usuarios pueden registrarse, explorar vinos, valorar botellas, y gestionar sus perfiles. La aplicación está enfocada en consumidores, bodegas y administradores, con funciones específicas para cada tipo de usuario.
-
-
-
-## List of functions
-
-   **Users**
-
-   1. **Consumer**
-
-      Record:
-
-        Debe ser mayor de 18 años.
-        Definir geolocalización.
-        Listado obligatorio de experiencia: Novato, Aprendiz, Experto, Master, Profesional.
-        Texto descriptivo opcional (con ejemplos en los placeholders).
-        Se envía un correo de confirmación al registrarse.
-
-      Actions:
-
-        Login y Logout.
-        Valorar botellas de vino.
-        Filtrar botellas y bodegas con información detallada.
-        Estado de verificación.
-        Logros internos (años de experiencia, botellas reseñadas, tiempo en el sistema).
-        Estatus de usuario (por ejemplo, "TOP").
-        Contactar con administradores.
-        Modificar perfil.
-        Eliminar cuenta.
-        Suscripción a avisos de nuevas botellas de vino que cumplan ciertos parámetros:
-        Se envía un correo cuando hay un nuevo "match".
-        Recepción de un correo mensual con un newsletter informativo.
-
-
-    
-    2. **Store**
-       
-       Record:
-         Debe ser mayor de 18 años.
-         Se envía un correo de confirmación al registrarse.
-
-       Actions:
-
-         Login y Logout.
-         Pedir aprobación para registrar botellas de vino.
-         Pedir aprobación para ofrecer información sobre la bodega:
-         Página web.
-         Ubicación.
-         Filtrar botellas y bodegas con información detallada.
-         Estado de verificación.
-         Contactar con administradores.
-         Modificar perfil.
-
-
-    
-    3. **Administrator**
-
-       Record:
-
-         Los integrantes del equipo pueden registrarse como administradores.
-
-       Actions:
-
-         Login y Logout.
-         Aceptar o denegar solicitudes de registro de botellas por parte de bodegas.
-         Aceptar o denegar solicitudes de ofrecer información de bodegas.
-         Eliminar cuentas de usuarios consumidores o bodegas.
-         Contactar con usuarios consumidores y bodegas.
- 
-
-
-    4. **Visitors**
-
-       Actions:
-
-         Filtrar botellas y bodegas con información limitada.
-
-
-
-    5. **Registered users**
-
-       Actions:
-         
-         Filtrar botellas y bodegas con información completa.
-
-
-
-
-    **Product**
-
-    1. **Wine bottles**
-
-       Actions:
-
-         Valoradas por usuarios consumidores.
-         Asociadas a:
-         Regiones vitivinícolas (que ofrecen información adicional).
-         Denominaciones de Origen (DO), si aplica.
-         Registro solicitado por usuarios bodega y aprobado por administradores.
-         Base de datos inicial incluye:
-         Datos de Europa, América y Oceanía.
-         Filtrado
-
-
-    **General**
-
-       Actions:
-
-         Confirmación de mayoría de edad al entrar a la aplicación.
-         Confirmación de aceptación de cookies.
-         Aplicación completamente en castellano.
-         Tecnologías Utilizadas
-         Framework Backend: [Nombre del framework, por ejemplo, Django, Express.js, etc.]
-         Base de Datos: [Nombre de la base de datos, por ejemplo, PostgreSQL, MongoDB, etc.]
-         Autenticación: [JWT, OAuth2, etc.]
-         Correo Electrónico: [Servicio de correo, por ejemplo, SendGrid, Nodemailer, etc.]
-         Geolocalización: [API utilizada, por ejemplo, Google Maps, OpenStreetMap, etc.]
-         DO/Regiones: [Fuente de datos, por ejemplo, bases de datos externas, manual, etc.]
