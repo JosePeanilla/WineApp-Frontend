@@ -2,13 +2,14 @@ import "../Forms.css"
 
 import { useCallback } from "react"
 import { useForm } from "react-hook-form"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 /* Internal logger */
 import { Logger } from "/src/utils/Logger.jsx"
 
 export const ConsumerUserRegisterForm = () => {
   const logger = new Logger(useLocation().pathname)
+  const navigate = useNavigate();
 
   const handleOnSubmit = useCallback(async (formsData) => {
     try {
@@ -20,6 +21,8 @@ export const ConsumerUserRegisterForm = () => {
       const newConsumerUser = await response.json()
       if (!response.ok) throw new Error(newConsumerUser.msg)
       logger.debug("Consumer user created successfully, with ID:", newConsumerUser.ID)
+      alert("[SUCCESS] Consumer user created successfully!")
+      navigate('/')
     } catch (error) {
       logger.error("Consumer user could not be created!\n", error)
       alert(`[ERROR] Consumer user could not be created!\n${error}`)
