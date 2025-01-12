@@ -7,10 +7,9 @@ It has been developed with all gathered information and knowledge learnt from th
 2. [Features](#features)
    1. [Users](#users)
       1. [Consumer](#consumer)
-      2. [Store](#store)
+      2. [Wineries](#store)
       3. [Administrator](#administrator)
       4. [Visitors](#visitors)
-      5. [Registered users](#registered-users)
 
    2. [Product](#product) 
       1. [Wine bottles](#wine-bottles)
@@ -39,14 +38,15 @@ This project is the user interface for the wine app, designed to provide an intu
       Register:
 
       Must be over 18 years old.
-      Define geolocation.
-      Mandatory list of experience: Newbie, Apprentice, Expert, Master, Professional.
-      Optional descriptive text (with examples in the placeholders).
+      Mandatory list of experience: Newbie - 0 experience in wines, Apprentice - starting, Professional - Have a job related.
       A confirmation email is sent upon registration.
 
       Features:
 
-      Login and Logout.
+      Login.
+      Logout.
+      Once all the requirements have been met, the user is registered and a confirmation email is sent.
+      Filter bottles and wineries with complete information. 
       Rate bottles of wine.
       Filter bottles and wineries with detailed information.
       Verification status.
@@ -60,7 +60,7 @@ This project is the user interface for the wine app, designed to provide an intu
       Receive a monthly email with an informative newsletter.
 
     
-    2. **Store**
+    2. **Wineries**
        
       Register:
 
@@ -99,16 +99,11 @@ This project is the user interface for the wine app, designed to provide an intu
 
     4. **Visitors**
 
+    They are unregistered visitors, they will have limited functionality, for example: view and filter bottles with partial information
+
       Features:
 
       Filter bottles and wineries with limited information.
-
-
-    5. **Registered users**
-
-      Features:
-         
-      Filter bottles and wineries with complete information.   
 
     **Product**
 
