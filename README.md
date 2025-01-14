@@ -5,12 +5,12 @@ It has been developed with all gathered information and knowledge learnt from th
 ## Table of Contents
 1. [Description](#description)
 2. [Features](#features)
-   1. [Users](#users)
+   1. [General](#general)
+   2. [Users](#users)
       1. [Consumer](#consumer)
       2. [Wineries](#wineries)
       3. [Administrator](#administrator)
       4. [Visitors](#visitors)
-   2. [General](#general)
 3. [How it was created](#how-it-was-created)
 4. [Additional dependencies installed](#additional-dependencies-installed)
     1. [React Router](#react-router)
@@ -27,78 +27,6 @@ This project is the user interface for the wine app, designed to provide an intu
 
 The wine app offers the following features, divided by topic:
 
-### Users
-
-#### Consumer
-
-      Register:
-
-      Must be over 18 years old.
-      Mandatory list of experience: Newbie - 0 experience in wines, Apprentice - starting, Professional - Have a job related.
-
-      A consumer user should be able to:
-
-      Login.
-      Logout.
-      Once all the requirements have been met, the user is registered and a confirmation email is sent.
-      Filter bottles and wineries with complete information. 
-      Rate bottles of wine.
-      Verification status.
-      Internal achievements (years of experience, reviewed bottles, time in the system).
-      User status (for example, "TOP").
-      Contact administrators.
-      Edit profile.
-      Delete account.
-      Subscription to notifications of new bottles of wine that meet certain parameters:
-      An email is sent when there is a new "match".
-      Receive a monthly email with an informative newsletter.
-      A confirmation email is sent upon registration.
-
-#### Wineries
-       
-      Register:
-
-      You must be over 18 years old.
-      A confirmation email is sent upon registration.
-
-      A winery user should be able to:
-
-      Login and Logout.
-      Request approval to register wine bottles.
-      Request approval to offer information about the winery:
-      Website.
-      Location.
-      Filter bottles and wineries with detailed information.
-      Verification status.
-      Contact administrators.
-      Modify profile.
-
-
-    
-#### Administrator
-
-      Register:
-
-      Team members can register as administrators.   
-
-      An administrator user should be able to:
-
-      Login and Logout.
-      Accept or deny requests to register bottles from wineries.
-      Accept or deny requests to provide information from wineries.
-      Delete accounts of consumer users or wineries.
-      Contact consumer users and wineries.   
- 
-
-
-#### Visitors
-
-    They are unregistered visitors, they will have limited functionality, for example: view and filter bottles with partial information
-
-      Visitors should be able to:
-
-      Filter bottles and wineries with limited information.
-
 ### General
 
       Features:
@@ -114,9 +42,73 @@ The wine app offers the following features, divided by topic:
       Geolocation: [API used, for example, Google Maps, OpenStreetMap, etc.]
       DO/Regions: [Data source, for example, external databases, manual, etc.]
 
+### Users
+
+#### Consumer
+
+      A user consumer can register itself into the web application.  
+      It must be over 18 years old, and must select its experience:
+        - Newbie (no experience in wines)
+        - Apprentice (starting in this world)
+        - Professional (have a job related)
+      Once all the requirements have been met, the user is registered and a confirmation email is sent.
+
+      A user should be able to:
+
+      Login.
+      Logout.
+      Internal achievements (years of experience, reviewed bottles, time in the system).
+      User status (for example, "TOP").
+      Contact administrators.
+      Edit profile.
+      Delete account.
+      Subscription to notifications of new bottles of wine that meet certain parameters:
+      An email is sent when there is a new "match".
+      Receive a monthly email with an informative newsletter.
+      A confirmation email is sent upon registration.
+
+#### Wineries
+       
+      A winery user can register in the web application.
+      You must be over 18 years old.
+      A confirmation email is sent upon registration.
+
+      A winery user should be able to:
+
+      Login and Logout.
+      Request approval to register wine bottles.
+      Request approval to offer information about the winery:
+      Website.
+      Location.
+      Filter bottles and wineries with detailed information.
+      Verification status.
+      Contact administrators.
+      Modify profile.
+    
+#### Administrator
+
+      An administrator user needs credentials
+      Team members can register as administrators.   
+
+      An administrator user should be able to:
+
+      Login and Logout.
+      Accept or deny requests to register bottles from wineries.
+      Accept or deny requests to provide information from wineries.
+      Delete accounts of consumer users or wineries.
+      Contact consumer users and wineries.   
+ 
+#### Visitors
+
+    They are unregistered visitors, they will have limited functionality, for example: view and filter bottles with partial information
+
+      Visitors should be able to:
+
+      Filter bottles and wineries with limited information.
+
 ## How it was created
 
-To initialize the project, follow these steps:
+To initialize the project, below steps were followed:
 
 1. **Clone** the repository
     ```bash
