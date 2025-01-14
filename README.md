@@ -10,13 +10,11 @@ It has been developed with all gathered information and knowledge learnt from th
       2. [Wineries](#wineries)
       3. [Administrator](#administrator)
       4. [Visitors](#visitors)
-   2. [Product](#product) 
-      1. [Wine bottles](#wine-bottles)
-      2. [General](#general)
+   2. [General](#general)
 3. [How it was created](#how-it-was-created)
 4. [Additional dependencies installed](#additional-dependencies-installed)
-    1. [React Router](#1-react-router)
-    2. [React Hook Form](#2-react-hook-form)
+    1. [React Router](#react-router)
+    2. [React Hook Form](#react-hook-form)
 5. [How to run the project](#how-to-run-the-project)
 
 ---
@@ -101,22 +99,7 @@ The wine app offers the following features, divided by topic:
 
       Filter bottles and wineries with limited information.
 
-### Product
-
-#### Wine bottles
-
-      Features:
-
-      Rated by consumer users.
-      Associated with:
-      Wine regions (which offer additional information).
-      Denominations of Origin (DO), if applicable.
-      Registration requested by winery users and approved by administrators.
-      Initial database includes:
-      Data from Europe, America and Oceania.
-      Filtering   
-
-#### General
+### General
 
       Features:
 
