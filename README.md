@@ -10,7 +10,6 @@ It has been developed with all gathered information and knowledge learnt from th
       2. [Wineries](#wineries)
       3. [Administrator](#administrator)
       4. [Visitors](#visitors)
-
    2. [Product](#product) 
       1. [Wine bottles](#wine-bottles)
       2. [General](#general)
@@ -19,8 +18,6 @@ It has been developed with all gathered information and knowledge learnt from th
     1. [React Router](#1-react-router)
     2. [React Hook Form](#2-react-hook-form)
 5. [How to run the project](#how-to-run-the-project)
-
-
 
 ---
 
