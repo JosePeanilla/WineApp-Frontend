@@ -7,14 +7,13 @@ It has been developed with all gathered information and knowledge learnt from th
 2. [Features](#features)
    1. [Users](#users)
       1. [Consumer](#consumer)
-      2. [Wineries](#store)
+      2. [Wineries](#wineries)
       3. [Administrator](#administrator)
       4. [Visitors](#visitors)
 
    2. [Product](#product) 
       1. [Wine bottles](#wine-bottles)
-
-   3. [General](#general)
+      2. [General](#general)
 3. [How it was created](#how-it-was-created)
 4. [Additional dependencies installed](#additional-dependencies-installed)
     1. [React Router](#1-react-router)
@@ -31,24 +30,24 @@ This project is the user interface for the wine app, designed to provide an intu
 
 ## Features
 
-   **Users**
+The wine app offers the following features, divided by topic:
 
-   1. **Consumer**
+### Users
+
+#### Consumer
 
       Register:
 
       Must be over 18 years old.
       Mandatory list of experience: Newbie - 0 experience in wines, Apprentice - starting, Professional - Have a job related.
-      A confirmation email is sent upon registration.
 
-      Features:
+      A consumer user should be able to:
 
       Login.
       Logout.
       Once all the requirements have been met, the user is registered and a confirmation email is sent.
       Filter bottles and wineries with complete information. 
       Rate bottles of wine.
-      Filter bottles and wineries with detailed information.
       Verification status.
       Internal achievements (years of experience, reviewed bottles, time in the system).
       User status (for example, "TOP").
@@ -58,16 +57,16 @@ This project is the user interface for the wine app, designed to provide an intu
       Subscription to notifications of new bottles of wine that meet certain parameters:
       An email is sent when there is a new "match".
       Receive a monthly email with an informative newsletter.
+      A confirmation email is sent upon registration.
 
-    
-    2. **Wineries**
+#### Wineries
        
       Register:
 
       You must be over 18 years old.
       A confirmation email is sent upon registration.
 
-      Features:
+      A winery user should be able to:
 
       Login and Logout.
       Request approval to register wine bottles.
@@ -81,13 +80,13 @@ This project is the user interface for the wine app, designed to provide an intu
 
 
     
-    3. **Administrator**
+#### Administrator
 
       Register:
 
       Team members can register as administrators.   
 
-      Features:
+      An administrator user should be able to:
 
       Login and Logout.
       Accept or deny requests to register bottles from wineries.
@@ -97,17 +96,17 @@ This project is the user interface for the wine app, designed to provide an intu
  
 
 
-    4. **Visitors**
+#### Visitors
 
     They are unregistered visitors, they will have limited functionality, for example: view and filter bottles with partial information
 
-      Features:
+      Visitors should be able to:
 
       Filter bottles and wineries with limited information.
 
-    **Product**
+### Product
 
-    1. **Wine bottles**
+#### Wine bottles
 
       Features:
 
@@ -120,7 +119,7 @@ This project is the user interface for the wine app, designed to provide an intu
       Data from Europe, America and Oceania.
       Filtering   
 
-    **General**
+#### General
 
       Features:
 
@@ -137,7 +136,7 @@ This project is the user interface for the wine app, designed to provide an intu
 
 ## How it was created
 
-To initialize the project, below steps were followed:
+To initialize the project, follow these steps:
 
 1. **Clone** the repository
     ```bash
