@@ -21,7 +21,7 @@ It has been developed with all gathered information and knowledge learnt from th
 
 ## Description
 
-This project is the user interface for the wine app, designed to provide an intuitive and personalized experience. Users can register, browse wines, rate bottles, and manage their profiles. The app is focused on consumers, wineries, and managers, with specific functions for each type of user.
+This project is the user interface for the wine app, designed to provide an intuitive and personalized experience. Users can register, browse wines, rate bottles, and manage their profiles. The app is focused primarly on consumers. Therefore, wineries have the chance to promote their brand, products and regions.
 
 ## Features
 
