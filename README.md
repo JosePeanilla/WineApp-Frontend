@@ -13,8 +13,8 @@ It has been developed with all gathered information and knowledge learnt from th
       4. [Visitors](#visitors)
 3. [How it was created](#how-it-was-created)
 4. [Additional dependencies installed](#additional-dependencies-installed)
-    1. [React Router](#react-router)
-    2. [React Hook Form](#react-hook-form)
+    1. [React Hook Form](#react-hook-form)
+    2. [React Router](#react-router)
 5. [How to run the project](#how-to-run-the-project)
 
 ---
@@ -141,20 +141,20 @@ To initialize the project, below steps were followed:
 
 ## Additional dependencies installed
 
-### **[React Router](https://reactrouter.com/)**:
-
-This package is used to provide the frontend the ability to navigate and route.
-
-```bash
-npm install react-router-dom
-```
-
 ### **[React Hook Form](https://www.react-hook-form.com/)**:
 
 This package is used to provide the frontend the ability to handle forms in a simpler manner.
 
 ```bash
 npm install react-hook-form
+```
+
+### **[React Router](https://reactrouter.com/)**:
+
+This package is used to provide the frontend the ability to navigate and route.
+
+```bash
+npm install react-router-dom
 ```
 
 ## How to run the project
