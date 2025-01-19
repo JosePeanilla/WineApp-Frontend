@@ -20,6 +20,7 @@ export const ConsumerUserRegisterForm = () => {
       })
       const newConsumerUser = await response.json()
       if (!response.ok) throw new Error(newConsumerUser.msg)
+        localStorage.setItem("token", newConsumerUser.token)
       logger.debug("Consumer user created successfully, with ID:", newConsumerUser.ID)
       alert("[SUCCESS] Consumer user created successfully!")
       navigate('/')
@@ -31,7 +32,10 @@ export const ConsumerUserRegisterForm = () => {
 
   const { formState, handleSubmit, register } = useForm({
     defaultValues: {
-      name: ""
+      name: "",
+      surname: "",
+      email: "",
+      password: ""
     }
   })
 
@@ -55,6 +59,26 @@ export const ConsumerUserRegisterForm = () => {
             required: { message: requiredFieldErrorMessage, value: true }
           })}/>
           {formState.errors.surname && <p className="forms_field_error">{formState.errors.surname.message}</p>}
+        </div>
+        {/* Email field */}
+        <div>
+          <label htmlFor="email">Correo Electrónico:</label>  
+          <input name="email" 
+          type="email" 
+          {...register("email", { 
+            required: { message: requiredFieldErrorMessage, value: true },          
+          })} />
+          {formState.errors.email && <p className="forms_field_error">{formState.errors.email.message}</p>}  
+        </div>
+        {/* Password field */}
+        <div>
+          <label htmlFor="password">Contraseña:</label>  
+          <input name="password" 
+          type="password" 
+          {...register("password", {
+            required: { message: requiredFieldErrorMessage, value: true },
+          })} />
+          {formState.errors.password && <p className="forms_field_error">{formState.errors.password.message}</p>}
         </div>
         <button type="submit">Crear usuario</button>
       </form>
