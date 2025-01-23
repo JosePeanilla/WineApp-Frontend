@@ -9,7 +9,7 @@ import { Logger } from "/src/utils/Logger.jsx"
 
 export const ConsumerUserRegisterForm = () => {
   const logger = new Logger(useLocation().pathname)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleOnSubmit = useCallback(async (formsData) => {
     try {
@@ -31,7 +31,11 @@ export const ConsumerUserRegisterForm = () => {
 
   const { formState, handleSubmit, register } = useForm({
     defaultValues: {
-      name: ""
+      email: "",
+      name: "",
+      password: "",
+      password_confirm: "",
+      surname: ""
     }
   })
 
@@ -55,6 +59,30 @@ export const ConsumerUserRegisterForm = () => {
             required: { message: requiredFieldErrorMessage, value: true }
           })}/>
           {formState.errors.surname && <p className="forms_field_error">{formState.errors.surname.message}</p>}
+        </div>
+        {/* Email field */}
+        <div>
+          <label htmlFor="email">Correo electrónico:</label>
+          <input name="email" type="text" {...register("email", {
+            required: { message: requiredFieldErrorMessage, value: true },
+          })}/>
+          {formState.errors.email && <p className="forms_field_error">{formState.errors.email.message}</p>}
+        </div>
+        {/* Password field */}
+        <div>
+          <label htmlFor="password">Contraseña:</label>
+          <input name="password" type="password" {...register("password", {
+            required: { message: requiredFieldErrorMessage, value: true },
+          })}/>
+          {formState.errors.password && <p className="forms_field_error">{formState.errors.password.message}</p>}
+        </div>
+        {/* Password-Confirmation field */}
+        <div>
+          <label htmlFor="password_confirm">Confirmar Contraseña:</label>
+          <input name="password_confirm" type="password" {...register("password_confirm", {
+            required: { message: requiredFieldErrorMessage, value: true },
+          })}/>
+          {formState.errors.password_confirm && <p className="forms_field_error">{formState.errors.password_confirm.message}</p>}
         </div>
         <button type="submit">Crear usuario</button>
       </form>
