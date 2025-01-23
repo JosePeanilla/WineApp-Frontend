@@ -6,16 +6,16 @@ import { ConsumerRegisterForm } from "/src/components/atoms/Forms/ConsumerRegist
 
 export const RegisterPage = () => {
   const [viewConsumerForm, setViewConsumerForm] = useState(false)
-  const [viewWineryUserForm, setViewWineryUserForm] = useState(false)
+  const [viewWineryForm, setViewWineryForm] = useState(false)
 
   const handleConsumerButtonClick = () => {
     setViewConsumerForm(true)
-    setViewWineryUserForm(false)
+    setViewWineryForm(false)
   }
 
-  const handleWineryUserButtonClick = () => {
+  const handleWineryButtonClick = () => {
     setViewConsumerForm(false)
-    setViewWineryUserForm(true)
+    setViewWineryForm(true)
   }
 
   return (
@@ -27,11 +27,11 @@ export const RegisterPage = () => {
           <button onClick={handleConsumerButtonClick}>Consumidor</button>
         </li>
         <li>
-          <button onClick={handleWineryUserButtonClick}>Bodega</button>
+          <button onClick={handleWineryButtonClick}>Bodega</button>
         </li>
       </ul>
       {viewConsumerForm && <ConsumerRegisterForm />}
-      {viewWineryUserForm && <h4>Showing Winery User Form</h4>}
+      {viewWineryForm && <h4>Showing Winery User Form</h4>}
     </section>
   )
 }
