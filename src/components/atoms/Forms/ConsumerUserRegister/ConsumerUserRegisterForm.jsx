@@ -29,7 +29,7 @@ export const ConsumerUserRegisterForm = () => {
     }
   }, [])
 
-  const { formState, handleSubmit, register } = useForm({
+  const { formState, handleSubmit, register, watch } = useForm({
     defaultValues: {
       email: "",
       name: "",
@@ -38,6 +38,24 @@ export const ConsumerUserRegisterForm = () => {
       surname: ""
     }
   })
+
+  const requiredNonBlankTextMessage = "Este campo debe ser rellenado, almenos, por algún carácter que no sea un espacio.";
+  const validateNonBlankTextInTextField = (text) => {
+    if (text.trim().length > 0) return true
+    else {
+      logger.error(`${requiredNonBlankTextMessage}`)
+      return requiredNonBlankTextMessage
+    }
+  }
+
+  const passwordsMismatchErrorMessage = "Las contraseñas no coinciden, por favor compruébalo."
+  const validatePasswordsMatch = (confirmationPassword) => {
+    if (confirmationPassword === watch("password")) return true
+    else {
+      logger.error(passwordsMismatchErrorMessage)
+      return passwordsMismatchErrorMessage
+    }
+  }
 
   const requiredFieldErrorMessage = "Este campo es necesario, por favor rellénalo."
   return (
@@ -48,7 +66,8 @@ export const ConsumerUserRegisterForm = () => {
         <div>
           <label htmlFor="name">Nombre:</label>
           <input name="name" type="text" {...register("name", {
-            required: { message: requiredFieldErrorMessage, value: true }
+            required: { message: requiredFieldErrorMessage, value: true },
+            validate: validateNonBlankTextInTextField
           })}/>
           {formState.errors.name && <p className="forms_field_error">{formState.errors.name.message}</p>}
         </div>
@@ -56,7 +75,8 @@ export const ConsumerUserRegisterForm = () => {
         <div>
           <label htmlFor="surname">Apellidos:</label>
           <input name="surname" type="text" {...register("surname", {
-            required: { message: requiredFieldErrorMessage, value: true }
+            required: { message: requiredFieldErrorMessage, value: true },
+            validate: validateNonBlankTextInTextField
           })}/>
           {formState.errors.surname && <p className="forms_field_error">{formState.errors.surname.message}</p>}
         </div>
@@ -65,6 +85,7 @@ export const ConsumerUserRegisterForm = () => {
           <label htmlFor="email">Correo electrónico:</label>
           <input name="email" type="text" {...register("email", {
             required: { message: requiredFieldErrorMessage, value: true },
+            validate: validateNonBlankTextInTextField
           })}/>
           {formState.errors.email && <p className="forms_field_error">{formState.errors.email.message}</p>}
         </div>
@@ -73,6 +94,7 @@ export const ConsumerUserRegisterForm = () => {
           <label htmlFor="password">Contraseña:</label>
           <input name="password" type="password" {...register("password", {
             required: { message: requiredFieldErrorMessage, value: true },
+            validate: validateNonBlankTextInTextField
           })}/>
           {formState.errors.password && <p className="forms_field_error">{formState.errors.password.message}</p>}
         </div>
@@ -81,6 +103,7 @@ export const ConsumerUserRegisterForm = () => {
           <label htmlFor="password_confirm">Confirmar Contraseña:</label>
           <input name="password_confirm" type="password" {...register("password_confirm", {
             required: { message: requiredFieldErrorMessage, value: true },
+            validate: validatePasswordsMatch
           })}/>
           {formState.errors.password_confirm && <p className="forms_field_error">{formState.errors.password_confirm.message}</p>}
         </div>
