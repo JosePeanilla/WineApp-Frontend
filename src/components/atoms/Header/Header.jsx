@@ -18,10 +18,10 @@ export const Header = () => (
     <div id="user_register_login">
       <ul>
         <li>
-          <NavLink to="/register">Register</NavLink>
+          <NavLink to="/register">Registrarse</NavLink>
         </li>
         <li>
-          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/login">Iniciar Sesión</NavLink>
         </li>
       </ul>
     </div>
