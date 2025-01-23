@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 /* Internal logger */
 import { Logger } from "/src/utils/Logger.jsx"
 
-export const ConsumerUserRegisterForm = () => {
+export const ConsumerRegisterForm = () => {
   const logger = new Logger(useLocation().pathname)
   const navigate = useNavigate()
 
@@ -18,9 +18,9 @@ export const ConsumerUserRegisterForm = () => {
         headers: { 'Content-Type': 'application/json' },
         method: "POST"
       })
-      const newConsumerUser = await response.json()
-      if (!response.ok) throw new Error(newConsumerUser.msg)
-      logger.debug("Consumer user created successfully, with ID:", newConsumerUser.ID)
+      const newConsumer = await response.json()
+      if (!response.ok) throw new Error(newConsumer.msg)
+      logger.debug("Consumer user created successfully, with ID:", newConsumer.ID)
       alert("[SUCCESS] Consumer user created successfully!")
       navigate('/')
     } catch (error) {

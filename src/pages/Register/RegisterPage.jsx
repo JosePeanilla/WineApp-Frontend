@@ -2,19 +2,19 @@ import "./RegisterPage.css"
 
 import { useState } from "react"
 
-import { ConsumerUserRegisterForm } from "/src/components/atoms/Forms/ConsumerUserRegister"
+import { ConsumerRegisterForm } from "/src/components/atoms/Forms/ConsumerRegister"
 
 export const RegisterPage = () => {
-  const [viewConsumerUserForm, setViewConsumerUserForm] = useState(false)
+  const [viewConsumerForm, setViewConsumerForm] = useState(false)
   const [viewWineryUserForm, setViewWineryUserForm] = useState(false)
 
-  const handleConsumerUserButtonClick = () => {
-    setViewConsumerUserForm(true)
+  const handleConsumerButtonClick = () => {
+    setViewConsumerForm(true)
     setViewWineryUserForm(false)
   }
 
   const handleWineryUserButtonClick = () => {
-    setViewConsumerUserForm(false)
+    setViewConsumerForm(false)
     setViewWineryUserForm(true)
   }
 
@@ -24,13 +24,13 @@ export const RegisterPage = () => {
       <h3>¿Qué tipo de usuario eres?</h3>
       <ul id="users_kind_buttons">
         <li>
-          <button onClick={handleConsumerUserButtonClick}>Consumidor</button>
+          <button onClick={handleConsumerButtonClick}>Consumidor</button>
         </li>
         <li>
           <button onClick={handleWineryUserButtonClick}>Bodega</button>
         </li>
       </ul>
-      {viewConsumerUserForm && <ConsumerUserRegisterForm />}
+      {viewConsumerForm && <ConsumerRegisterForm />}
       {viewWineryUserForm && <h4>Showing Winery User Form</h4>}
     </section>
   )
