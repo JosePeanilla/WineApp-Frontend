@@ -2,7 +2,8 @@ import "./RegisterPage.css"
 
 import { useState } from "react"
 
-import { ConsumerRegisterForm } from "/src/components/atoms/Forms/ConsumerRegister"
+import { ConsumerRegisterForm } from "/src/components/molecules/Register/Consumer"
+import { WineryRegisterForm } from "/src/components/molecules/Register/Winery"
 
 export const RegisterPage = () => {
   const [viewConsumerForm, setViewConsumerForm] = useState(false)
@@ -31,7 +32,7 @@ export const RegisterPage = () => {
         </li>
       </ul>
       {viewConsumerForm && <ConsumerRegisterForm />}
-      {viewWineryForm && <h4>Showing Winery User Form</h4>}
+      {viewWineryForm && <WineryRegisterForm />}
     </section>
   )
 }

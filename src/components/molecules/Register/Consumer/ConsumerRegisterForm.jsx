@@ -1,4 +1,4 @@
-import "../Forms.css"
+import "/src/components/atoms/Forms/Forms.css"
 
 import { useCallback } from "react"
 import { useForm } from "react-hook-form"
