@@ -2,8 +2,8 @@ import "./RegisterPage.css"
 
 import { useState } from "react"
 
-import { ConsumerRegisterForm } from "/src/components/molecules/Register/Consumer"
-import { WineryRegisterForm } from "/src/components/molecules/Register/Winery"
+import { ConsumerRegisterForm } from "/src/components/organisms/Register/Consumer"
+import { WineryRegisterForm } from "/src/components/organisms/Register/Winery"
 
 export const RegisterPage = () => {
   const [viewConsumerForm, setViewConsumerForm] = useState(false)
