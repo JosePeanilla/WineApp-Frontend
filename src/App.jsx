@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Header } from "/src/components/atoms/Header"
 import { HomePage } from "/src/pages/Home"
 import { RegisterPage } from "/src/pages/Register"
-import { LoginPage } from "/src/pages/Login";
+import { LoginPage } from "/src/pages/Login"
 
 export const App = () => {
   return (

@@ -63,10 +63,8 @@ export const ConsumerUserRegisterForm = () => {
         {/* Email field */}
         <div>
           <label htmlFor="email">Correo Electrónico:</label>  
-          <input name="email" 
-          type="email" 
-          {...register("email", { 
-            required: { message: requiredFieldErrorMessage, value: true },          
+          <input name="email" type="email" {...register("email", {
+             required: { message: requiredFieldErrorMessage, value: true },          
           })} />
           {formState.errors.email && <p className="forms_field_error">{formState.errors.email.message}</p>}  
         </div>
