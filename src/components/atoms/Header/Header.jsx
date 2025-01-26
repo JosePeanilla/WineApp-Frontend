@@ -1,12 +1,10 @@
-import "./Header.css";
+import "./Header.css"
 
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
+import { useAuth } from "/src/context/AuthContext"
 
 export const Header = () => {
-  const logout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-  }
+  const { isAuthenticated, logout } = useAuth()
 
   return (
     <header>
@@ -26,15 +24,23 @@ export const Header = () => {
       </nav>
       <div id="user_register_login">
         <ul>
-          <li>
-            <NavLink to="/register">Register</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <button className="logout_button" onClick={logout}>Logout</button>
-          </li>
+          {!isAuthenticated && (
+            <>
+              <li>
+                <NavLink to="/register">Register</NavLink>
+              </li>
+              <li>
+                <NavLink to="/login">Login</NavLink>
+              </li>
+            </>
+          )}
+          {isAuthenticated && (
+            <li>
+              <button className="logout_button" onClick={logout}>
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </header>
