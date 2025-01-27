@@ -1,4 +1,4 @@
-/* Internal logger */
+/************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"

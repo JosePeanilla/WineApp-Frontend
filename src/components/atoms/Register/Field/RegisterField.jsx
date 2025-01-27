@@ -1,4 +1,4 @@
-/* Internal logger */
+/************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 
 export const RegisterField = ({ name, required=true, register, text, type="text", validate=undefined }) => {
