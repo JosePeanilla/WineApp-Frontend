@@ -1,2 +1,2 @@
-import { RegisterCredentials } from "./RegisterCredentials.jsx"
-export { RegisterCredentials }
+import { UserCredentials } from "./UserCredentials.jsx"
+export { UserCredentials }

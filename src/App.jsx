@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import { Header } from "/src/components/atoms/Header"
 import { HomePage } from "/src/pages/Home"
+import { LoginPage } from "/src/pages/Login"
 import { RegisterPage } from "/src/pages/Register"
 
 export const App = () => {
@@ -13,6 +14,7 @@ export const App = () => {
       <main>
         <Routes>
           <Route path='/' element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
           <Route path='*' element={<h2>Add here the not-found page</h2>} />
         </Routes>

@@ -1,0 +1,40 @@
+#login_page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#login_page > h2 {
+  margin: 15px;
+}
+
+#login_page form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+}
+
+#login_page label {
+  margin-bottom: 5px;
+}
+
+#login_page input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#login_page button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.3s;
+}
+
+#login_page button:hover {
+  background-color: #0056b3;
+}

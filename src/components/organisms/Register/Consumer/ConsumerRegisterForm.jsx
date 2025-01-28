@@ -22,7 +22,7 @@ export const ConsumerRegisterForm = () => {
       /* else */
       logger.debug("Consumer user created successfully, with ID:", newConsumer.ID)
       alert("[SUCCESS] Consumer user created successfully!")
-      navigate('/')
+      navigate('/login')
     } catch (error) {
       logger.error("Consumer user could not be created!\n", error)
       alert(`[ERROR] Consumer user could not be created!\n${error}`)

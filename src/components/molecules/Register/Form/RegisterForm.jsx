@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form"
 
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
-import { RegisterCredentials } from "/src/components/atoms/Register/Credentials"
 import { RegisterField } from "/src/components/atoms/Register/Field"
+import { UserCredentials } from "/src/components/atoms/Register/Credentials"
 
 export const RegisterForm = ({ formFields, formTitle, handleOnSubmit }) => {
-  const { formState, handleSubmit, register, watch } = useForm({
+  const { formState, handleSubmit, register } = useForm({
     defaultValues: formFields.reduce((accumulator, field) => {
       accumulator[field.name] = field.default?field.default:""
       return accumulator
@@ -25,10 +25,11 @@ export const RegisterForm = ({ formFields, formTitle, handleOnSubmit }) => {
             <FieldErrorP error={formState.errors[field.name]} />
           </div>
         ))}
-        <RegisterCredentials
+        <UserCredentials
           formState={formState}
+          is_register={true}
           register={register}
-          watch={watch}
+          section_id={"register_credentials"}
         />
         <button type="submit">Registrarse</button>
       </form>

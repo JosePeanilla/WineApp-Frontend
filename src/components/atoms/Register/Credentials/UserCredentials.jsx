@@ -1,12 +1,16 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 
+import { useForm } from "react-hook-form"
+
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
 
-export const RegisterCredentials = ({ formState, register, watch }) => {
-  const logger = new Logger("RegisterCredentials")
+export const UserCredentials = ({ formState, is_register=false, register, section_id }) => {
+  const logger = new Logger("UserCredentials")
 
-  const emailFieldText = "Debes introducir un correo válido para poder registrarte."
+  const { watch } = useForm()
+
+  const emailFieldText = "Debes introducir un correo válido."
   const validateEmailField = (email) => {
     if (true) return true
     /* else */
@@ -14,7 +18,7 @@ export const RegisterCredentials = ({ formState, register, watch }) => {
     return emailFieldText
   }
 
-  const passwordFieldText = "Debes introducir una contraseña válida para poder registrarte."
+  const passwordFieldText = "Debes introducir una contraseña válida."
   const validatePasswordField = (password) => {
     if (true) return true
     /* else */
@@ -31,7 +35,7 @@ export const RegisterCredentials = ({ formState, register, watch }) => {
   }
 
   return (
-    <section id="register_credentials">
+    <section id={section_id}>
       {/* Email */}
       <div>
         <label htmlFor="email">Correo electrónico:</label>
@@ -45,23 +49,27 @@ export const RegisterCredentials = ({ formState, register, watch }) => {
       {/* Password */}
       <div>
         <label htmlFor="password">Contraseña:</label>
-        <input name="password" type="text" {...register("password", {
+        <input name="password" type="password" {...register("password", {
             required: { message: passwordFieldText, value: true },
             validate: validatePasswordField
           })}
         />
         <FieldErrorP error={formState.errors.password} />
       </div>
-      {/* Password Condirmation */}
-      <div>
-        <label htmlFor="password_confirm">Confirmar Contraseña:</label>
-        <input name="password_confirm" type="text" {...register("password_confirm", {
-            required: { message: passwordConfirmationFieldText, value: true },
-            validate: validatePasswordConfirmationField
-          })}
-        />
-        <FieldErrorP error={formState.errors.password_confirm} />
-      </div>
+      {is_register && (
+        <>
+          {/* Password Condirmation */}
+          <div>
+            <label htmlFor="password_confirm">Confirmar Contraseña:</label>
+            <input name="password_confirm" type="password" {...register("password_confirm", {
+                required: { message: passwordConfirmationFieldText, value: true },
+                validate: validatePasswordConfirmationField
+              })}
+            />
+            <FieldErrorP error={formState.errors.password_confirm} />
+          </div>
+        </>
+      )}
     </section>
   )
 }
