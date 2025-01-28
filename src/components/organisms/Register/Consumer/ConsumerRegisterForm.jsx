@@ -17,15 +17,15 @@ export const ConsumerRegisterForm = () => {
         headers: { 'Content-Type': 'application/json' },
         method: "POST"
       })
-      const newConsumer = await response.json()
-      if (!response.ok) throw new Error(newConsumer.msg)
+      const jsonData = await response.json()
+      if (!response.ok) throw jsonData
       /* else */
-      logger.debug("Consumer user created successfully, with ID:", newConsumer.ID)
+      logger.debug("Consumer user created successfully, with ID:", jsonData.data)
       alert("[SUCCESS] Consumer user created successfully!")
       navigate('/login')
-    } catch (error) {
-      logger.error("Consumer user could not be created!\n", error)
-      alert(`[ERROR] Consumer user could not be created!\n${error}`)
+    } catch (err) {
+      logger.error(err.msg, err.error)
+      alert(`[ERROR] ${err.msg}`)
     }
   }, [])
 

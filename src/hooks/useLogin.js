@@ -11,10 +11,10 @@ export const useLogin = () => {
         headers: { "Content-Type": "application/json" },
         method: "POST"
       })
-      const json = await response.json()
-      if (json.error) return json
+      const jsonData = await response.json()
+      if (jsonData.error) return json
       else {
-        localStorage.setItem("token", json.data)
+        localStorage.setItem("token", jsonData.data)
         return { error: null }
       }
     } catch (err) {

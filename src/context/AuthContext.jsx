@@ -19,10 +19,10 @@ export const AuthProvider = ({ children }) => {
     const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user`, {
       headers: { Authorization: `Bearer ${token}` }
     })
-    const json = await response.json()
-    if (json.error) return null
+    const jsonData = await response.json()
+    if (jsonData.error) return null
     else {
-      setUser(json.data)
+      setUser(jsonData.data)
     }
   })
 

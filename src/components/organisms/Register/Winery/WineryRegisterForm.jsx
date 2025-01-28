@@ -17,15 +17,15 @@ export const WineryRegisterForm = () => {
         headers: { 'Content-Type': 'application/json' },
         method: "POST"
       })
-      const newWinery = await response.json()
-      if (!response.ok) throw new Error(newWinery.msg)
+      const jsonData = await response.json()
+      if (!response.ok) throw jsonData
       /* else */
-      logger.debug("Winery user created successfully, with ID:", newWinery.ID)
+      logger.debug("Winery user created successfully, with ID:", jsonData.data)
       alert("[SUCCESS] Winery user created successfully!")
       navigate('/')
-    } catch (error) {
-      logger.error("Winery user could not be created!\n", error)
-      alert(`[ERROR] Winery user could not be created!\n${error}`)
+    } catch (err) {
+      logger.error(err.msg, err.error)
+      alert(`[ERROR] ${err.msg}`)
     }
   }, [])
 
