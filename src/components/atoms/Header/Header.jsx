@@ -1,24 +1,13 @@
 import "./Header.css"
 
 import { NavLink } from "react-router-dom"
-import { useCallback, useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { useContext } from "react"
 
 import { AuthContext } from "/src/context/AuthContext"
-
-import { useLogout } from "/src/hooks/useLogout"
+import { LogoutBtn } from "/src/components/atoms/LogoutBtn"
 
 export const Header = () => {
-  const { setToken, user } = useContext(AuthContext)
-  const { logout } = useLogout()
-  const navigate = useNavigate()
-
-  const handleLogout = useCallback(() => {
-    logout()
-    setToken(null)
-    if (window.location !== "/") navigate('/')
-    window.location.reload()
-  }, [])
+  const { user } = useContext(AuthContext)
 
   return (
     <header>
@@ -47,7 +36,7 @@ export const Header = () => {
           )}
           {user && (
             <li>
-              <button className="logout_button" onClick={handleLogout}>Logout</button>
+              <LogoutBtn />
             </li>
           )}
         </ul>
