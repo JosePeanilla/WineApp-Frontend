@@ -39,15 +39,14 @@ export const WineryRegisterForm = () => {
       required: false,
       text: "Descripción"
     },
-    { /* Contact Email */
-      name: "contact_email",
-      required: false,
-      text: "Correo electrónico de contacto"
+    { /* Location */
+      name: "location",
+      text: "Localización (País)"
     },
-    { /* Contact Telephone */
-      name: "contact_telephone",
+    { /* Phone */
+      name: "phone",
       required: false,
-      text: "Teléfono de contacto"
+      text: "Teléfono"
     },
     { /* Webpage */
       name: "web_page",
