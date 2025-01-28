@@ -1,14 +1,10 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 
-import { useForm } from "react-hook-form"
-
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
 
-export const UserCredentials = ({ formState, is_register=false, register, section_id }) => {
+export const UserCredentials = ({ formState, is_register=false, register, section_id, watch=null }) => {
   const logger = new Logger("UserCredentials")
-
-  const { watch } = useForm()
 
   const emailFieldText = "Debes introducir un correo válido."
   const validateEmailField = (email) => {

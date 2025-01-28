@@ -5,7 +5,7 @@ import { RegisterField } from "/src/components/atoms/Register/Field"
 import { UserCredentials } from "/src/components/atoms/Register/Credentials"
 
 export const RegisterForm = ({ formFields, formTitle, handleOnSubmit }) => {
-  const { formState, handleSubmit, register } = useForm({
+  const { formState, handleSubmit, register, watch } = useForm({
     defaultValues: formFields.reduce((accumulator, field) => {
       accumulator[field.name] = field.default?field.default:""
       return accumulator
@@ -30,6 +30,7 @@ export const RegisterForm = ({ formFields, formTitle, handleOnSubmit }) => {
           is_register={true}
           register={register}
           section_id={"register_credentials"}
+          watch={watch}
         />
         <button type="submit">Registrarse</button>
       </form>
