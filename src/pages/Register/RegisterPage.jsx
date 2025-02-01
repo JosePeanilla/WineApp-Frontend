@@ -2,20 +2,21 @@ import "./RegisterPage.css"
 
 import { useState } from "react"
 
-import { ConsumerUserRegisterForm } from "/src/components/atoms/Forms/ConsumerUserRegister"
+import { ConsumerRegisterForm } from "/src/components/organisms/Register/Consumer"
+import { WineryRegisterForm } from "/src/components/organisms/Register/Winery"
 
 export const RegisterPage = () => {
-  const [viewConsumerUserForm, setViewConsumerUserForm] = useState(false)
-  const [viewWineryUserForm, setViewWineryUserForm] = useState(false)
+  const [viewConsumerForm, setViewConsumerForm] = useState(false)
+  const [viewWineryForm, setViewWineryForm] = useState(false)
 
-  const handleConsumerUserButtonClick = () => {
-    setViewConsumerUserForm(true)
-    setViewWineryUserForm(false)
+  const handleConsumerButtonClick = () => {
+    setViewConsumerForm(true)
+    setViewWineryForm(false)
   }
 
-  const handleWineryUserButtonClick = () => {
-    setViewConsumerUserForm(false)
-    setViewWineryUserForm(true)
+  const handleWineryButtonClick = () => {
+    setViewConsumerForm(false)
+    setViewWineryForm(true)
   }
 
   return (
@@ -24,14 +25,14 @@ export const RegisterPage = () => {
       <h3>¿Qué tipo de usuario eres?</h3>
       <ul id="users_kind_buttons">
         <li>
-          <button onClick={handleConsumerUserButtonClick}>Consumidor</button>
+          <button onClick={handleConsumerButtonClick}>Consumidor</button>
         </li>
         <li>
-          <button onClick={handleWineryUserButtonClick}>Bodega</button>
+          <button onClick={handleWineryButtonClick}>Bodega</button>
         </li>
       </ul>
-      {viewConsumerUserForm && <ConsumerUserRegisterForm />}
-      {viewWineryUserForm && <h4>Showing Winery User Form</h4>}
+      {viewConsumerForm && <ConsumerRegisterForm />}
+      {viewWineryForm && <WineryRegisterForm />}
     </section>
   )
 }

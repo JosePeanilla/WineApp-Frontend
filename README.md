@@ -1,110 +1,140 @@
 # Wine Application (Frontend) - Grupo Rojo
+
 This project contains the frontend part of the final ("*Full-Stack Developer*") master's work.  
 It has been developed with all gathered information and knowledge learnt from the master (React and JS).
 
 ## Table of Contents
+
 1. [Description](#description)
 2. [Features](#features)
-   1. [General](#general)
+   1. [General](#general-features)
    2. [Users](#users)
-      1. [Consumer](#consumer)
-      2. [Wineries](#wineries)
-      3. [Administrator](#administrator)
-      4. [Visitors](#visitors)
-3. [How it was created](#how-it-was-created)
-4. [Additional dependencies installed](#additional-dependencies-installed)
-    1. [React Router](#react-router)
+      1. [Administrator](#administrator)
+      2. [Consumer](#consumer)
+      3. [Visitor](#visitor)
+      4. [Winery](#winery)
+3. [How to run the project](#how-to-run-the-project)
+    1. [Prerequisites](#prerequisites)
+    2. [Execution](#execution)
+4. [How it was created](#how-it-was-created)
+5. [Additional dependencies installed](#additional-dependencies-installed)
+    1. [Moment](#moment)
     2. [React Hook Form](#react-hook-form)
-5. [How to run the project](#how-to-run-the-project)
+    3. [React Router](#react-router)
 
 ---
 
 ## Description
 
-This project is the user interface for the wine app, designed to provide an intuitive and personalized experience. Users can register, browse wines, rate bottles, and manage their profiles. The app is focused primarly on consumers. Therefore, wineries have the chance to promote their brand, products and regions.
+This project is the user interface for the wine app, designed to provide an intuitive and personalized experience.  
+Users can register, browse wines, rate bottles, and manage their profiles.  
+The app is focused primarly on consumers. Therefore, wineries have the chance to promote their brand, products and regions.
 
 ## Features
 
 The wine app offers the following features, divided by topic:
 
-### General
+### General Features
 
-      Features:
-
-      Confirmation of age upon entering the application.
-      Confirmation of acceptance of cookies.
-      Application completely in Spanish.
-      Technologies Used
-      Backend Framework: [Framework name, for example, Django, Express.js, etc.]
-      Database: [Database name, for example, PostgreSQL, MongoDB, etc.]
-      Authentication: [JWT, OAuth2, etc.]
-      Email: [Mail service, for example, SendGrid, Nodemailer, etc.]
-      Geolocation: [API used, for example, Google Maps, OpenStreetMap, etc.]
-      DO/Regions: [Data source, for example, external databases, manual, etc.]
+1. **Age review** - Visitor is requested to provide its age, and is permitted to access the content only if it has +18 years.
+2. **Cookies** - Visitor is requested to accept (or deny) the cookies.
+3. **Language** - The application is completely in Spanish.
+4. **Backend Framework** - The server is developed in `Express.js`.
+5. **Database** - `MongoDB`.
+6. **Frontend Framework** - The web application is developed with `Vite + React`.
+7. **Authentication** - `JWT` library is used.
+8. **Email** - It is yet not decided which mail service will be used.
 
 ### Users
 
-#### Consumer
-
-      A user consumer can register itself into the web application.  
-      It must be over 18 years old, and must select its experience:
-        - Newbie (no experience in wines)
-        - Apprentice (starting in this world)
-        - Professional (have a job related)
-      Once all the requirements have been met, the user is registered and a confirmation email is sent.
-
-      A user should be able to:
-
-      Login.
-      Logout.
-      Internal achievements (years of experience, reviewed bottles, time in the system).
-      User status (for example, "TOP").
-      Contact administrators.
-      Edit profile.
-      Delete account.
-      Subscription to notifications of new bottles of wine that meet certain parameters:
-      An email is sent when there is a new "match".
-      Receive a monthly email with an informative newsletter.
-      A confirmation email is sent upon registration.
-
-#### Wineries
-       
-      A winery user can register in the web application.
-      You must be over 18 years old.
-      A confirmation email is sent upon registration.
-
-      A winery user should be able to:
-
-      Login and Logout.
-      Request approval to register wine bottles.
-      Request approval to offer information about the winery:
-      Website.
-      Location.
-      Filter bottles and wineries with detailed information.
-      Verification status.
-      Contact administrators.
-      Modify profile.
-    
 #### Administrator
 
-      An administrator user needs credentials
-      Team members can register as administrators.   
+This is the kind of user only team members can be, no visitors.  
+They will have access and permission to everything, as well as "superpowers" to accept or deny users requests.
 
-      An administrator user should be able to:
+1. A team member shall be able to **register** as administrator, and shall be given **admin credentials**.
+2. An administrator shall be able to **login** and **logout** from the web app with its credentials.
+3. An administrator shall be able to **accept** or **deny** a winery request to add a bottle to its profile.
+4. An administrator shall be able to **accept** or **deny** a winery request to add more information to its profile.
+5. An administrator shall be able to **delete** any user account.
 
-      Login and Logout.
-      Accept or deny requests to register bottles from wineries.
-      Accept or deny requests to provide information from wineries.
-      Delete accounts of consumer users or wineries.
-      Contact consumer users and wineries.   
- 
-#### Visitors
+#### Consumer
 
-    They are unregistered visitors, they will have limited functionality, for example: view and filter bottles with partial information
+This is the usual kind of user, a wine bottles consumer which would like to rate or search this kind of product.
 
-      Visitors should be able to:
+1. A visitor shall be able to **register** as a consumer user, and shall be given **consumer credentials**.
+    > It must be over 18 years old, and it must select its expertise:
+    > - Newbie (no experience in wines)
+    > - Apprentice (starting in this world)
+    > - Professional (have a job related)
+    >
+    > Once all the requirements have been met, the user is registered, and a confirmation email is sent.
+2. A consumer user shall be able to **login** and **logout** from the web app with its credentials.
+3. A consumer user shall be able to **see** and **filter** wine bottles and wineries.
+    > All the information shall be displayed.
+4. A consumer user shall be able to **subscribe** to receive notifications when a *new bottle* (which meets defined parameters) is *added* to the web app.
+    > These notifications shall be handled by sending an email to the user.
+5. A consumer user shall be able to **subscribe** to receive a *monthly newsletter*.
+    > This newsletter shall contain the application updates information, and shall be handled by sending an email to the user.
+6. A consumer user shall be able to **edit** is profile freely.
+7. A consumer user shall be able to **contact** an administrator user.
+8. A consumer user shall be able to **delete** its account freely.
+9. A consumer user can have **internal achievements** (years of experience, reviewed bottles, time in the system).
+10. A consumer user can have different **user status** (e.g. `TOP`).
 
-      Filter bottles and wineries with limited information.
+#### Winery
+
+This is the kind of user which will actually fill the web app data.  
+They will provide which wines they offer, but will require always admin checks when adding information.
+
+1. A visitor shall be able to **register** as a winery user, and shall be given **winery credentials**.
+    > It must be over 18 years old, and it must provide a certificate to verify its authenticity.  
+    > Once all the requirements have been met, the user is registered, and a confirmation email is sent.
+2. A winery user shall be able to **login** and **logout** from the web app with its credentials.
+3. A winery user shall be able to **request** approval to add a *wine bottle* to its profile.
+    > It will require admin approval.
+4. A winery user shall be able to **see** and **filter** wine bottles and wineries.
+    > All the information shall be displayed.
+5. A winery user shall be able to **request** approval to *add* or *edit* information in its profile.
+    > Such as Location or Website, among others.  
+    > It will require admin approval.
+6. A winery user shall be able to **contact** an administrator user.
+7. A winery user can have different **verification status** (e.g. `Verified`).
+
+#### Visitor
+
+This is the kind of user which is not registered to the web app.  
+They will have access to everything, but with limited displayed information.
+
+1. A visitor shall be able to **access** the web app *without registering*.
+2. A non-registered user shall be able to **see** and **filter** wine bottles and wineries.
+    > Limited information shall be displayed.
+
+## How to run the project
+
+### Prerequisites
+
+These are the steps needed to be **executed only once**, to set the environment:
+
+1. Install the Node packages:
+    ```bash
+    npm install
+    ```
+2. Create a .env file at the root of the project:
+    ```bash
+    touch .env
+    ```
+3. Fill the created .env file with:
+    ```env
+    PORT=<backend_server_port>
+    VITE_SERVER_URL=<backend_server_url>:$PORT
+    ```
+
+### Execution
+
+As this is a React (front-end) application, it is set to be launched simply with: `npm run dev`.
+
+Frontend (web app) should be running, by default, at **http://localhost:5173/**.
 
 ## How it was created
 
@@ -141,12 +171,12 @@ To initialize the project, below steps were followed:
 
 ## Additional dependencies installed
 
-### **[React Router](https://reactrouter.com/)**:
+### **[Moment](https://momentjs.com/)**:
 
-This package is used to provide the frontend the ability to navigate and route.
+This package is used to get date and time with specific format in a simpler way.
 
 ```bash
-npm install react-router-dom
+npm install moment
 ```
 
 ### **[React Hook Form](https://www.react-hook-form.com/)**:
@@ -157,10 +187,10 @@ This package is used to provide the frontend the ability to handle forms in a si
 npm install react-hook-form
 ```
 
-## How to run the project
+### **[React Router](https://reactrouter.com/)**:
 
-As this is a React (front-end) application, it is set to be launched simply with:
+This package is used to provide the frontend the ability to navigate and route.
+
 ```bash
-npm run dev
+npm install react-router-dom
 ```
-Frontend should be running at **http://localhost:5173/**.

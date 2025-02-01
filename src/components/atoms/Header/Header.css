@@ -41,12 +41,12 @@ header > nav > ul > li > a:hover {
 }
 
 header > div#user_register_login > ul {
-  display: flex; 
-  gap: 0.5rem; 
-  list-style: none; 
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
   margin: 0;
   padding: 0;
-  align-items: center; 
 }
 
 header > div#user_register_login > ul > li,
@@ -56,16 +56,16 @@ header > div#user_register_login > ul > li > button {
 
 header > div#user_register_login > ul > li > a,
 header > div#user_register_login > ul > li > button {
-  display: inline-block; 
+  background-color: transparent;
   border: 2px solid #007bff;
   border-radius: 25px;
   color: #007bff;
+  cursor: pointer;
+  display: inline-block;
   padding: 5px 15px;
   text-decoration: none;
-  background-color: transparent;
   transition: background-color 0.5s, color 0.5s;
-  cursor: pointer;
-  vertical-align: middle; 
+  vertical-align: middle;
 }
 
 header > div#user_register_login > ul > li > a:hover,

@@ -1,63 +1,48 @@
 import "./LoginPage.css"
 
+/************************************************** Internal logger ***************************************************/
+import { Logger } from "/src/utils/Logger.jsx"
+
+import { useCallback, useContext } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "/src/context/AuthContext"
+
+import { AuthContext } from "/src/context/AuthContext"
+import { UserCredentials } from "/src/components/atoms/Register/Credentials"
+
+import { useLogin } from "/src/hooks/useLogin"
 
 export const LoginPage = () => {
-  const { register, handleSubmit, formState } = useForm()
+  const logger = new Logger("LoginPage")
+
+  const { setToken } = useContext(AuthContext)
+  const { formState, handleSubmit, register } = useForm()
+  const { login } = useLogin()
   const navigate = useNavigate()
-  const { login } = useAuth()
 
-  const onSubmit = async (data) => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      })
-
-      const result = await response.json()
-      if (!response.ok) {
-        throw new Error(result.msg);
-      }
-
-      alert("[SUCCESS] Login successful!")
-      login(result.token)
-      navigate("/");
-    } catch (error) {
-      alert(`[ERROR] Login failed!\n${error}`)
+  const handleOnSubmit = useCallback(async (formsData) => {
+    const { error } = await login(formsData)
+    if (!error) {
+      setToken(localStorage.getItem("token"))
+      logger.debug("User logged in successfully!")
+      alert("[SUCCESS] User logged in successfully!")
+      navigate('/')
     }
-  }
+    else {
+      logger.error("User could not be logged in!", error)
+      alert(`[ERROR] User could not be logged in!`)
+    }
+  }, [])
 
   return (
     <section id="login_page">
       <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="email">Correo electrónico:</label>
-          <input
-            type="email"
-            {...register("email", { required: "Este campo es obligatorio." })}
-          />
-          {formState.errors.email && (
-            <p className="forms_field_error">
-              {formState.errors.email.message}
-            </p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="password">Contraseña:</label>
-          <input
-            type="password"
-            {...register("password", { required: "Este campo es obligatorio." })}
-          />
-          {formState.errors.password && (
-            <p className="forms_field_error">
-              {formState.errors.password.message}
-            </p>
-          )}
-        </div>
+      <form onSubmit={handleSubmit(handleOnSubmit)}>
+        <UserCredentials
+          formState={formState}
+          register={register}
+          section_id={"login_credentials"}
+        />
         <button type="submit">Iniciar Sesión</button>
       </form>
     </section>

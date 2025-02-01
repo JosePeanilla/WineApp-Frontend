@@ -1,29 +1,38 @@
-import { createContext, useContext, useState, useEffect } from "react"
+import { createContext, useCallback, useEffect, useState } from "react"
 
-const AuthContext = createContext()
+export const AuthContext = createContext({
+  setToken: () => "Out of context",
+  user: {
+    email: "Out of context",
+    id: "Out of context",
+    name: "Out of context",
+    password: "Out of context"
+    // and other params, depending on kind...
+  }
+})
+
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token"))
+  const [user, setUser] = useState(null)
+
+  const fetchUser = useCallback(async () => {
+    const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    const jsonData = await response.json()
+    if (jsonData.error) return null
+    else {
+      setUser(jsonData.data)
+    }
+  })
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token); 
-  }, [])
-
-  const login = (token) => {
-    localStorage.setItem("token", token);
-    setIsAuthenticated(true); 
-  }
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    setIsAuthenticated(false); 
-  }
+    if (token) fetchUser()
+  }, [token])
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ setToken, user }}>
       {children}
     </AuthContext.Provider>
   )
 }
-
-export const useAuth = () => useContext(AuthContext);
