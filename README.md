@@ -21,6 +21,9 @@ It has been developed with all gathered information and knowledge learnt from th
     1. [Moment](#moment)
     2. [React Hook Form](#react-hook-form)
     3. [React Router](#react-router)
+    4. [Tailwind CSS](#tailwind)
+6. [Design Wireframes](#design-wireframes)
+
 
 ---
 
@@ -194,3 +197,17 @@ This package is used to provide the frontend the ability to navigate and route.
 ```bash
 npm install react-router-dom
 ```
+
+
+### **[Tailwind CSS](https://tailwindcss.com/)**:
+
+ Tailwind CSS provides a set of utility classes that you can use to style your website directly within your HTML.
+
+ We are using Daisy Components: https://daisyui.com/components/
+
+
+### **[Excalidraw layout]:
+
+Por favor usar layout, como referencia de la estructure de la app.
+
+https://excalidraw.com/#room=8f49d94579c9111aff10,SJHCJLNv8MwTHj9n8pzA_Q
