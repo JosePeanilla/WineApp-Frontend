@@ -28,20 +28,20 @@ export const Header = () => {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li><a>Como funciona</a></li>
-        <li><NavLink className="btn" to="/vinos">Vinos</NavLink></li>
-        <li><a>Regiones</a></li>
-        <li><a>Tips/Blog</a></li>
+        <li><NavLink to="/">Como funciona?</NavLink></li>
+        <li><NavLink to="/wines">Vinos</NavLink></li>
+        <li><NavLink to="/wineries">Regiones</NavLink></li>
+        <li><NavLink to="/news">Tips/Blog</NavLink></li>
       </ul>
     </div>
     <NavLink className="btn btn-ghost text-xl" to="/">WineApp</NavLink>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><a>Como funciona</a></li>
-      <li><NavLink className="btn" to="/vinos">Vinos</NavLink></li>
-      <li><a>Regiones</a></li>
-      <li><a>Tips/Blog</a></li>
+      <li><NavLink to="/">Como funciona?</NavLink></li>
+      <li><NavLink to="/wines">Vinos</NavLink></li>
+      <li><NavLink to="/wineries">Wineries</NavLink></li>
+      <li><NavLink to="/news">Tips/Blog</NavLink></li>
     </ul>
   </div>
   {!user && (

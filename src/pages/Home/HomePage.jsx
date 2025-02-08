@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom"
 export const HomePage = () => (
   <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content text-center">
@@ -7,7 +8,7 @@ export const HomePage = () => (
         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
         quasi. In deleniti eaque aut repudiandae et a id nisi.
       </p>
-      <button className="btn bg-vino-muy-fuerte">Registrate</button>
+      <NavLink className="btn" to="/register">Registrarse</NavLink>
     </div>
   </div>
 </div>
