@@ -32,7 +32,7 @@ export const RegisterForm = ({ formFields, formTitle, handleOnSubmit }) => {
           section_id={"register_credentials"}
           watch={watch}
         />
-        <button type="submit">Registrarse</button>
+        <button className="btn" type="submit">Registrarse</button>
       </form>
     </section>
   )

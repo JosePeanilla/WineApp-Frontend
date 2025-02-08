@@ -20,7 +20,7 @@ export const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/wines' element={<VinosPage />} />
-          <Route path='/wineries' element={<RegionesPage />} />
+          <Route path='/regions' element={<RegionesPage />} />
           <Route path='/news' element={<NoticiasPage />} />
           <Route path='*' element={<h2>Add here the not-found page</h2>} />
         </Routes>

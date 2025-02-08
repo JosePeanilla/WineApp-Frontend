@@ -30,7 +30,7 @@ export const Header = () => {
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
         <li><NavLink to="/">Como funciona?</NavLink></li>
         <li><NavLink to="/wines">Vinos</NavLink></li>
-        <li><NavLink to="/wineries">Regiones</NavLink></li>
+        <li><NavLink to="/regions">Regiones</NavLink></li>
         <li><NavLink to="/news">Noticias</NavLink></li>
       </ul>
     </div>
@@ -40,7 +40,7 @@ export const Header = () => {
     <ul className="menu menu-horizontal px-1">
       <li><NavLink to="/">Como funciona?</NavLink></li>
       <li><NavLink to="/wines">Vinos</NavLink></li>
-      <li><NavLink to="/wineries">Wineries</NavLink></li>
+      <li><NavLink to="/regions">Regiones</NavLink></li>
       <li><NavLink to="/news">Noticias</NavLink></li>
     </ul>
   </div>
