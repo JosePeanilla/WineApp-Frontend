@@ -1,4 +1,4 @@
-header {
+/* header {
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -76,4 +76,4 @@ header > div#user_register_login > ul > li > button:hover {
 
 .logout_button {
   font-family: Times New Roman;
-}
+} */
