@@ -2,7 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@theme {
-    --color-vino-muy-fuerte: oklch(19.65% 0.0376 62.88);
-}
