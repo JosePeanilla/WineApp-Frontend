@@ -19,6 +19,7 @@ export const RegisterField = ({ name, required=true, register, text, type="text"
       <input
         name={name}
         type={type}
+        className="input input-bordered w-full max-w-xs"
         {...register(name, {
           required: { message: required?requiredFieldErrorMessage:undefined, value: required },
           validate: validate?validate:validateNonBlankTextInTextField

@@ -20,15 +20,15 @@ export const RegisterPage = () => {
   }
 
   return (
-    <section id="register_page">
-      <h2>Some Register-page title here</h2>
-      <h3>¿Qué tipo de usuario eres?</h3>
-      <ul id="users_kind_buttons">
+    <section className="text-center" id="register_page">
+      <h1 >Registrate Aqui</h1>
+      <h2>¿Qué tipo de usuario eres?</h2>
+      <ul id="users_kind_buttons" className="d-flex flex-row">
         <li>
-          <button onClick={handleConsumerButtonClick}>Consumidor</button>
+          <button className="btn" onClick={handleConsumerButtonClick}>Consumidor</button>
         </li>
         <li>
-          <button onClick={handleWineryButtonClick}>Bodega</button>
+          <button className="btn" onClick={handleWineryButtonClick}>Bodega</button>
         </li>
       </ul>
       {viewConsumerForm && <ConsumerRegisterForm />}

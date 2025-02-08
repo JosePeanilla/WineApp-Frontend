@@ -23,6 +23,7 @@ It has been developed with all gathered information and knowledge learnt from th
     3. [React Router](#react-router)
     4. [Tailwind CSS](#tailwind)
 6. [Design Wireframes](#design-wireframes)
+7. [Design Colors](#design-colors)
 
 
 ---
@@ -211,3 +212,16 @@ npm install react-router-dom
 Por favor usar layout, como referencia de la estructure de la app.
 
 https://excalidraw.com/#room=8f49d94579c9111aff10,SJHCJLNv8MwTHj9n8pzA_Q
+
+
+### **[Design Colors]:
+
+Por favor referir a estos colores para unificar el app.
+
+https://coolors.co/visualizer/211103-3d1308-7b0d1e-9f2042-f8e5ee
+
+Vino muy fuerte: #211103
+Vino fuerte: #3d1308
+Vino moderado: #7b0d1e
+Vino ligero: #9f2042
+Vino muy ligero: #f8e5ee

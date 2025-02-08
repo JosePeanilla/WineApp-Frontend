@@ -1,32 +1,7 @@
-#register_page {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-
-#register_page > h2 {
-  margin: 15px;
-}
-
 #users_kind_buttons {
   display: flex;
   justify-content: center;
   list-style: none;
   gap: 40px;
   margin: 15px 0;
-}
-
-#users_kind_buttons > li > button {
-  background-color: #f0f0f0;
-  border: 1px solid black;
-  border-radius: 8px;
-  color: black;
-  cursor: pointer;
-  padding: 5px 10px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-#users_kind_buttons > li > button:hover {
-  background-color: black;
-  color: white;
 }
