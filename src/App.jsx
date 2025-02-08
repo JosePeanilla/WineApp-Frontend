@@ -2,6 +2,7 @@ import "./App.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import { Header } from "/src/components/atoms/Header"
+import { Footer } from "/src/components/atoms/Footer"
 import { HomePage } from "/src/pages/Home"
 import { LoginPage } from "/src/pages/Login"
 import { RegisterPage } from "/src/pages/Register"
@@ -24,7 +25,7 @@ export const App = () => {
           <Route path='*' element={<h2>Add here the not-found page</h2>} />
         </Routes>
       </main>
-      <h1>Add here the application footer</h1>
+      <Footer />
     </BrowserRouter>
   )
 }
