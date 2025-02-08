@@ -7,6 +7,7 @@ import { LoginPage } from "/src/pages/Login"
 import { RegisterPage } from "/src/pages/Register"
 import { VinosPage } from "/src/pages/Vinos"
 import { RegionesPage } from "/src/pages/Regiones"
+import { NoticiasPage } from "/src/pages/Noticias"
 
 export const App = () => {
   return (
@@ -19,6 +20,7 @@ export const App = () => {
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/wines' element={<VinosPage />} />
           <Route path='/wineries' element={<RegionesPage />} />
+          <Route path='/news' element={<NoticiasPage />} />
           <Route path='*' element={<h2>Add here the not-found page</h2>} />
         </Routes>
       </main>

@@ -31,7 +31,7 @@ export const Header = () => {
         <li><NavLink to="/">Como funciona?</NavLink></li>
         <li><NavLink to="/wines">Vinos</NavLink></li>
         <li><NavLink to="/wineries">Regiones</NavLink></li>
-        <li><NavLink to="/news">Tips/Blog</NavLink></li>
+        <li><NavLink to="/news">Noticias</NavLink></li>
       </ul>
     </div>
     <NavLink className="btn btn-ghost text-xl" to="/">WineApp</NavLink>
@@ -41,7 +41,7 @@ export const Header = () => {
       <li><NavLink to="/">Como funciona?</NavLink></li>
       <li><NavLink to="/wines">Vinos</NavLink></li>
       <li><NavLink to="/wineries">Wineries</NavLink></li>
-      <li><NavLink to="/news">Tips/Blog</NavLink></li>
+      <li><NavLink to="/news">Noticias</NavLink></li>
     </ul>
   </div>
   {!user && (
