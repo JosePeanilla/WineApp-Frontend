@@ -24,5 +24,5 @@ export const LogoutBtn = () => {
     window.location.reload()
   }, [])
 
-  return <button className="logout_button" onClick={handleLogout}>Cerrar Sesión</button>
+  return <button className="navbar-end bg-wineapp-ligero text-white" onClick={handleLogout}>Cerrar Sesión</button>
 }

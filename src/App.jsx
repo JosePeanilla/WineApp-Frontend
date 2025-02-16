@@ -1,5 +1,6 @@
 import "./App.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { useEffect } from "react"
 
 import { Header } from "/src/components/atoms/Header"
 import { Footer } from "/src/components/atoms/Footer"
@@ -10,8 +11,15 @@ import { VinosPage } from "/src/pages/Vinos"
 import { RegionesPage } from "/src/pages/Regiones"
 import { NoticiasPage } from "/src/pages/Noticias"
 
+
 export const App = () => {
-  return (
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", "WineAppTheme"); // Force theme
+  }, []);
+
+return (
+
     <BrowserRouter>
       <Header />
       <main>
