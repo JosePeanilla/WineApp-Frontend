@@ -5,7 +5,7 @@ import { AuthContext } from "/src/context/AuthContext"
 import { LogoutBtn } from "/src/components/atoms/LogoutBtn"
 
 export const Header = () => {
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   return (
 <div className="navbar bg-base-100">
@@ -32,6 +32,14 @@ export const Header = () => {
         <li><NavLink to="/wines">Vinos</NavLink></li>
         <li><NavLink to="/regions">Regiones</NavLink></li>
         <li><NavLink to="/news">Noticias</NavLink></li>
+        <li>
+        <NavLink to={user.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
+                  Modificar Perfil
+        </NavLink>
+        </li>
+        <li>
+          <LogoutBtn />
+        </li>
       </ul>
     </div>
     <NavLink className="btn btn-ghost text-xl" to="/">WineApp</NavLink>
@@ -42,6 +50,14 @@ export const Header = () => {
       <li><NavLink to="/wines">Vinos</NavLink></li>
       <li><NavLink to="/regions">Regiones</NavLink></li>
       <li><NavLink to="/news">Noticias</NavLink></li>
+      <li>
+        <NavLink to={user.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
+                  Modificar Perfil
+        </NavLink>
+        </li>
+        <li>
+                <LogoutBtn />
+              </li>
     </ul>
   </div>
   {!user && (

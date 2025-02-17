@@ -15,11 +15,12 @@ export const RegisterForm = ({ formFields, formTitle, handleOnSubmit }) => {
   return (
     <section id="register_form">
       <h4>{formTitle}</h4>
-      <form onSubmit={handleSubmit(handleOnSubmit)}>
+      <form onSubmit={handleSubmit(handleOnSubmit)} noValidate>
         {formFields.map((field, index) => (
           <div key={index}>
             <RegisterField
               register={register}
+              required={field.required}
               {...field}
             />
             <FieldErrorP error={formState.errors[field.name]} />
