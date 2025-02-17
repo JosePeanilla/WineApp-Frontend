@@ -33,7 +33,7 @@ export const Header = () => {
         <li><NavLink to="/regions">Regiones</NavLink></li>
         <li><NavLink to="/news">Noticias</NavLink></li>
         <li>
-        <NavLink to={user.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
+        <NavLink to={user?.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
                   Modificar Perfil
         </NavLink>
         </li>
@@ -51,7 +51,7 @@ export const Header = () => {
       <li><NavLink to="/regions">Regiones</NavLink></li>
       <li><NavLink to="/news">Noticias</NavLink></li>
       <li>
-        <NavLink to={user.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
+        <NavLink to={user?.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
                   Modificar Perfil
         </NavLink>
         </li>
