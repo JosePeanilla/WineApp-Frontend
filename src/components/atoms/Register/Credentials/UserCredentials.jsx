@@ -1,10 +1,14 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 
+import { useValidateEmail } from "/src/hooks/useValidateEmail"
+import { useValidatePassword } from "/src/hooks/useValidatePassword"
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
 
 export const UserCredentials = ({ formState, is_register=false, register, section_id, watch=null }) => {
   const logger = new Logger("UserCredentials")
+  const { validateEmail } = useValidateEmail()
+  const { validatePassword } = useValidatePassword()
 
   const emailFieldText = "Debes introducir un correo válido."
   const validateEmailField = (email) => {
@@ -35,9 +39,9 @@ export const UserCredentials = ({ formState, is_register=false, register, sectio
       {/* Email */}
       <div>
         <label htmlFor="email">Correo electrónico:</label>
-        <input name="email" type="text" {...register("email", {
-            required: { message: emailFieldText, value: true },
-            validate: validateEmailField
+        <input id="email" name="email" autoComplete="off"  {...register("email", {
+            required: { message: "Debes introducir un correo válido.", value: true },
+            validate: validateEmail
           })}
         />
         <FieldErrorP error={formState.errors.email} />
@@ -45,9 +49,9 @@ export const UserCredentials = ({ formState, is_register=false, register, sectio
       {/* Password */}
       <div>
         <label htmlFor="password">Contraseña:</label>
-        <input name="password" type="password" {...register("password", {
-            required: { message: passwordFieldText, value: true },
-            validate: validatePasswordField
+        <input id="password" name="password" type="password" {...register("password", {
+            required: { message: "Debes introducir una contraseña válida.", value: true },
+            validate: validatePassword
           })}
         />
         <FieldErrorP error={formState.errors.password} />
@@ -57,7 +61,7 @@ export const UserCredentials = ({ formState, is_register=false, register, sectio
           {/* Password Condirmation */}
           <div>
             <label htmlFor="password_confirm">Confirmar Contraseña:</label>
-            <input name="password_confirm" type="password" {...register("password_confirm", {
+            <input id="password_confirm" name="password_confirm" type="password" {...register("password_confirm", {
                 required: { message: passwordConfirmationFieldText, value: true },
                 validate: validatePasswordConfirmationField
               })}

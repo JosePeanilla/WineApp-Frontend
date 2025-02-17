@@ -5,7 +5,7 @@ import { AuthContext } from "/src/context/AuthContext"
 import { LogoutBtn } from "/src/components/atoms/LogoutBtn"
 
 export const Header = () => {
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   return (
 <div className="navbar bg-white text-wineapp-muyfuerte">
@@ -32,6 +32,7 @@ export const Header = () => {
         <li><NavLink to="/wines">Vinos</NavLink></li>
         <li><NavLink to="/regions">Regiones</NavLink></li>
         <li><NavLink to="/news">Noticias</NavLink></li>
+
         {!user && (
           <div>
         <li> <NavLink className="btn bg-wineapp-moderado text-white mr-3 btn-sm w-full" to="/register">Registrarse</NavLink></li>
@@ -41,6 +42,15 @@ export const Header = () => {
         {user && (
         <LogoutBtn />
         )}
+        <li>
+        <NavLink to={user?.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
+                  Modificar Perfil
+        </NavLink>
+        </li>
+        <li>
+          <LogoutBtn />
+        </li>
+
       </ul>
   </div>
     <NavLink className="text-xl text-wineapp-muyfuerte font-bold" to="/">Wine<span className="text-wineapp-ligero">App</span></NavLink>
@@ -51,6 +61,14 @@ export const Header = () => {
       <li><NavLink to="/wines">Vinos</NavLink></li>
       <li><NavLink to="/regions">Regiones</NavLink></li>
       <li><NavLink to="/news">Noticias</NavLink></li>
+      <li>
+        <NavLink to={user?.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
+                  Modificar Perfil
+        </NavLink>
+        </li>
+        <li>
+                <LogoutBtn />
+              </li>
     </ul>
   </div>
   {!user && (
