@@ -1,14 +1,14 @@
 import { NavLink } from "react-router-dom"
 export const HomePage = () => (
-  <div className="hero bg-base-200 min-h-screen">
+  <div className="hero bg-white min-h-screen">
   <div className="hero-content text-center">
     <div className="max-w-md">
-      <h1 className="text-5xl font-bold">Bienvenidos</h1>
+      <h1 className="text-5xl font-bold text-wineapp-muyfuerte">Bienvenidos</h1>
       <p className="py-6">
         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
         quasi. In deleniti eaque aut repudiandae et a id nisi.
       </p>
-      <NavLink className="btn" to="/register">Registrarse</NavLink>
+      <NavLink className="btn bg-wineapp-ligero text-white" to="/register">Registrarse</NavLink>
     </div>
   </div>
 </div>
