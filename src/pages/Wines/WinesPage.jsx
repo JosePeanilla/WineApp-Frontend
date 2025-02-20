@@ -39,7 +39,7 @@ export const WinesPage = () => {
       <h1 className="text-center text-2xl font-bold my-6">Listado completo</h1>
       
       {/* Tarjetas */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-6 px-4">
+      <div className="grid grid-cols-1 gap-y-10 px-4">
         {wines.length > 0 ? (
           wines.map((wine) => (
             <WineCard key={wine.id} wine={wine} />
