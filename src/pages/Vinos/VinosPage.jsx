@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react"
-import WineCard from "../../components/molecules/WineCard/WineCard.jsx"
+import { WineCard } from "../../components/molecules/WineCard"
 
 export const VinosPage = () => {
   
   const [wines, setWines] = useState([])
 
   useEffect(() => {
-    // Petición GET al backend para obtener la lista de vinos
     fetch("http://localhost:3000/wines") 
       .then((response) => response.json()) 
-      .then((data) => setWines(data.data))
+      .then((data) => {
+        const winesWithCorrectID = data.data.map(wine => ({
+          ...wine,
+          id: wine.id || wine._id // <-- Asegura que `id` exista
+        }))
+        setWines(winesWithCorrectID)
+      })
       .catch((error) => console.error("Error fetching wines:", error))
   }, [])
 
@@ -30,7 +35,7 @@ export const VinosPage = () => {
         )}
       </div>
     </section>
-  );
-};
+  )
+}
 
 export default VinosPage

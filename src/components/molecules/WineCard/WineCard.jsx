@@ -1,33 +1,31 @@
-import { useNavigate } from "react-router-dom";
+/************************************************** Internal logger ***************************************************/
+import { Logger } from "/src/utils/Logger.jsx"
 
-const WineCard = ({ wine }) => {
-  const navigate = useNavigate(); // Hook para navegar al detalle del vino
+import { useNavigate } from "react-router-dom"
+import { WineCardImage } from "./WineCardImage.jsx"
+import { WineCardContent } from "./WineCardContent.jsx"
+import { WineCardActions } from "./WineCardActions.jsx"
+
+const logger = new Logger("WineCard")
+
+export const WineCard = ({ wine }) => {
+  const navigate = useNavigate()
+
+  if (!wine || !wine.id) {
+    logger.error("WineCard recibió un objeto inválido o sin ID.")
+    return <p className="text-red-500">Error: Información del vino no disponible.</p>
+  }
+
+  logger.debug(`Renderizando WineCard para el vino: ${wine.name}`)
 
   return (
-    <div className="card card-side bg-base-100 shadow-xl cursor-pointer hover:shadow-2x1 transition"
-      onClick={() => navigate(`/wines/${wine.id}`)} // Redirige a los detalles del vino
+    <div
+      className="card card-side bg-base-100 shadow-xl cursor-pointer hover:shadow-2xl transition"
+      onClick={() => navigate(`/wines/${wine.id}`)}
     >
-      {/* Imagen del vino */}  
-      <figure className="w-1/3"> 
-        <img src={wine.image} alt={wine.name} className="w-full h-48 object-cover rounded-l-lg" />
-      </figure> 
-
-      {/* Contenido de la tarjeta */}
-      <div className="card-body w-2/3">
-        <h2 className="card-title text-lg font-semibold">{wine.name}</h2>
-        <p className="text-sm text-gray-600">{wine.winery} - {wine.region} - {wine.country}</p>
-        <p className="text-gray-500">{wine.description}</p>
-
-        {/* Boton para ir a los detalles del vino */}
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary" onClick={(e) => {
-              e.stopPropagation();
-              navigate(`/wines/${wine.id}`);
-            }}>Catar</button>
-        </div>
-      </div>
+      <WineCardImage image={wine.image} name={wine.name} />
+      <WineCardContent wine={wine} />
+      <WineCardActions wineId={wine.id} />
     </div>
   )
 }
-
-export default WineCard
