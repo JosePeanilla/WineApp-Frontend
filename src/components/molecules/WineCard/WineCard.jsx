@@ -20,9 +20,10 @@ export const WineCard = ({ wine }) => {
 
   return (
     <div
-      className="card card-side bg-base-100 shadow-xl cursor-pointer hover:shadow-2xl transition"
+      className="card bg-base-100 shadow-lg cursor-pointer hover:shadow-2xl transition transform hover:scale-105 w-full max-w-sm mx-auto"
       onClick={() => navigate(`/wines/${wine.id}`)}
     >
+
       <WineCardImage image={wine.image} name={wine.name} />
       <WineCardContent wine={wine} />
       <WineCardActions wineId={wine.id} />

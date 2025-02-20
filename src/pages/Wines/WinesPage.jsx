@@ -39,15 +39,13 @@ export const WinesPage = () => {
       <h1 className="text-center text-2xl font-bold my-6">Listado completo</h1>
       
       {/* Tarjetas */}
-      <div className="flex flex-col items-center gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-6 px-4">
         {wines.length > 0 ? (
           wines.map((wine) => (
-            <div key={wine.id} className="w-full md:w-1/3">
-              <WineCard wine={wine} />
-            </div>
+            <WineCard key={wine.id} wine={wine} />
           ))
         ) : (
-          <p className="text-center text-lg">No hay vinos disponibles.</p>
+          <p className="text-center text-lg col-span-full">No hay vinos disponibles.</p>
         )}
       </div>
     </section>

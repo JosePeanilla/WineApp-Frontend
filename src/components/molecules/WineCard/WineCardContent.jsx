@@ -12,7 +12,7 @@ export const WineCardContent = ({ wine }) => {
   logger.debug(`Mostrando contenido para: ${wine.name}`)
 
   return (
-    <div className="card-body w-2/3">
+    <div className="card-body text-center p-4">
       <h2 className="card-title text-lg font-semibold">{wine.name || "Nombre no disponible"}</h2>
       <p className="text-sm text-gray-600">
         {wine.winery || "Bodega desconocida"} - {wine.region || "Región desconocida"} - {wine.country || "País no disponible"}
