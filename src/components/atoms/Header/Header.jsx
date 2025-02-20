@@ -1,14 +1,40 @@
+/************************************************** Internal logger ***************************************************/
+import { Logger } from "/src/utils/Logger.jsx"
+import { useEffect, useContext, useState } from "react"
 import { NavLink } from "react-router-dom"
-import { useContext, useState } from "react"
 
 import { AuthContext } from "/src/context/AuthContext"
 import { LogoutBtn } from "/src/components/atoms/LogoutBtn"
 
 export const Header = () => {
+  const logger = new Logger("Header")
+
   const { user } = useContext(AuthContext)
   const [isOpen, setIsOpen] = useState(false)
 
-  const closeDropdown = () => setIsOpen(false)
+  useEffect(() => {
+    logger.info("Componente Header cargado correctamente.")
+  }, [logger])
+
+  const toggleDropdown = () => {
+    setIsOpen((prev) => {
+      const newState = !prev
+      logger.info(`Menú móvil ${newState ? "abierto" : "cerrado"}.`)
+      return newState
+    })
+  }
+
+  const closeDropdown = () => {
+    setIsOpen(false)
+    logger.info("Menú móvil cerrado desde un enlace.")
+  }
+
+  const handleLogoutMobile = () => {
+    closeDropdown()
+    localStorage.removeItem("token")
+    logger.info("Usuario cerró sesión desde menú móvil.")
+    window.location.reload()
+  }
 
   return (
     <div className="navbar bg-white text-wineapp-muyfuerte px-6 flex justify-between items-center">
@@ -17,7 +43,7 @@ export const Header = () => {
       <div className="lg:hidden">
         <div className="dropdown">
           <button 
-            onClick={() => setIsOpen(!isOpen)} 
+            onClick={toggleDropdown} 
             className="btn btn-ghost lg:hidden"
           >
             <svg
@@ -54,11 +80,7 @@ export const Header = () => {
                   <li>
                     <button 
                       className="btn bg-wineapp-ligero text-white btn-sm w-full"
-                      onClick={() => {
-                        closeDropdown();
-                        localStorage.removeItem("token");
-                        window.location.reload();
-                      }}>
+                      onClick={handleLogoutMobile}>
                       Cerrar Sesión
                     </button>
                   </li>

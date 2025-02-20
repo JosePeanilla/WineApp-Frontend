@@ -1,3 +1,7 @@
+/************************************************** Internal logger ***************************************************/
+import { Logger } from "/src/utils/Logger.jsx"
+import { useEffect } from "react"
+
 import { useForm } from "react-hook-form"
 
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
@@ -5,17 +9,32 @@ import { RegisterField } from "/src/components/atoms/Register/Field"
 import { UserCredentials } from "/src/components/atoms/Register/Credentials"
 
 export const RegisterForm = ({ formFields, formTitle, handleOnSubmit }) => {
+  const logger = new Logger("RegisterForm")
+
   const { formState, handleSubmit, register, watch } = useForm({
     defaultValues: formFields.reduce((accumulator, field) => {
-      accumulator[field.name] = field.default?field.default:""
+      accumulator[field.name] = field.default ? field.default : ""
       return accumulator
     }, {})
   })
 
+  useEffect(() => {
+    logger.info(`Formulario "${formTitle}" cargado correctamente.`)
+  }, [logger, formTitle])
+
+  const onSubmit = (data) => {
+    logger.info(`Formulario "${formTitle}" enviado con datos:`, data)
+    handleOnSubmit(data)
+  }
+
+  const onError = (errors) => {
+    logger.error(`Errores en el formulario "${formTitle}":`, errors)
+  }
+
   return (
     <section id="register_form">
       <h4>{formTitle}</h4>
-      <form onSubmit={handleSubmit(handleOnSubmit)} noValidate>
+      <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
         {formFields.map((field, index) => (
           <div key={index}>
             <RegisterField
