@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form"
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
 import { RegisterField } from "/src/components/atoms/Register/Field"
 import { useValidatePhone } from "/src/hooks/useValidatePhone"
+import { FormContainer, Button } from "/src/components/atoms/Form"
 
 export const ProfileForm = ({ formFields, formTitle, user, handleOnSubmit }) => {
     const logger = new Logger("ProfileForm")
@@ -38,7 +39,7 @@ export const ProfileForm = ({ formFields, formTitle, user, handleOnSubmit }) => 
     return (
         <section id="profile_form">
             <h4>{formTitle}</h4>
-            <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
+            <FormContainer onSubmit={handleSubmit(onSubmit, onError)} noValidate>
                 {formFields.map(({ name, text, required = true, type = "text" }) => (
                     <div key={name}>
                         <RegisterField
@@ -53,8 +54,8 @@ export const ProfileForm = ({ formFields, formTitle, user, handleOnSubmit }) => 
                         {formState.errors[name] && <FieldErrorP message={formState.errors[name].message} />}
                     </div>
                 ))}
-                <button type="submit">Guardar Cambios</button>
-            </form>
+                <Button variant="fuerte" type="submit">Guardar Cambios</Button>
+            </FormContainer>
         </section>
     )
 }

@@ -3,7 +3,7 @@ import { Logger } from "/src/utils/Logger.jsx"
 import { useEffect } from "react"
 
 import { useForm } from "react-hook-form"
-
+import { FormContainer, Button } from "/src/components/atoms/Form"
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
 import { RegisterField } from "/src/components/atoms/Register/Field"
 import { UserCredentials } from "/src/components/atoms/Register/Credentials"
@@ -34,7 +34,7 @@ export const RegisterForm = ({ formFields, formTitle, handleOnSubmit }) => {
   return (
     <section id="register_form">
       <h4>{formTitle}</h4>
-      <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
+      <FormContainer onSubmit={handleSubmit(onSubmit, onError)} noValidate>
         {formFields.map((field, index) => (
           <div key={index}>
             <RegisterField
@@ -52,8 +52,10 @@ export const RegisterForm = ({ formFields, formTitle, handleOnSubmit }) => {
           section_id={"register_credentials"}
           watch={watch}
         />
-        <button className="btn" type="submit">Registrarse</button>
-      </form>
+        <Button variant="moderado" type="submit">
+          Registrarse
+        </Button>
+        </FormContainer>
     </section>
   )
 }
