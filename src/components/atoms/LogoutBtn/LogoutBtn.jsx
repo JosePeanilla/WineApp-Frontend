@@ -5,12 +5,9 @@ import { useCallback, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { AuthContext } from "/src/context/AuthContext"
-
 import { useLogout } from "/src/hooks/useLogout"
 
 export const LogoutBtn = () => {
-  const logger = new Logger("LogoutBtn")
-
   const { setToken } = useContext(AuthContext)
   const { logout } = useLogout()
   const navigate = useNavigate()
@@ -18,11 +15,17 @@ export const LogoutBtn = () => {
   const handleLogout = useCallback(() => {
     logout()
     setToken(null)
-    logger.debug("User logged out successfully!")
     alert("[SUCCESS] ¡El usuario cerró la sesión con éxito!")
     if (window.location !== "/") navigate('/')
     window.location.reload()
   }, [])
 
-  return <button className="navbar-end bg-wineapp-ligero text-white" onClick={handleLogout}>Cerrar Sesión</button>
+  return (
+    <button
+      className="btn bg-wineapp-ligero text-white"
+      onClick={handleLogout}
+    >
+      Cerrar Sesión
+    </button>
+  )
 }
