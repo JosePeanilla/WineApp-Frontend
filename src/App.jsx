@@ -7,8 +7,8 @@ import { Footer } from "/src/components/atoms/Footer"
 import { HomePage } from "/src/pages/Home"
 import { LoginPage } from "/src/pages/Login"
 import { RegisterPage } from "/src/pages/Register"
-import { VinosPage } from "/src/pages/Vinos"
-import { RegionesPage } from "/src/pages/Regiones"
+import { WinesPage } from "/src/pages/Wines"
+import { RegionsPage } from "/src/pages/Regions"
 import { NoticiasPage } from "/src/pages/Noticias"
 import { ConsumerProfilePage, WineryProfilePage } from "/src/pages/Profile"
 
@@ -28,8 +28,8 @@ return (
           <Route path='/' element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
-          <Route path='/wines' element={<VinosPage />} />
-          <Route path='/regions' element={<RegionesPage />} />
+          <Route path='/wines' element={<WinesPage />} />
+          <Route path='/regions' element={<RegionsPage />} />
           <Route path='/news' element={<NoticiasPage />} />
           <Route path='/profile/consumer' element={<ConsumerProfilePage />} />
           <Route path='/profile/winery' element={<WineryProfilePage />} />

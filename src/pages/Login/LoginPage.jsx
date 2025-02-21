@@ -1,8 +1,7 @@
-import "./LoginPage.css"
-
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 
+import { FormContainer, Button } from "/src/components/atoms/Form"
 import { useEffect, useCallback, useContext } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -42,15 +41,18 @@ export const LoginPage = () => {
 
   return (
     <section id="login_page">
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit(handleOnSubmit)}>
+      <h2 className="text-center text-xl font-bold mb-4">Iniciar Sesión</h2>
+      
+      <FormContainer onSubmit={handleSubmit(handleOnSubmit)}>
         <UserCredentials
           formState={formState}
           register={register}
           section_id={"login_credentials"}
         />
-        <button type="submit">Iniciar Sesión</button>
-      </form>
+        <Button variant="ligero" type="submit">
+          Iniciar Sesión
+        </Button>
+      </FormContainer>
     </section>
   )
 }

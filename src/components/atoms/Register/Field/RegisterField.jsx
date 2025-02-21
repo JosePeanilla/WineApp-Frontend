@@ -7,6 +7,7 @@ import { useValidatePassword } from "/src/hooks/useValidatePassword"
 import { useValidateWebsite } from "/src/hooks/useValidateWebsite"
 import { america, europa } from "/src/utils/countries"
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
+import { Input } from "/src/components/atoms/Form"
 
 export const RegisterField = ({ name, required = true, register = () => {}, text, type = "text", validate, formState }) => {
   const logger = new Logger("RegisterField")
@@ -61,7 +62,7 @@ export const RegisterField = ({ name, required = true, register = () => {}, text
 
       </select>
       ) : (
-        <input
+        <Input
         id={fieldId}
         name={name}
         type={type}

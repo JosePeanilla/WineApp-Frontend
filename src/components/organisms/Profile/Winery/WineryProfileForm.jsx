@@ -64,12 +64,6 @@ export const WineryProfileForm = ({ user, navigate }) => {
       required: false,
       text: "Descripción"
     },
-    { /* Location */
-      name: "location",
-      text: "Localización (País)",
-      required: true,
-      type: "select"
-    },
     { /* Phone */
       name: "phone",
       required: false,
@@ -81,6 +75,12 @@ export const WineryProfileForm = ({ user, navigate }) => {
       text: "Página web",
       required: false,
       type: "url"
+    },
+    { /* Location */
+      name: "location",
+      text: "Localización (País)",
+      required: true,
+      type: "select"
     }
   ]
 

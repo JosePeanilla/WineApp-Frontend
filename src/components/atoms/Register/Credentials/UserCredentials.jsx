@@ -4,6 +4,7 @@ import { Logger } from "/src/utils/Logger.jsx"
 import { useValidateEmail } from "/src/hooks/useValidateEmail"
 import { useValidatePassword } from "/src/hooks/useValidatePassword"
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
+import { Input } from "/src/components/atoms/Form"
 
 export const UserCredentials = ({ formState, is_register=false, register, section_id, watch=null }) => {
   const logger = new Logger("UserCredentials")
@@ -35,40 +36,55 @@ export const UserCredentials = ({ formState, is_register=false, register, sectio
   }
 
   return (
-    <section id={section_id}>
+    <section id={section_id} className="w-full max-w-md mx-auto">
       {/* Email */}
-      <div>
-        <label htmlFor="email">Correo electrónico:</label>
-        <input id="email" name="email" autoComplete="off"  {...register("email", {
+      <div className="mb-4">
+        <label htmlFor="email" className="block font-medium">Correo electrónico:</label>
+        <Input
+          id="email"
+          name="email"
+          autoComplete="off"
+          className="w-full"
+          {...register("email", {
             required: { message: "Debes introducir un correo válido.", value: true },
             validate: validateEmail
           })}
         />
         <FieldErrorP error={formState.errors.email} />
       </div>
+
       {/* Password */}
-      <div>
-        <label htmlFor="password">Contraseña:</label>
-        <input id="password" name="password" type="password" {...register("password", {
+      <div className="mb-4">
+        <label htmlFor="password" className="block font-medium">Contraseña:</label>
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          className="w-full"
+          {...register("password", {
             required: { message: "Debes introducir una contraseña válida.", value: true },
             validate: validatePassword
           })}
         />
         <FieldErrorP error={formState.errors.password} />
       </div>
+
+      {/* Confirmación de Contraseña (Solo para Registro) */}
       {is_register && (
-        <>
-          {/* Password Condirmation */}
-          <div>
-            <label htmlFor="password_confirm">Confirmar Contraseña:</label>
-            <input id="password_confirm" name="password_confirm" type="password" {...register("password_confirm", {
-                required: { message: passwordConfirmationFieldText, value: true },
-                validate: validatePasswordConfirmationField
-              })}
-            />
-            <FieldErrorP error={formState.errors.password_confirm} />
-          </div>
-        </>
+        <div className="mb-4">
+          <label htmlFor="password_confirm" className="block font-medium">Confirmar Contraseña:</label>
+          <Input
+            id="password_confirm"
+            name="password_confirm"
+            type="password"
+            className="w-full"
+            {...register("password_confirm", {
+              required: { message: passwordConfirmationFieldText, value: true },
+              validate: validatePasswordConfirmationField
+            })}
+          />
+          <FieldErrorP error={formState.errors.password_confirm} />
+        </div>
       )}
     </section>
   )

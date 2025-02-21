@@ -1,85 +1,140 @@
+/************************************************** Internal logger ***************************************************/
+import { Logger } from "/src/utils/Logger.jsx"
+import { useEffect, useContext, useState } from "react"
 import { NavLink } from "react-router-dom"
-import { useContext } from "react"
 
 import { AuthContext } from "/src/context/AuthContext"
 import { LogoutBtn } from "/src/components/atoms/LogoutBtn"
 
 export const Header = () => {
-  const { user } = useContext(AuthContext);
+  const logger = new Logger("Header")
+
+  const { user } = useContext(AuthContext)
+  const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    logger.info("Componente Header cargado correctamente.")
+  }, [logger])
+
+  const toggleDropdown = () => {
+    setIsOpen((prev) => {
+      const newState = !prev
+      logger.info(`Menú móvil ${newState ? "abierto" : "cerrado"}.`)
+      return newState
+    })
+  }
+
+  const closeDropdown = () => {
+    setIsOpen(false)
+    logger.info("Menú móvil cerrado desde un enlace.")
+  }
+
+  const handleLogoutMobile = () => {
+    closeDropdown()
+    localStorage.removeItem("token")
+    logger.info("Usuario cerró sesión desde menú móvil.")
+    window.location.reload()
+  }
 
   return (
-<div className="navbar bg-white text-wineapp-muyfuerte">
-  <div className="navbar-start">
-    <div className="dropdown">
-      <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h8m-8 6h16" />
-        </svg>
+    <div className="navbar bg-white text-wineapp-muyfuerte px-6 flex justify-between items-center">
+      
+      {/* Menú hamburguesa en móviles */}
+      <div className="lg:hidden">
+        <div className="dropdown">
+          <button 
+            onClick={toggleDropdown} 
+            className="btn btn-ghost lg:hidden"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </button>
+
+          {isOpen && (
+            <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              <li><NavLink to="/" onClick={closeDropdown}>Como funciona?</NavLink></li>
+              <li><NavLink to="/wines" onClick={closeDropdown}>Vinos</NavLink></li>
+              <li><NavLink to="/regions" onClick={closeDropdown}>Regiones</NavLink></li>
+              <li><NavLink to="/news" onClick={closeDropdown}>Noticias</NavLink></li>
+
+              {user ? (
+                <>
+                  <li>
+                    <NavLink 
+                      className="btn bg-wineapp-moderado text-white btn-sm w-full text-center"
+                      to={user?.role === "consumers" ? "/profile/consumer" : "/profile/winery"}
+                      onClick={closeDropdown}>
+                      Modificar Perfil
+                    </NavLink>
+                  </li>
+                  <li>
+                    <button 
+                      className="btn bg-wineapp-ligero text-white btn-sm w-full"
+                      onClick={handleLogoutMobile}>
+                      Cerrar Sesión
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li><NavLink className="btn bg-wineapp-moderado text-white btn-sm w-full" to="/register" onClick={closeDropdown}>Registrarse</NavLink></li>
+                  <li><NavLink className="btn bg-wineapp-ligero text-white btn-sm w-full" to="/login" onClick={closeDropdown}>Iniciar Sesión</NavLink></li>
+                </>
+              )}
+            </ul>
+          )}
+        </div>
       </div>
-      <ul
-        tabIndex={0}
-        className="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 bg-wineapp-muyligero">
-        <li><NavLink to="/">Como funciona?</NavLink></li>
-        <li><NavLink to="/wines">Vinos</NavLink></li>
-        <li><NavLink to="/regions">Regiones</NavLink></li>
-        <li><NavLink to="/news">Noticias</NavLink></li>
 
-        {!user && (
-          <div>
-        <li> <NavLink className="btn bg-wineapp-moderado text-white mr-3 btn-sm w-full" to="/register">Registrarse</NavLink></li>
-        <li><NavLink className="btn bg-wineapp-ligero text-white btn-sm" to="/login">Iniciar Sesión</NavLink></li>
-          </div>
-                   )}
-        {user && (
-        <LogoutBtn />
+      {/* Logo */}
+      <div className="absolute left-1/2 transform -translate-x-1/2 lg:static lg:transform-none">
+        <NavLink className="text-xl text-wineapp-muyfuerte font-bold" to="/">
+          Wine<span className="text-wineapp-ligero">App</span>
+        </NavLink>
+      </div>
+
+      {/* Menú principal en pantallas grandes */}
+      <div className="hidden lg:flex flex-1 justify-center">
+        <ul className="menu menu-horizontal px-2">
+          <li><NavLink to="/">Como funciona?</NavLink></li>
+          <li><NavLink to="/wines">Vinos</NavLink></li>
+          <li><NavLink to="/regions">Regiones</NavLink></li>
+          <li><NavLink to="/news">Noticias</NavLink></li>
+        </ul>
+      </div>
+
+      {/* Botones en la derecha SOLO en escritorio */}
+      <div className="hidden lg:flex items-center gap-4">
+        {user ? (
+          <>
+            <NavLink 
+              className="btn bg-wineapp-moderado text-white"
+              to={user?.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
+              Modificar Perfil
+            </NavLink>
+            <LogoutBtn />
+          </>
+        ) : (
+          <>
+            <NavLink className="btn bg-wineapp-moderado text-white" to="/register">
+              Registrarse
+            </NavLink>
+            <NavLink className="btn bg-wineapp-ligero text-white" to="/login">
+              Iniciar Sesión
+            </NavLink>
+          </>
         )}
-        <li>
-        <NavLink to={user?.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
-                  Modificar Perfil
-        </NavLink>
-        </li>
-        <li>
-          <LogoutBtn />
-        </li>
-
-      </ul>
-  </div>
-    <NavLink className="text-xl text-wineapp-muyfuerte font-bold" to="/">Wine<span className="text-wineapp-ligero">App</span></NavLink>
-  </div>
-  <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-2">
-      <li className="primary-active-wineapp-ligero"><NavLink to="/">Como funciona?</NavLink></li>
-      <li><NavLink to="/wines">Vinos</NavLink></li>
-      <li><NavLink to="/regions">Regiones</NavLink></li>
-      <li><NavLink to="/news">Noticias</NavLink></li>
-      <li>
-        <NavLink to={user?.role === "consumers" ? "/profile/consumer" : "/profile/winery"}>
-                  Modificar Perfil
-        </NavLink>
-        </li>
-        <li>
-                <LogoutBtn />
-              </li>
-    </ul>
-  </div>
-  {!user && (
-  <div id="user_register_login" className="navbar-end max-sm:hidden">
-      <NavLink className="btn bg-wineapp-moderado text-white mr-3" to="/register">Registrarse</NavLink>
-      <NavLink className="btn bg-wineapp-ligero text-white" to="/login">Iniciar Sesión</NavLink>
+      </div>
     </div>
-    )}
-    {user && (
-    <LogoutBtn />
-    )}
-</div>
   )
 }

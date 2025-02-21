@@ -1,7 +1,0 @@
-#users_kind_buttons {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  gap: 40px;
-  margin: 15px 0;
-}
