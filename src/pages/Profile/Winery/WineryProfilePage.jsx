@@ -1,5 +1,3 @@
-import "../ProfilePage.css"
-
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 
@@ -32,8 +30,8 @@ export const WineryProfilePage = () => {
   }
 
   return (
-    <section id="profile_page">
-      <h2>Editar perfil de bodega</h2>
+    <section id="profile_page" className="flex flex-col items-center">
+      <h2 className="my-4">Editar perfil de bodega</h2>
 
       <WineryProfileForm
         user={user}
@@ -42,7 +40,10 @@ export const WineryProfilePage = () => {
         logger={logger}
       />
 
-      <button onClick={toggleEmailForm} style={{ marginTop: "1rem" }}>
+      <button
+        onClick={toggleEmailForm}
+        className={`mt-4 ${showEmailForm ? "btn bg-wineapp-ligero text-white" : "text-black hover:text-gray-700"}`}
+      >
         {showEmailForm ? "Cancelar" : "Modificar Email"}
       </button>
 
@@ -50,7 +51,10 @@ export const WineryProfilePage = () => {
           <EmailChangeForm user={user} setUser={setUser} setShowEmailForm={setShowEmailForm} />
       )}
 
-      <button onClick={togglePasswordForm} style={{ marginTop: "1rem" }}>
+      <button
+        onClick={togglePasswordForm}
+        className={`mt-4 ${showPasswordForm ? "btn bg-wineapp-ligero text-white" : "text-black hover:text-gray-700"}`}
+      >
         {showPasswordForm ? "Cancelar" : "Modificar Contraseña"}
       </button>
 
