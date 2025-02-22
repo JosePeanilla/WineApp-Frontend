@@ -9,7 +9,7 @@ import { LoginPage } from "/src/pages/Login"
 import { RegisterPage } from "/src/pages/Register"
 import { WinesPage } from "/src/pages/Wines"
 import { RegionsPage } from "/src/pages/Regions"
-import { NoticiasPage } from "/src/pages/Noticias"
+import { NewsPage } from "/src/pages/News"
 import { ConsumerProfilePage, WineryProfilePage } from "/src/pages/Profile"
 
 
@@ -30,7 +30,7 @@ return (
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/wines' element={<WinesPage />} />
           <Route path='/regions' element={<RegionsPage />} />
-          <Route path='/news' element={<NoticiasPage />} />
+          <Route path='/news' element={<NewsPage />} />
           <Route path='/profile/consumer' element={<ConsumerProfilePage />} />
           <Route path='/profile/winery' element={<WineryProfilePage />} />
           <Route path='*' element={<h2>Add here the not-found page</h2>} />

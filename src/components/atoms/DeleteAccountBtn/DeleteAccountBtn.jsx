@@ -5,6 +5,7 @@ import { useDeleteAccount } from "/src/hooks/useDeleteAccount"
 import { useContext } from "react"
 import { AuthContext } from "/src/context/AuthContext"
 import { useNavigate } from "react-router-dom"
+import { Button } from "/src/components/atoms/Form"
 
 export const DeleteAccountBtn = () => {
   const logger = new Logger("DeleteAccountBtn")
@@ -39,19 +40,14 @@ export const DeleteAccountBtn = () => {
   }
 
   return (
-    <button 
+    <Button 
       onClick={handleDeleteAccount} 
+      variant="eliminar"
       style={{
-        marginTop: "2rem",
-        backgroundColor: "red",
-        color: "white",
-        padding: "10px",
-        borderRadius: "5px",
-        border: "none",
-        cursor: "pointer"
+        marginTop: "2rem"
       }}
     >
       Eliminar Cuenta
-    </button>
+    </Button>
   )
 }

@@ -6,8 +6,7 @@ import { useValidateEmail } from "/src/hooks/useValidateEmail"
 
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
 import { RegisterField } from "/src/components/atoms/Register/Field"
-
-import "./EmailChangeForm.css"
+import { FormContainer, Button } from "/src/components/atoms/Form"
 
 export const EmailChangeForm = ({ user, setUser, setShowEmailForm }) => {
   const logger = new Logger("EmailChangeForm")
@@ -65,7 +64,7 @@ export const EmailChangeForm = ({ user, setUser, setShowEmailForm }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(handleEmailChange, onError)} noValidate className="email_form">
+    <FormContainer onSubmit={handleSubmit(handleEmailChange, onError)} noValidate className="email_form">
       <h3 className="email_form_title">Actualizar Email</h3>
       <div>
         <RegisterField
@@ -98,7 +97,7 @@ export const EmailChangeForm = ({ user, setUser, setShowEmailForm }) => {
           formState={formState} 
         />
       </div>
-      <button type="submit" className="email_form_button">Guardar Email</button>
-    </form>
+      <Button variant="moderado" type="submit" className="email_form_button">Guardar Email</Button>
+    </FormContainer>
   )
 }
