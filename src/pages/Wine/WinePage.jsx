@@ -27,13 +27,13 @@ export const WinePage = () => {
       <div className="lg:w-1/2 pt-10">
         <img
           src="https://picsum.photos/200" // Foto de botella
-          alt="Wine Bottle"
+          alt={wine.name}
           className="rounded-lg shadow-lg w-full h-auto"
         />
         <h2 className="mt-4 mb-2"> Mapa de la region: {wine.region}</h2>
         <img
           src="https://picsum.photos/150" // Foto de region
-          alt="Wine Bottle"
+          alt={wine.region}
           className="rounded-lg shadow-lg h-auto"
         />
       </div>
