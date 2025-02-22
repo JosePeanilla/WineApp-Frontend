@@ -242,3 +242,4 @@ Vino fuerte: #3d1308
 Vino moderado: #7b0d1e
 Vino ligero: #9f2042
 Vino muy ligero: #f8e5ee
+Eliminar: #DC2626

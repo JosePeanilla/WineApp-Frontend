@@ -7,6 +7,7 @@ export const Button = ({ children, className, variant = "primary", ...props }) =
       moderado: "bg-[#7b0d1e] hover:bg-[#9f2042] text-white",
       ligero: "bg-[#9f2042] hover:bg-[#f8e5ee] text-white",
       muyLigero: "bg-[#f8e5ee] hover:bg-[#9f2042] text-black",
+      eliminar: "bg-red-600 hover:bg-red-700 text-white",
     }
   
     return (
