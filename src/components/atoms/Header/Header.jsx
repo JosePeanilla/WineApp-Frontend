@@ -110,6 +110,10 @@ export const Header = () => {
           <li><NavLink to="/wines">Vinos</NavLink></li>
           <li><NavLink to="/regions">Regiones</NavLink></li>
           <li><NavLink to="/news">Noticias</NavLink></li>
+
+          {user?.role === "wineries" && (
+            <li><NavLink to="/wines/manage">Gestionar Vinos</NavLink></li>
+          )}
         </ul>
       </div>
 

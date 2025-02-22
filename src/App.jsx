@@ -12,7 +12,7 @@ import { WinePage } from "/src/pages/Wine"
 import { RegionsPage } from "/src/pages/Regions"
 import { NewsPage } from "/src/pages/News"
 import { ConsumerProfilePage, WineryProfilePage } from "/src/pages/Profile"
-
+import { WinesManagementPage } from "/src/pages/WinesManagement"
 
 export const App = () => {
 
@@ -35,6 +35,7 @@ return (
           <Route path='/news' element={<NewsPage />} />
           <Route path='/profile/consumer' element={<ConsumerProfilePage />} />
           <Route path='/profile/winery' element={<WineryProfilePage />} />
+          <Route path='/wines/manage' element={<WinesManagementPage />} />
           <Route path='*' element={<h2>Add here the not-found page</h2>} />
         </Routes>
       </main>
