@@ -54,7 +54,7 @@ export const ProfileForm = ({ formFields, formTitle, user, handleOnSubmit }) => 
                         {formState.errors[name] && <FieldErrorP message={formState.errors[name].message} />}
                     </div>
                 ))}
-                <Button variant="fuerte" type="submit">Guardar Cambios</Button>
+                <Button variant="moderado" type="submit">Guardar Cambios</Button>
             </FormContainer>
         </section>
     )

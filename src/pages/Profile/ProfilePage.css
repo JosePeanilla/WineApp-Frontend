@@ -25,17 +25,3 @@
     padding: 5px;
   }
   
-  #profile_page button {
-    background-color: #28a745;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    transition: background-color 0.3s;
-  }
-  
-  #profile_page button:hover {
-    background-color: #218838;
-  }
-  

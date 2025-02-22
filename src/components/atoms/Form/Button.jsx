@@ -1,5 +1,5 @@
 export const Button = ({ children, className, variant = "primary", ...props }) => {
-    const baseStyles = "text-white rounded-md py-2 px-4 transition-colors duration-300"
+    const baseStyles = "rounded-md py-2 px-4 transition-colors duration-300"
   
     const variants = {
       muyFuerte: "bg-[#211103] hover:bg-[#3d1308] text-white",

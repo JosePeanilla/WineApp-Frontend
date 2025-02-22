@@ -11,11 +11,11 @@ export const WineCardImage = ({ image, name }) => {
   logger.debug(`Cargando imagen para: ${name || "Desconocido"}`)
 
   return (
-    <figure className="w-full">
+    <figure>
         <img
             src={image || "/default-wine.jpg"}
             alt={name || "Vino desconocido"}
-            className="w-full h-64 object-cover rounded-t-lg"
+            className="w-full object-cover rounded-l-lg"
         />
     </figure>
   )

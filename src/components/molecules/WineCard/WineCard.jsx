@@ -20,13 +20,18 @@ export const WineCard = ({ wine }) => {
 
   return (
     <div
-      className="card bg-base-100 shadow-lg cursor-pointer hover:shadow-2xl transition transform hover:scale-105 w-full max-w-sm mx-auto"
+      className="card card-side bg-base-100 shadow-xl p-6 cursor-pointer hover:shadow-2xl transition transform hover:scale-105 w-full max-w-3xl mx-auto rounded-lg flex items-center"
       onClick={() => navigate(`/wines/${wine.id}`)}
     >
-
-      <WineCardImage image={wine.image} name={wine.name} />
-      <WineCardContent wine={wine} />
-      <WineCardActions wineId={wine.id} />
+      <figure className="w-40 h-40 flex-shrink-0 rounded-lg overflow-hidden">
+        <WineCardImage image={wine.image} name={wine.name} />
+      </figure>
+      <div className="card-body flex flex-col justify-between w-full pl-6">
+        <WineCardContent wine={wine} />
+        <div className="card-actions self-end">
+          <WineCardActions wineId={wine.id} />
+        </div>
+      </div>
     </div>
   )
 }

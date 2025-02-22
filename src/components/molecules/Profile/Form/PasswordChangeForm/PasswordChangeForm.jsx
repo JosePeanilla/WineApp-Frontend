@@ -6,8 +6,7 @@ import { useValidatePassword } from "/src/hooks/useValidatePassword"
 
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
 import { RegisterField } from "/src/components/atoms/Register/Field"
-
-import "./PasswordChangeForm.css"
+import { FormContainer, Button } from "/src/components/atoms/Form"
 
 export const PasswordChangeForm = ({ user, setUser, setShowPasswordForm }) => {
   const logger = new Logger("PasswordChangeForm")
@@ -65,7 +64,7 @@ export const PasswordChangeForm = ({ user, setUser, setShowPasswordForm }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(handlePasswordChange, onError)} className="password_form">
+    <FormContainer onSubmit={handleSubmit(handlePasswordChange, onError)} className="password_form">
       <h3 className="password_form_title">Actualizar Contraseña</h3>
 
       <RegisterField
@@ -96,7 +95,7 @@ export const PasswordChangeForm = ({ user, setUser, setShowPasswordForm }) => {
       />
       {errors.confirm_new_password && <FieldErrorP error={errors.confirm_new_password} />}
 
-      <button type="submit" className="password_form_button">Guardar Contraseña</button>
-    </form>
+      <Button variant="moderado" type="submit" className="password_form_button">Guardar Contraseña</Button>
+    </FormContainer>
   )
 }
