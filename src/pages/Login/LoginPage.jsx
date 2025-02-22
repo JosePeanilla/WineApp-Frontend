@@ -34,8 +34,8 @@ export const LoginPage = () => {
       navigate('/')
     }
     else {
-      logger.error("User could not be logged in!", error)
-      alert(`[ERROR] User could not be logged in!`)
+      logger.error("Error en el inicio de sesión:", error)
+      alert(`[ERROR] ${error || "No se pudo iniciar sesión. Verifique sus credenciales e inténtelo de nuevo."}`)
     }
   }, [])
 

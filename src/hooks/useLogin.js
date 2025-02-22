@@ -11,14 +11,22 @@ export const useLogin = () => {
         headers: { "Content-Type": "application/json" },
         method: "POST"
       })
+
       const jsonData = await response.json()
-      if (jsonData.error) return json
-      else {
-        localStorage.setItem("token", jsonData.data)
-        return { error: null }
+
+      if (!response.ok) {
+        logger.error("Error en el inicio de sesión:", jsonData.error || "Credenciales incorrectas.")
+        
+        const errorMessage = jsonData.error || "Los datos de inicio de sesión no son correctos. Por favor, inténtelo de nuevo con los datos correctos."
+        return { error: errorMessage }
       }
+
+      localStorage.setItem("token", jsonData.data)
+      logger.info("Usuario autenticado con éxito.")
+      return { error: null }
+
     } catch (err) {
-      const errorText = "Error al intentar iniciar sesión!"
+      const errorText = "Hubo un error al intentar iniciar sesión. Verifique su conexión e inténtelo nuevamente."
       logger.error(errorText, err)
       return { error: errorText }
     }
