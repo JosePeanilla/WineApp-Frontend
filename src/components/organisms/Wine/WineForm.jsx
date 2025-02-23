@@ -11,11 +11,10 @@ import { FormContainer, Button } from "/src/components/atoms/Form"
 
 export const WineForm = ({ wine = null, onSuccess }) => {
   const logger = new Logger("WineForm")
-  const { register, handleSubmit, formState, reset } = useForm({ defaultValues: wine || {} })
+  const { register, handleSubmit, formState, reset, setValue } = useForm({ defaultValues: wine || {} })
   const { uploadImage } = useCloudinaryUpload()
   const { upsertWine } = useUpsertWine()
   const { user } = useContext(AuthContext)
-
   const [regions, setRegions] = useState([])
 
   useEffect(() => {
@@ -26,6 +25,20 @@ export const WineForm = ({ wine = null, onSuccess }) => {
       })
       .catch((error) => console.error("Error al obtener regiones:", error))
   }, [])
+
+  useEffect(() => {
+    if (wine) {
+      Object.keys(wine).forEach((key) => {
+        if (key === "region" && typeof wine[key] === "object") {
+          setValue("region", wine[key].name)
+        } else {
+          setValue(key, wine[key]); 
+        }
+      })
+    } else {
+      reset()
+    }
+  }, [wine, setValue, reset])
 
   const onSubmit = async (data) => {
     try {
