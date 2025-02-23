@@ -41,7 +41,6 @@ export const WineForm = ({ wine = null, onSuccess }) => {
   }, [wine, setValue, reset])
 
   const onSubmit = async (data) => {
-    ("Datos enviados desde el formulario:", data)
     try {
       if (!user || user.role !== "wineries") {
         throw new Error("Solo las bodegas pueden agregar vinos. Asegúrate de estar autenticado correctamente.")
@@ -67,8 +66,6 @@ export const WineForm = ({ wine = null, onSuccess }) => {
         region: selectedRegion._id, 
         winery: wineryId,
       }
-
-      ("Vino enviado al backend:", wineData)
 
     const wineId = wine?.id || wine?._id
     const result = await upsertWine(wineData, wineId)

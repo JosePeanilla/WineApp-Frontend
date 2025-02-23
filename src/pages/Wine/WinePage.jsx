@@ -9,11 +9,9 @@ export const WinePage = () => {
   useEffect(() => {
     fetch(`http://localhost:3000/wines/${id}`) 
       .then((res) => {
-        ("Raw response:", res)
         return res.json()
       })
       .then((data) => {
-        ("Datos recibidos del backend:", data)
       setWine(data.data)
       ("Fetched wine data:", data)
       })

@@ -16,7 +16,6 @@ export const WinesPage = () => {
     fetch("http://localhost:3000/wines") 
       .then((response) => response.json()) 
       .then((data) => {
-        ("Datos recibidos de la API:", data)
         if (!data || !data.data) {
           logger.warn("No wine data received from API")
           return
