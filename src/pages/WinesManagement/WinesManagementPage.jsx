@@ -60,7 +60,7 @@ export const WinesManagementPage = () => {
           wines.map((wine) => (
             <div key={wine.id || wine._id} className="mb-4">
               <WineCard wine={wine} />
-              <div className="flex gap-2 mt-2">
+              <div className="flex justify-center gap-4 mt-6">
                 <Button variant="moderado" onClick={() => handleEdit(wine)}>Editar</Button>
                 <Button variant="eliminar" onClick={() => handleDelete(wine.id || wine._id)}>
                   Eliminar
