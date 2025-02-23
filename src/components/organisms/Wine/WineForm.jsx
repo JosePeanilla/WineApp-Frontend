@@ -36,7 +36,6 @@ export const WineForm = ({ wine = null, onSuccess }) => {
       const wineryId = user.id
 
       const selectedRegion = regions.find(region => region.name.toLowerCase() === data.region.toLowerCase())
-
       if (!selectedRegion) {
         throw new Error("La región ingresada no existe en la base de datos.")
       }
@@ -55,17 +54,19 @@ export const WineForm = ({ wine = null, onSuccess }) => {
         winery: wineryId,
       }
 
-      const result = await upsertWine(wineData, wine?.id)
-      if (result.error) throw result.error
+      const wineId = wine?.id || wine?._id;
+    const result = await upsertWine(wineData, wineId);
+    
+    if (result.error) throw result.error;
 
-      alert("Vino guardado correctamente.")
-      reset()
-      onSuccess()
-    } catch (error) {
-      console.error("Error al guardar el vino:", error)
-      alert(`Error: ${error.message}`)
-    }
+    alert(`Vino ${wineId ? "actualizado" : "agregado"} correctamente.`);
+    reset();
+    onSuccess();
+  } catch (error) {
+    console.error("Error al guardar el vino:", error);
+    alert(`Error: ${error.message}`);
   }
+}
 
   const fields = [
     { name: "name", text: "Nombre del Vino", required: true },

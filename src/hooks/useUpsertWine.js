@@ -6,18 +6,24 @@ export const useUpsertWine = () => {
 
   const upsertWine = async (wineData, wineId = null) => {
     try {
+      if (wineId) {
+        wineData = { ...wineData, id: wineId }
+      }
+
       const method = wineId ? "PUT" : "POST"
       const url = wineId 
         ? `${import.meta.env.VITE_SERVER_URL}/wines/${wineId}` 
         : `${import.meta.env.VITE_SERVER_URL}/wines`
 
+      logger.info(`Enviando ${method} a ${url} con datos:`, wineData)
+
       const response = await fetch(url, {
         method,
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(wineData)
+        body: JSON.stringify(wineData),
       })
 
       const jsonData = await response.json()

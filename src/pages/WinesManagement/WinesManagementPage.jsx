@@ -42,7 +42,7 @@ export const WinesManagementPage = () => {
   }
 
   const handleEdit = (wine) => {
-    setWineToEdit(wine);
+    setWineToEdit({ ...wine, id: wine.id || wine._id })
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
