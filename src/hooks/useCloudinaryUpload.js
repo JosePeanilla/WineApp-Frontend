@@ -6,8 +6,13 @@ export const useCloudinaryUpload = () => {
 
   const uploadImage = async (file) => {
     if (!file) {
-      logger.error("Falta el archivo: no se proporcionó ningún archivo para subir.")
+      logger.error("No se proporcionó ningún archivo para subir.")
       return { error: "Error: No se proporcionó archivo para subir." }
+    }
+
+    if (!import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || !import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET) {
+      logger.error("Cloudinary no está configurado correctamente en el .env")
+      return { error: "Cloudinary no está configurado correctamente." }
     }
 
     try {
@@ -15,10 +20,13 @@ export const useCloudinaryUpload = () => {
       formData.append("file", file)
       formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET)
 
-      const response = await fetch(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`, {
-        method: "POST",
-        body: formData
-      })
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData
+        }
+      )
 
       const jsonData = await response.json()
 

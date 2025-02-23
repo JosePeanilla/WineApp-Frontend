@@ -32,7 +32,7 @@ export const WineForm = ({ wine = null, onSuccess }) => {
         if (key === "region" && typeof wine[key] === "object") {
           setValue("region", wine[key].name)
         } else {
-          setValue(key, wine[key]); 
+          setValue(key, wine[key]) 
         }
       })
     } else {
@@ -45,41 +45,43 @@ export const WineForm = ({ wine = null, onSuccess }) => {
       if (!user || user.role !== "wineries") {
         throw new Error("Solo las bodegas pueden agregar vinos. Asegúrate de estar autenticado correctamente.")
       }
-
+  
       const wineryId = user.id
-
+  
       const selectedRegion = regions.find(region => region.name.toLowerCase() === data.region.toLowerCase())
       if (!selectedRegion) {
         throw new Error("La región ingresada no existe en la base de datos.")
       }
-
-      if (data.image[0]) {
+  
+      let imageUrl = wine?.image || "" 
+  
+      if (data.image && data.image.length > 0 && data.image[0] instanceof File) {
         const imageResult = await uploadImage(data.image[0])
         if (imageResult.error) throw imageResult.error
-        data.image = imageResult.data.secure_url
-      } else {
-        data.image = wine?.image || ""
+        imageUrl = imageResult.data.secure_url
       }
-
+  
       const wineData = {
         ...data,
-        region: selectedRegion._id, 
+        region: selectedRegion._id,
         winery: wineryId,
+        image: imageUrl, 
       }
-
-    const wineId = wine?.id || wine?._id
-    const result = await upsertWine(wineData, wineId)
-    
-    if (result.error) throw result.error
-
-    alert(`Vino ${wineId ? "actualizado" : "agregado"} correctamente.`)
-    reset()
-    onSuccess()
-  } catch (error) {
-    console.error("Error al guardar el vino:", error)
-    alert(`Error: ${error.message}`)
+  
+      const wineId = wine?.id || wine?._id
+      const result = await upsertWine(wineData, wineId)
+      
+      if (result.error) throw result.error
+  
+      alert(`Vino ${wineId ? "actualizado" : "agregado"} correctamente.`)
+      reset()
+      onSuccess()
+    } catch (error) {
+      console.error("Error al guardar el vino:", error)
+      alert(`Error: ${error.message}`)
+    }
   }
-}
+  
 
   const fields = [
     { name: "name", text: "Nombre del Vino", required: true },
