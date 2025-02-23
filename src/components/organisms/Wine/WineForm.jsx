@@ -24,8 +24,7 @@ export const WineForm = ({ wine = null, onSuccess }) => {
       const wineryId = user.id
       console.log("Winery ID enviado al backend:", wineryId)
 
-      const regionId = user.regionId || null
-      if (!regionId) throw new Error("No se encontró la región asociada al usuario. Por favor, selecciona una región.")
+      const region = data.region || ""
 
       console.log("Region ID enviado al backend:", regionId)
 
@@ -62,7 +61,7 @@ export const WineForm = ({ wine = null, onSuccess }) => {
     { name: "year", text: "Año", required: true, type: "number" },
     { name: "description", text: "Descripción", required: false },
     { name: "price", text: "Precio (€)", required: true, type: "number" },
-    { name: "region", text: "Región", required: true, type: "select" }, // 🔹 Se mantiene como select si el usuario puede elegir
+    { name: "region", text: "Región", required: true, type: "text" }, 
     { name: "country", text: "País", required: true, type: "select" },
   ]
 

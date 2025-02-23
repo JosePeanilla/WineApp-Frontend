@@ -15,7 +15,10 @@ export const WineCardContent = ({ wine }) => {
     <div className="card-body">
         <h2 className="card-title text-lg font-semibold">{wine.name}</h2>
         <p className="text-sm text-gray-800">{wine.type} - {wine.year}</p>
-        <p className="text-sm text-gray-600">{wine.winery} - {wine.region} - {wine.country}</p>
+        <p className="text-sm text-gray-600">
+          {wine.winery?.name || "Bodega desconocida"} - {typeof wine.region === "object" ? wine.region?.name : wine.region} - {wine.country || "País desconocido"}
+        </p>
+
         <p className="text-gray-500">{wine.description}</p>
         <p className="text-gray-500">Precio: ${wine.price}</p>
       </div>
