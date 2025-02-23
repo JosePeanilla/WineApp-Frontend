@@ -46,10 +46,14 @@ export const WinesManagementPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
+  const handleCancelEdit = () => {
+    setWineToEdit(null) 
+  }
+
   return (
     <section className="container mx-auto p-4">
       <h1 className="text-2xl mb-4">Gestionar Vinos</h1>
-      <WineForm wine={wineToEdit} onSuccess={() => window.location.reload()} />
+      <WineForm wine={wineToEdit} onSuccess={() => window.location.reload()} onCancel={handleCancelEdit} />
 
       <div className="mt-6">
         {wines.length > 0 ? (

@@ -9,7 +9,7 @@ import { AuthContext } from "/src/context/AuthContext"
 import { RegisterField } from "/src/components/atoms/Register/Field"
 import { FormContainer, Button } from "/src/components/atoms/Form"
 
-export const WineForm = ({ wine = null, onSuccess }) => {
+export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
   const logger = new Logger("WineForm")
   const { register, handleSubmit, formState, reset, setValue } = useForm({ defaultValues: wine || {} })
   const { uploadImage } = useCloudinaryUpload()
@@ -112,6 +112,7 @@ export const WineForm = ({ wine = null, onSuccess }) => {
       <Button type="submit" variant="moderado">
         {wine ? "Actualizar Vino" : "Agregar Vino"}
       </Button>
+      {wine && <Button type="button" variant="ligero" onClick={onCancel}>Cancelar</Button>}
     </FormContainer>
   )
 }

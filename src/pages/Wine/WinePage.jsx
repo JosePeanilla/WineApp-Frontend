@@ -18,7 +18,6 @@ export const WinePage = () => {
           region: typeof data.data.region === "object" ? data.data.region : { name: data.data.region || "" },
         }
         setWine(formattedWine)
-        console.log("Wine Data:", formattedWine);
       })
       .catch((error) => console.error("Error al obtener datos del vino:", error))
   }, [id])
