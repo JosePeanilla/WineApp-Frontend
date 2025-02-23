@@ -10,11 +10,9 @@ const logger = new Logger("WineCard")
 
 export const WineCard = ({ wine }) => {
   const wineId = wine.id || wine._id
-  console.log("Wine recibido en WineCard:", wine)
   const navigate = useNavigate()
 
   if (!wine || !wineId) {
-    console.error("Error: El objeto wine es inválido o no tiene un ID válido:", wine)
     logger.error("WineCard recibió un objeto inválido o sin ID.")
     return <p className="text-red-500">Error: Información del vino no disponible.</p>
   }

@@ -41,6 +41,7 @@ export const WineForm = ({ wine = null, onSuccess }) => {
   }, [wine, setValue, reset])
 
   const onSubmit = async (data) => {
+    ("Datos enviados desde el formulario:", data)
     try {
       if (!user || user.role !== "wineries") {
         throw new Error("Solo las bodegas pueden agregar vinos. Asegúrate de estar autenticado correctamente.")
@@ -67,17 +68,19 @@ export const WineForm = ({ wine = null, onSuccess }) => {
         winery: wineryId,
       }
 
-      const wineId = wine?.id || wine?._id;
-    const result = await upsertWine(wineData, wineId);
-    
-    if (result.error) throw result.error;
+      ("Vino enviado al backend:", wineData)
 
-    alert(`Vino ${wineId ? "actualizado" : "agregado"} correctamente.`);
-    reset();
-    onSuccess();
+    const wineId = wine?.id || wine?._id
+    const result = await upsertWine(wineData, wineId)
+    
+    if (result.error) throw result.error
+
+    alert(`Vino ${wineId ? "actualizado" : "agregado"} correctamente.`)
+    reset()
+    onSuccess()
   } catch (error) {
-    console.error("Error al guardar el vino:", error);
-    alert(`Error: ${error.message}`);
+    console.error("Error al guardar el vino:", error)
+    alert(`Error: ${error.message}`)
   }
 }
 
@@ -87,7 +90,7 @@ export const WineForm = ({ wine = null, onSuccess }) => {
     { name: "year", text: "Año", required: true, type: "number" },
     { name: "description", text: "Descripción", required: false },
     { name: "price", text: "Precio (€)", required: true, type: "number" },
-    { name: "region", text: "Región", required: true, type: "text" },  // 🔹 Campo de texto en lugar de select
+    { name: "region", text: "Región", required: true, type: "text" },  
     { name: "country", text: "País", required: true, type: "select" },
   ]
 

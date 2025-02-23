@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export const WinePage = () => {
-  const { id } = useParams();
-  const [wine, setWine] = useState(null);
+  const { id } = useParams()
+  const [wine, setWine] = useState(null)
 
   useEffect(() => {
     fetch(`http://localhost:3000/wines/${id}`) 
       .then((res) => {
-        console.log("Raw response:", res);
-        return res.json();
+        ("Raw response:", res)
+        return res.json()
       })
       .then((data) => {
-        console.log("Fetched wine data:", data)
-      setWine(data.data);
-      console.log("Fetched wine data:", data);
+        ("Datos recibidos del backend:", data)
+      setWine(data.data)
+      ("Fetched wine data:", data)
       })
-  }, [id]);
+  }, [id])
 
-  if (wine) {
-    console.log("Valor de wine.region:", wine.region);
-  }
-
-  if (!wine) return <p>Loading...</p>;
+  if (!wine) return <p>Loading...</p>
 
   return (
     <>

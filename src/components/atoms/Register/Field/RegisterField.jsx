@@ -20,7 +20,14 @@ export const RegisterField = ({ name, required = true, register = () => {}, text
   const requiredNonBlankTextMessage = "Este campo debe ser rellenado, al menos, por algún carácter que no sea un espacio."
 
   const validateNonBlankTextInTextField = (field_text) => {
-    if (field_text.trim().length > 0) return true;
+    if (typeof field_text === "number") {
+      field_text = String(field_text)
+    }
+    if (typeof field_text !== "string") {
+      logger.error("Error: El valor del campo no es un string válido.", field_text)
+      return "Error: Valor inválido."
+    }
+    if (field_text.trim().length > 0) return true
     logger.error(`${requiredNonBlankTextMessage}`)
     return requiredNonBlankTextMessage
   }
