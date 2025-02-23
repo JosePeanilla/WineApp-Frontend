@@ -1,6 +1,7 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
-import { useContext } from "react"
+
+import { useContext, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useCloudinaryUpload } from "/src/hooks/useCloudinaryUpload"
 import { useUpsertWine } from "/src/hooks/useUpsertWine"
@@ -13,7 +14,18 @@ export const WineForm = ({ wine = null, onSuccess }) => {
   const { register, handleSubmit, formState, reset } = useForm({ defaultValues: wine || {} })
   const { uploadImage } = useCloudinaryUpload()
   const { upsertWine } = useUpsertWine()
-  const { user } = useContext(AuthContext) 
+  const { user } = useContext(AuthContext)
+
+  const [regions, setRegions] = useState([])
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/regions`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRegions(data.data || [])
+      })
+      .catch((error) => console.error("Error al obtener regiones:", error))
+  }, [])
 
   const onSubmit = async (data) => {
     try {
@@ -22,11 +34,12 @@ export const WineForm = ({ wine = null, onSuccess }) => {
       }
 
       const wineryId = user.id
-      console.log("Winery ID enviado al backend:", wineryId)
 
-      const region = data.region || ""
+      const selectedRegion = regions.find(region => region.name.toLowerCase() === data.region.toLowerCase())
 
-      console.log("Region ID enviado al backend:", regionId)
+      if (!selectedRegion) {
+        throw new Error("La región ingresada no existe en la base de datos.")
+      }
 
       if (data.image[0]) {
         const imageResult = await uploadImage(data.image[0])
@@ -38,19 +51,18 @@ export const WineForm = ({ wine = null, onSuccess }) => {
 
       const wineData = {
         ...data,
-        region: regionId, 
+        region: selectedRegion._id, 
         winery: wineryId,
       }
 
       const result = await upsertWine(wineData, wine?.id)
       if (result.error) throw result.error
 
-      logger.info("Vino guardado correctamente.")
       alert("Vino guardado correctamente.")
       reset()
       onSuccess()
     } catch (error) {
-      logger.error("Error al guardar el vino:", error)
+      console.error("Error al guardar el vino:", error)
       alert(`Error: ${error.message}`)
     }
   }
@@ -61,7 +73,7 @@ export const WineForm = ({ wine = null, onSuccess }) => {
     { name: "year", text: "Año", required: true, type: "number" },
     { name: "description", text: "Descripción", required: false },
     { name: "price", text: "Precio (€)", required: true, type: "number" },
-    { name: "region", text: "Región", required: true, type: "text" }, 
+    { name: "region", text: "Región", required: true, type: "text" },  // 🔹 Campo de texto en lugar de select
     { name: "country", text: "País", required: true, type: "select" },
   ]
 

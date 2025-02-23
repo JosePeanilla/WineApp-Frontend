@@ -35,7 +35,7 @@ export const WinesManagementPage = () => {
       if (result.error) {
         alert(result.error)
       } else {
-        setWines(wines.filter((w) => w.id !== wineId))
+        setWines((prevWines) => prevWines.filter((wine) => wine.id !== wineId && wine._id !== wineId))
         alert("Vino eliminado correctamente.")
       }
     }
@@ -58,7 +58,9 @@ export const WinesManagementPage = () => {
               <WineCard wine={wine} />
               <div className="flex gap-2 mt-2">
                 <Button variant="moderado" onClick={() => handleEdit(wine)}>Editar</Button>
-                <Button variant="eliminar" onClick={() => handleDelete(wine.id)}>Eliminar</Button>
+                <Button variant="eliminar" onClick={() => handleDelete(wine.id || wine._id)}>
+                  Eliminar
+                </Button>
               </div>
             </div>
           ))
