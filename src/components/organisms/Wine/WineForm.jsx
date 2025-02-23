@@ -1,6 +1,5 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
-
 import { useContext } from "react"
 import { useForm } from "react-hook-form"
 import { useCloudinaryUpload } from "/src/hooks/useCloudinaryUpload"
@@ -9,28 +8,26 @@ import { AuthContext } from "/src/context/AuthContext"
 import { RegisterField } from "/src/components/atoms/Register/Field"
 import { FormContainer, Button } from "/src/components/atoms/Form"
 
-const getRegionIdByName = async (regionName) => {
-  const res = await fetch(`http://localhost:3000/regions?name=${regionName}`);
-  const data = await res.json();
-  if (!data.data[0]) throw new Error(`Región '${regionName}' no encontrada.`);
-  return data.data[0]._id;
-};
-
 export const WineForm = ({ wine = null, onSuccess }) => {
   const logger = new Logger("WineForm")
   const { register, handleSubmit, formState, reset } = useForm({ defaultValues: wine || {} })
   const { uploadImage } = useCloudinaryUpload()
   const { upsertWine } = useUpsertWine()
-  const { user } = useContext(AuthContext) // 🔹 Obtener el usuario autenticado
+  const { user } = useContext(AuthContext) 
 
   const onSubmit = async (data) => {
     try {
       if (!user || user.role !== "wineries") {
-        throw new Error("Solo las bodegas pueden agregar vinos. Asegúrate de estar autenticado correctamente.");
+        throw new Error("Solo las bodegas pueden agregar vinos. Asegúrate de estar autenticado correctamente.")
       }
 
-      const wineryId = user.id; // 🔹 Usar el ID del usuario autenticado (bodega)
-      console.log("Winery ID enviado al backend:", wineryId); // 🔍 Verificar si el ID es correcto
+      const wineryId = user.id
+      console.log("Winery ID enviado al backend:", wineryId)
+
+      const regionId = user.regionId || null
+      if (!regionId) throw new Error("No se encontró la región asociada al usuario. Por favor, selecciona una región.")
+
+      console.log("Region ID enviado al backend:", regionId)
 
       if (data.image[0]) {
         const imageResult = await uploadImage(data.image[0])
@@ -40,13 +37,11 @@ export const WineForm = ({ wine = null, onSuccess }) => {
         data.image = wine?.image || ""
       }
 
-      const regionId = await getRegionIdByName(data.region);
-
       const wineData = {
         ...data,
-        region: regionId,
-        winery: wineryId, // ✅ Ahora se usa el ID correcto
-      };
+        region: regionId, 
+        winery: wineryId,
+      }
 
       const result = await upsertWine(wineData, wine?.id)
       if (result.error) throw result.error
@@ -67,7 +62,7 @@ export const WineForm = ({ wine = null, onSuccess }) => {
     { name: "year", text: "Año", required: true, type: "number" },
     { name: "description", text: "Descripción", required: false },
     { name: "price", text: "Precio (€)", required: true, type: "number" },
-    { name: "region", text: "Región", required: true },
+    { name: "region", text: "Región", required: true, type: "select" }, // 🔹 Se mantiene como select si el usuario puede elegir
     { name: "country", text: "País", required: true, type: "select" },
   ]
 

@@ -54,7 +54,7 @@ export const WinesManagementPage = () => {
       <div className="mt-6">
         {wines.length > 0 ? (
           wines.map((wine) => (
-            <div key={wine.id} className="mb-4">
+            <div key={wine.id || wine._id} className="mb-4">
               <WineCard wine={wine} />
               <div className="flex gap-2 mt-2">
                 <Button variant="moderado" onClick={() => handleEdit(wine)}>Editar</Button>

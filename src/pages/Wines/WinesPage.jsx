@@ -16,6 +16,7 @@ export const WinesPage = () => {
     fetch("http://localhost:3000/wines") 
       .then((response) => response.json()) 
       .then((data) => {
+        console.log("Datos recibidos de la API:", data)
         if (!data || !data.data) {
           logger.warn("No wine data received from API")
           return
@@ -30,6 +31,7 @@ export const WinesPage = () => {
         logger.info(`Loaded ${winesWithCorrectID.length} wines successfully`)
       })
       .catch((error) => {
+        console.error("Error al obtener los vinos:", error)
         logger.error("Error fetching wines:", error)
       })
   }, [])
