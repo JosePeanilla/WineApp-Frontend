@@ -30,7 +30,7 @@ export const WinePage = () => {
       {/* Left Column - Image */}
       <div className="lg:w-1/2 pt-10">
         <img
-          src="https://picsum.photos/200" // Foto de botella
+          src={wine.image || "https://picsum.photos/200"} 
           alt={wine.name}
           className="rounded-lg shadow-lg w-full h-auto"
         />
