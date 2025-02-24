@@ -15,11 +15,11 @@ export const WineCardActions = ({ wineId }) => {
   logger.debug(`Renderizando botón de acción para el vino con ID: ${wineId}`)
 
   return (
-    <div className="mt-auto flex justify-end p-4">
+    <div className="w-full flex justify-center">
       <button
-        className="btn btn-primary px-4 py-2 rounded-lg shadow-md"
+        className="btn bg-wineapp-moderado text-white px-4 py-2 text-lg font-semibold rounded-lg shadow-md transition-transform transform hover:scale-105"
         onClick={(e) => {
-          e.stopPropagation()
+          e.stopPropagation() 
           navigate(`/wines/${wineId}`)
         }}
       >
