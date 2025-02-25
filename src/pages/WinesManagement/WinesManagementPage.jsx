@@ -59,14 +59,13 @@ export const WinesManagementPage = () => {
         {wines.length > 0 ? (
           wines.map((wine) => (
             <div key={wine.id || wine._id} className="mb-4">
-              <WineCard wine={wine} />
-              <div className="flex justify-center gap-4 mt-6">
-                <Button variant="moderado" onClick={() => handleEdit(wine)}>Editar</Button>
-                <Button variant="eliminar" onClick={() => handleDelete(wine.id || wine._id)}>
-                  Eliminar
-                </Button>
-              </div>
-            </div>
+              <WineCard
+              wine={wine}
+              showEditDelete={true}
+              onEdit={() => handleEdit(wine)}
+              onDelete={(wineId) => handleDelete(wineId)}
+            />
+          </div>
           ))
         ) : (
           <p>No tienes vinos registrados aún.</p>

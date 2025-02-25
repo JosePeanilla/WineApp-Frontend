@@ -1,10 +1,11 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 import { useNavigate } from "react-router-dom"
+import { Button } from "/src/components/atoms/Form"
 
 const logger = new Logger("WineCardActions")
 
-export const WineCardActions = ({ wineId }) => {
+export const WineCardActions = ({ wineId, showEditDelete = false, onEdit, onDelete }) => {
   const navigate = useNavigate()
 
   if (!wineId) {
@@ -15,16 +16,27 @@ export const WineCardActions = ({ wineId }) => {
   logger.debug(`Renderizando botón de acción para el vino con ID: ${wineId}`)
 
   return (
-    <div className="w-full flex justify-center">
-      <button
-        className="btn bg-wineapp-moderado text-white px-4 py-2 text-lg font-semibold rounded-lg shadow-md transition-transform transform hover:scale-105"
+    <div className="w-full flex justify-center gap-4">
+      {showEditDelete && (
+        <>
+          <Button variant="ligero" onClick={() => onEdit(wineId)}>
+            Editar
+          </Button>
+          <Button variant="eliminar" onClick={() => onDelete(wineId)}>
+            Eliminar
+          </Button>
+        </>
+      )}
+      
+      <Button
+        variant="moderado"
         onClick={(e) => {
           e.stopPropagation() 
           navigate(`/wines/${wineId}`)
         }}
       >
         Catar
-      </button>
+      </Button>
     </div>
   )
 }

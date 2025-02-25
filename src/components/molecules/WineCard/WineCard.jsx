@@ -7,7 +7,7 @@ import { WineCardActions } from "./WineCardActions.jsx"
 
 const logger = new Logger("WineCard")
 
-export const WineCard = ({ wine }) => {
+export const WineCard = ({ wine, showEditDelete = false, onEdit, onDelete }) => {
   const wineId = wine.id || wine._id
 
   if (!wine || !wineId) {
@@ -25,7 +25,12 @@ export const WineCard = ({ wine }) => {
       <div className="card-body flex flex-col justify-between w-full pl-6">
         <WineCardContent wine={wine} />
         <div className="card-actions self-end">
-          <WineCardActions wineId={wineId} />
+          <WineCardActions
+           wineId={wineId}
+           showEditDelete={showEditDelete}
+           onEdit={onEdit}
+           onDelete={onDelete}
+          />
         </div>
       </div>
     </div>
