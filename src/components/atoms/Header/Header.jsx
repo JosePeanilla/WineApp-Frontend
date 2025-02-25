@@ -67,6 +67,18 @@ export const Header = () => {
               <li><NavLink to="/regions" onClick={closeDropdown}>Regiones</NavLink></li>
               <li><NavLink to="/news" onClick={closeDropdown}>Noticias</NavLink></li>
 
+              {user?.role === "wineries" && ( 
+                <li>
+                  <NavLink 
+                    className="btn bg-wineapp-ligero text-white btn-sm w-full"
+                    to="/wines/manage"
+                    onClick={closeDropdown}
+                  >
+                    Gestionar Vinos
+                  </NavLink>
+                </li>
+              )}
+
               {user ? (
                 <>
                   <li>
