@@ -88,6 +88,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
     { name: "type", text: "Tipo de Vino", required: true },
     { name: "year", text: "Año", required: true, type: "number" },
     { name: "description", text: "Descripción", required: false },
+    { name: "additionalDescription", text: "Descripción Adicional", required: false },
     { name: "price", text: "Precio (€)", required: true, type: "number" },
     { name: "region", text: "Región", required: true, type: "text" },  
     { name: "country", text: "País", required: true, type: "select" },

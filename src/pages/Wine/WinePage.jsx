@@ -46,13 +46,17 @@ export const WinePage = () => {
       {/* Right Column - Content */}
       <div className="lg:w-1/2 space-y-4 pt-10">
         <h1 className="text-3xl font-bold">{wine.name}</h1>
-        <h3 className="text-lg font-semibold"> Typo de Vino: {wine.type}</h3>
+        <h3 className="text-lg font-semibold"> Tipo de Vino: {wine.type}</h3>
         <h3 className="text-lg font-semibold">Año: {wine.year}</h3>
         <h2 className="text-lg font-semibold">Bodega: {wine.winery?.name || "Desconocida"}</h2>
         <h2 className="text-lg font-semibold">Región: {wine.region?.name || "Desconocida"}</h2>
         <p className="mt-2">{wine.description}</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis odio vitae dolor gravida, in blandit nisi aliquam. Curabitur tincidunt porttitor enim sit amet tristique. Fusce dolor diam, dapibus a congue in, rhoncus sollicitudin augue. Aliquam eros dui, ornare a facilisis vel, condimentum vitae metus. Aliquam ut ligula massa. In eu tempus purus. Cras vel dolor eget risus convallis efficitur. Curabitur in tempus tellus. Duis venenatis feugiat sem, nec faucibus libero efficitur sed. Proin semper, sem mollis posuere auctor, libero nisi laoreet neque, ac imperdiet lectus tellus et nunc. Nulla finibus vel nisi ut iaculis.  
-        In eu diam felis. Sed semper nisl nulla, at maximus lectus consectetur in. Ut dignissim mi in dolor sodales rhoncus. Cras non turpis bibendum, placerat nibh vel, euismod orci. Sed interdum tortor tempor mi aliquet, non dignissim sem gravida. Vivamus euismod purus eu metus lacinia, eget euismod nisl blandit. Nunc urna massa, hendrerit eget pulvinar eu, mattis quis quam. Pellentesque semper, enim id efficitur imperdiet, quam mi varius augue, eu vestibulum nunc neque sed nisi. Curabitur et egestas lacus. Duis varius dui metus, non aliquam orci sodales ut. Proin dictum luctus nisl, nec tempus magna bibendum vel. In dapibus lectus eget tellus venenatis posuere.</p>
+        <div className="mt-4">
+          <h2 className="text-xl font-semibold">Información adicional</h2>
+          <p>
+            {wine.additionalDescription || "Información adicional no disponible."}
+          </p>
+        </div>
         <p className="text-lg font-semibold">Price: {wine.price}€ </p>
       </div>
     </div>
