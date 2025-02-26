@@ -57,7 +57,9 @@ export const WinesManagementPage = () => {
 
       <div className="mt-6">
         {wines.length > 0 ? (
-          wines.map((wine) => (
+          [...wines] // Clonamos el array para evitar modificar el estado directamente
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          .map((wine) => (
             <div key={wine.id || wine._id} className="mb-4">
               <WineCard
               wine={wine}
