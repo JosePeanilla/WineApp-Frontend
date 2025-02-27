@@ -52,12 +52,12 @@ export const WinesManagementPage = () => {
 
   return (
     <section className="container mx-auto p-4">
-      <h1 className="text-2xl mb-4">Gestionar Vinos</h1>
+      <h1 className="text-2xl font-bold text-center mb-4">Gestionar Vinos</h1>
       <WineForm wine={wineToEdit} onSuccess={() => window.location.reload()} onCancel={handleCancelEdit} />
 
       <div className="mt-6">
         {wines.length > 0 ? (
-          [...wines] // Clonamos el array para evitar modificar el estado directamente
+          [...wines] 
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .map((wine) => (
             <div key={wine.id || wine._id} className="mb-4">
