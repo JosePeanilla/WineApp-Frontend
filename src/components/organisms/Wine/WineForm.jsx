@@ -48,7 +48,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
   
       const wineryId = user.id
   
-      const selectedRegion = regions.find(region => region.name.toLowerCase() === data.region.toLowerCase())
+      const selectedRegion = regions.find(region => region._id === data.region)
       if (!selectedRegion) {
         throw new Error("La región ingresada no existe en la base de datos.")
       }
@@ -97,12 +97,33 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)} noValidate>
       {fields.map((field) => (
-        <RegisterField
-          key={field.name}
-          register={register}
-          formState={formState}
-          {...field}
-        />
+        field.name === "region" ? (
+          <div key={field.name} className="mb-4">
+            <label htmlFor="region" className="block font-medium">
+              {field.text}:
+            </label>
+            <select
+              id="region"
+              {...register("region", { required: true })}
+              className="input-field"
+            >
+              <option value="">Selecciona una región</option>
+              {regions.map((region) => (
+                <option key={region._id} value={region._id}>
+                  {region.name}
+                </option>
+              ))}
+            </select>
+
+          </div>
+        ) : (
+          <RegisterField
+            key={field.name}
+            register={register}
+            formState={formState}
+            {...field}
+          />
+        )
       ))}
 
       <div>
