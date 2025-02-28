@@ -1,7 +1,7 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 import { useEffect, useContext, useState } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 
 import { AuthContext } from "/src/context/AuthContext"
 import { LogoutBtn } from "/src/components/atoms/LogoutBtn"
@@ -9,6 +9,7 @@ import { Button } from "/src/components/atoms/Form"
 
 export const Header = () => {
   const logger = new Logger("Header")
+  const navigate = useNavigate()
 
   const { user } = useContext(AuthContext)
   const [isOpen, setIsOpen] = useState(false)
@@ -34,6 +35,7 @@ export const Header = () => {
     closeDropdown()
     localStorage.removeItem("token")
     logger.info("Usuario cerró sesión desde menú móvil.")
+    navigate("/")
     window.location.reload()
   }
 
