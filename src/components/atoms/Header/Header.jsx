@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom"
 
 import { AuthContext } from "/src/context/AuthContext"
 import { LogoutBtn } from "/src/components/atoms/LogoutBtn"
+import { Button } from "/src/components/atoms/Form"
 
 export const Header = () => {
   const logger = new Logger("Header")
@@ -70,7 +71,7 @@ export const Header = () => {
               {user?.role === "wineries" && ( 
                 <li>
                   <NavLink 
-                    className="btn bg-wineapp-ligero text-white btn-sm w-full"
+                    className="btn bg-wineapp-fuerte text-white btn-sm w-full"
                     to="/wines/manage"
                     onClick={closeDropdown}
                   >
@@ -123,14 +124,21 @@ export const Header = () => {
           <li><NavLink to="/regions">Regiones</NavLink></li>
           <li><NavLink to="/news">Noticias</NavLink></li>
 
-          {user?.role === "wineries" && (
-            <li><NavLink to="/wines/manage">Gestionar Vinos</NavLink></li>
-          )}
+          
         </ul>
       </div>
 
       {/* Botones en la derecha SOLO en escritorio */}
       <div className="hidden lg:flex items-center gap-4">
+        {user?.role === "wineries" && (
+            <Button 
+              variant="fuerte"
+              className="btn bg-wineapp-fuerte text-white"
+              onClick={() => navigate("/wines/manage")}
+            >
+              Gestionar Vinos
+            </Button>
+        )}
         {user ? (
           <>
             <NavLink 
