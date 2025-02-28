@@ -30,16 +30,16 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
     if (wine) {
       Object.keys(wine).forEach((key) => {
         if (key === "region" && typeof wine[key] === "object") {
-          setValue("region", wine[key].name)
+          setValue("region", wine[key]._id || "") 
         } else {
-          setValue(key, wine[key]) 
+          setValue(key, wine[key] || "")
         }
       })
     } else {
       reset()
     }
   }, [wine, setValue, reset])
-
+  
   const onSubmit = async (data) => {
     try {
       if (!user || user.role !== "wineries") {
