@@ -98,14 +98,14 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
     <FormContainer onSubmit={handleSubmit(onSubmit)} noValidate>
       {fields.map((field) => (
         field.name === "region" ? (
-          <div key={field.name} className="mb-4">
-            <label htmlFor="region" className="block font-medium">
+          <div key={field.name}>
+            <label htmlFor="region" className="block font-normal">
               {field.text}:
             </label>
             <select
               id="region"
               {...register("region", { required: true })}
-              className="input-field"
+              className="p-2 w-full bg-white focus:outline-none"
             >
               <option value="">Selecciona una región</option>
               {regions.map((region) => (
