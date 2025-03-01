@@ -49,6 +49,7 @@ export const RegisterField = ({ name, required = true, register = () => {}, text
         <select id={fieldId} name={name} {...register(name, {
           required: required ? { message: "Debes seleccionar un país.", value: true } : undefined
         })}
+        className="border border-gray-300 rounded-md p-2 w-full bg-white"
         defaultValue="" 
       >
         <option value="">Selecciona un país</option>
