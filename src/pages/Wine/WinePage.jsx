@@ -57,7 +57,7 @@ export const WinePage = () => {
             {wine.additionalDescription || "Información adicional no disponible."}
           </p>
         </div>
-        <p className="text-lg font-semibold">Price: {wine.price}€ </p>
+        <p className="text-lg font-semibold">Precio: {wine.price}€ </p>
       </div>
     </div>
     <Link to="/wines" className="flex items-center text-lg font-bold ml-5">
