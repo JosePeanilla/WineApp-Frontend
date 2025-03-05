@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
+import { WineReview } from "/src/components/molecules/WineReview"
 
 export const WinePage = () => {
   const { id } = useParams()
@@ -60,6 +61,7 @@ export const WinePage = () => {
         <p className="text-lg font-semibold">Precio: {wine.price}€ </p>
       </div>
     </div>
+    <WineReview wineId={wine._id} onReviewSubmitted={() => console.log("Reseña enviada!")} />
     <Link to="/wines" className="flex items-center text-lg font-bold ml-5">
     <svg
       xmlns="http://www.w3.org/2000/svg"
