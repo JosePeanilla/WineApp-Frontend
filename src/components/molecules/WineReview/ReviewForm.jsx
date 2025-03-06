@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import StarRatings from "react-star-ratings"
 import { Button } from "/src/components/atoms/Form"
 
-export const ReviewForm = ({ wineId, onReviewSubmit, onReviewUpdate, editingReview = null, onCancelEdit }) => {
+export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null }) => {
   const [rating, setRating] = useState(editingReview?.rating || 0)
   const [comment, setComment] = useState(editingReview?.comment || "")
 
@@ -15,16 +15,12 @@ export const ReviewForm = ({ wineId, onReviewSubmit, onReviewUpdate, editingRevi
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!rating || !comment.trim()) {
-      alert("Debes agregar una valoración y un comentario.")
+    if (!rating) {
+      alert("Debes agregar una valoración con estrellas.")
       return
     }
 
-    if (editingReview) {
-      onReviewUpdate({ ...editingReview, rating, comment })
-    } else {
-      onReviewSubmit({ wine: wineId, rating, comment })
-    }
+    onReviewSubmit({ wine: wineId, rating, comment })
 
     setRating(0)
     setComment("")
@@ -41,20 +37,14 @@ export const ReviewForm = ({ wineId, onReviewSubmit, onReviewUpdate, editingRevi
       />
       <textarea
         className="w-full p-2 mt-2 border rounded"
-        placeholder="Deja tu comentario..."
+        placeholder="Escribe un comentario opcional..."
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
       <div className="mt-2 flex gap-2">
         <Button type="submit" variant="moderado">
-          {editingReview ? "Actualizar Valoración" : "Enviar Valoración"}
+          Enviar Valoración
         </Button>
- 
-        {editingReview && (
-          <Button type="button" variant="ligero" onClick={onCancelEdit}>
-            Cancelar
-          </Button>
-        )}
       </div>
     </form>
   )

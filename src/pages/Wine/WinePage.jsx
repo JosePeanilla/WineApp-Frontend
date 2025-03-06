@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
+import { AuthContext } from "/src/context/AuthContext"
+import { useWineReview } from "/src/hooks/useWineReview"
 import { WineReview } from "/src/components/molecules/WineReview"
+import { ReviewList } from "/src/components/molecules/WineReview"
 
 export const WinePage = () => {
   const { id } = useParams()
   const [wine, setWine] = useState(null)
+  const { user } = useContext(AuthContext)
+  const { reviews, fetchReviews, handleReviewSubmit, handleReviewUpdate, handleReviewDelete } = useWineReview(id)
 
   useEffect(() => {
     fetch(`http://localhost:3000/wines/${id}`)
@@ -21,7 +26,8 @@ export const WinePage = () => {
         setWine(formattedWine)
       })
       .catch((error) => console.error("Error al obtener datos del vino:", error))
-  }, [id])
+      fetchReviews() 
+  }, [id, fetchReviews])
 
   if (!wine) return <p>Loading...</p>
 
@@ -42,6 +48,10 @@ export const WinePage = () => {
           className="rounded-lg shadow-lg h-auto"
         />
 
+        <div className="mt-6">
+          <h2 className="text-xl font-semibold">Valoraciones y comentarios</h2>
+          <ReviewList reviews={reviews} user={user} onEdit={handleReviewUpdate} onDelete={handleReviewDelete} />
+        </div>
       </div>
 
       {/* Right Column - Content */}
