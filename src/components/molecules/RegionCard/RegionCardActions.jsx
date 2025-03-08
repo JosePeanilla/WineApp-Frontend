@@ -1,6 +1,7 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 import { useNavigate } from "react-router-dom"
+import { Button } from "/src/components/atoms/Form"
 
 const logger = new Logger("RegionCardActions")
 
@@ -16,15 +17,15 @@ export const RegionCardActions = ({ regionId }) => {
 
   return (
     <div className="mt-auto flex justify-end p-4">
-      <button
-        className="btn btn-primary px-4 py-2 rounded-lg shadow-md"
+      <Button
+        variant="moderado"
         onClick={(e) => {
           e.stopPropagation()
           navigate(`/regions/${regionId}`)
         }}
       >
-        Abre la puerta
-      </button>
+        Descubrir
+      </Button>
     </div>
   )
 }

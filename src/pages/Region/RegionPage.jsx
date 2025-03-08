@@ -13,13 +13,13 @@ export const RegionPage = () => {
         if (!data || !data.data) {
           return
         }
-        const formattedWine = {
+        const formattedRegion = {
           ...data.data,
           region: typeof data.data.region === "object" ? data.data.region : { name: data.data.region || "" },
         }
-        setWine(formattedWine)
+        setRegion(formattedRegion)
       })
-      .catch((error) => console.error("Error al obtener datos del vino:", error))
+      .catch((error) => console.error("Error al obtener datos de la región:", error))
   }, [id])
 
   if (!region) return <p>Loading...</p>
