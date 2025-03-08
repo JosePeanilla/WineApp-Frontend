@@ -25,12 +25,28 @@ export const RegionsPage = () => {
           id: region.id || region._id 
         }))
 
-        setRegions(regionsWithCorrectID)
-        logger.info(`Loaded ${regionsWithCorrectID.length} regions successfully`)
+        const regionImages = {
+          "Douro": "https://cdn.pixabay.com/photo/2017/11/30/21/58/douro-2989559_1280.jpg",
+          "Luján de Cuyo": "https://images.unsplash.com/photo-1520356996640-d3b614727887?q=80&w=2117&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "Maldonado": "https://plus.unsplash.com/premium_photo-1663088920520-5e6f067f3bda?q=80&w=2088&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "Napa Valley": "https://cdn.pixabay.com/photo/2019/06/17/18/33/napa-valley-4280579_1280.jpg",
+          "Penedès": "https://cdn.pixabay.com/photo/2014/08/26/15/15/road-428039_1280.jpg",
+          "Piamonte": "https://cdn.pixabay.com/photo/2017/12/03/09/58/torino-2994538_1280.jpg",
+          "Valle del Loira": "https://cdn.pixabay.com/photo/2014/07/04/17/57/sancerre-384105_1280.jpg",
+          "Valle del Maipo": "https://cdn.pixabay.com/photo/2021/07/09/16/31/vineyard-6399505_1280.jpg"
+        }
+
+        const updatedRegions = regionsWithCorrectID.map(region => ({
+          ...region,
+          image: regionImages[region.name] || "https://via.placeholder.com/300"
+        }))
+
+        setRegions(updatedRegions)
+        logger.info(`Loaded ${updatedRegions.length} regions successfully`)
       })
       .catch((error) => {
         logger.error("Error fetching regions:", error)
-      })
+      }) 
   }, [])
 
   return (

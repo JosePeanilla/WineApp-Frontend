@@ -19,8 +19,7 @@ export const RegionCard = ({ region }) => {
 
   return (
     <div
-      className="card card-compact bg-base-100 w-96 shadow-xl cursor-pointer hover:shadow-2xl transition"
-      onClick={() => navigate(`/regions/${region.id}`)}
+      className="card card-compact bg-base-100 w-96 shadow-xl hover:shadow-2xl transition"
     >
       <figure className="w-full h-48 object-cover">
         <RegionCardImage image={region.image} name={region.name} />

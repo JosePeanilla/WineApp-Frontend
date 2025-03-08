@@ -16,7 +16,7 @@ export const RegionCardActions = ({ regionId }) => {
   logger.debug(`Renderizando botón de acción para la región con ID: ${regionId}`)
 
   return (
-    <div className="mt-auto flex justify-end p-4">
+    <div className="mt-auto flex justify-end p-4 cursor-pointer">
       <Button
         variant="moderado"
         onClick={(e) => {
