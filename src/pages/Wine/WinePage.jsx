@@ -72,7 +72,14 @@ export const WinePage = () => {
         <p className="text-lg font-semibold">Precio: {wine.price}€ </p>
       </div>
     </div>
-    <WineReview wineId={wine._id} onReviewSubmitted={() => fetchReviews()} editingReview={editingReview} setEditingReview={setEditingReview}  />
+    {user?.role === "consumers" && (
+      <WineReview 
+        wineId={wine._id} 
+        onReviewSubmitted={() => fetchReviews()} 
+        editingReview={editingReview} 
+        setEditingReview={setEditingReview} 
+      />
+    )}
     <Link to="/wines" className="flex items-center text-lg font-bold ml-5">
     <svg
       xmlns="http://www.w3.org/2000/svg"

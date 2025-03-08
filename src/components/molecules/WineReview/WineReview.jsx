@@ -20,14 +20,12 @@ export const WineReview = ({ wineId, onReviewSubmitted, editingReview, setEditin
   return (
     <section className="mt-6">
       <h2 className="text-xl font-semibold">Tu valoración</h2>
-      {user && (
-        <ReviewForm
-          wineId={wineId}
-          onReviewSubmit={submitReview}
-          editingReview={editingReview}
-          onCancelEdit={() => setEditingReview(null)}
-        />
-      )}
+      <ReviewForm
+        wineId={wineId}
+        onReviewSubmit={submitReview}
+        editingReview={editingReview}
+        onCancelEdit={() => setEditingReview(null)}
+      />
     </section>
   )
 }
