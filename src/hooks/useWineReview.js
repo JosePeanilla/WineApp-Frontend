@@ -37,9 +37,12 @@ export const useWineReview = (wineId) => {
       })
       const responseData = await response.json();
       if (!response.ok) throw new Error(responseData.error || "Error al enviar la valoración")
-      console.log("Reseña enviada con éxito:", responseData.data)
-      await fetchReviews()
-      console.log("fetchReviews() ejecutado, nuevas reseñas deberían aparecer.")
+        setReviews((prevReviews) => {
+          const updatedReviews = [...prevReviews, responseData.data]
+          console.log("🟢 Estado actualizado de reviews:", updatedReviews)
+          return updatedReviews
+        })
+      fetchReviews()
     } catch (err) {
       console.error("Error al enviar la valoración:", err)
     }

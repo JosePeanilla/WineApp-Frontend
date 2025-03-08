@@ -19,9 +19,7 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null }) => 
       alert("Debes agregar una valoración con estrellas.")
       return
     }
-
     onReviewSubmit({ wine: wineId, rating, comment })
-
     setRating(0)
     setComment("")
   }

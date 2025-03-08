@@ -71,7 +71,7 @@ export const WinePage = () => {
         <p className="text-lg font-semibold">Precio: {wine.price}€ </p>
       </div>
     </div>
-    <WineReview wineId={wine._id} onReviewSubmitted={() => console.log("Reseña enviada!")} />
+    <WineReview wineId={wine._id} onReviewSubmitted={() => fetchReviews()} />
     <Link to="/wines" className="flex items-center text-lg font-bold ml-5">
     <svg
       xmlns="http://www.w3.org/2000/svg"
