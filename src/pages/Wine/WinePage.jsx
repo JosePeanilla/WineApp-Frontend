@@ -27,7 +27,7 @@ export const WinePage = () => {
       })
       .catch((error) => console.error("Error al obtener datos del vino:", error))
       fetchReviews() 
-  }, [id, fetchReviews])
+  }, [id])
 
   if (!wine) return <p>Loading...</p>
 

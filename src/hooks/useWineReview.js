@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useCallback } from "react"
 import { AuthContext } from "/src/context/AuthContext"
 
 export const useWineReview = (wineId) => {
@@ -6,19 +6,24 @@ export const useWineReview = (wineId) => {
   const [reviews, setReviews] = useState([])
   const [averageRating, setAverageRating] = useState(0)
 
-  const fetchReviews = async () => {
+  const fetchReviews = useCallback(async () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/reviews/wine/${wineId}`)
       const data = await res.json()
       if (!data.data) return
-
-      setReviews(data.data)
-      const totalReviews = data.data.length
-      setAverageRating(totalReviews > 0 ? data.data.reduce((sum, r) => sum + r.rating, 0) / totalReviews : 0)
+      const updatedReviews = data.data.map((review) => ({
+        ...review,
+        isOwner: user && review.user?._id === user._id, 
+      }))
+      setReviews(updatedReviews)
+      const totalReviews = updatedReviews.length
+      setAverageRating(
+        totalReviews > 0 ? updatedReviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews : 0
+      )
     } catch (err) {
       console.error("Error al cargar valoraciones:", err)
     }
-  }
+  }, [wineId, user])
 
   const handleReviewSubmit = async (newReview) => {
     try {
@@ -30,14 +35,11 @@ export const useWineReview = (wineId) => {
         },
         body: JSON.stringify(newReview),
       })
-
-      const responseData = await response.json()
+      const responseData = await response.json();
       if (!response.ok) throw new Error(responseData.error || "Error al enviar la valoración")
-
-      const reviewWithUser = { ...responseData.data, user }
-
-      setReviews([...reviews, reviewWithUser])
-      setAverageRating(responseData.data.averageRating)
+      console.log("Reseña enviada con éxito:", responseData.data)
+      await fetchReviews()
+      console.log("fetchReviews() ejecutado, nuevas reseñas deberían aparecer.")
     } catch (err) {
       console.error("Error al enviar la valoración:", err)
     }
