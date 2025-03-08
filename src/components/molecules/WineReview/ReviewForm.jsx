@@ -51,19 +51,24 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCan
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-4">
-      <StarRatings
-        rating={rating}
-        starRatedColor="#ffd700"
-        changeRating={(newRating) => {
-          logger.debug(`Nueva valoración seleccionada: ${newRating}`)
-          setRating(newRating)
-        }}
-        numberOfStars={5}
-        name="rating"
-      />
+    <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-lg font-semibold text-center mb-2">Tu valoración</h2>
+      <div className="flex justify-center mb-4">
+        <StarRatings
+          rating={rating}
+          starRatedColor="#ffd700"
+          changeRating={(newRating) => {
+            logger.debug(`Nueva valoración seleccionada: ${newRating}`)
+            setRating(newRating)
+          }}
+          numberOfStars={5}
+          name="rating"
+          starDimension="30px"
+          starSpacing="5px"
+        />
+      </div>
       <textarea
-        className="w-full p-2 mt-2 border rounded"
+        className="w-full p-2 border border-gray-300 rounded-md resize-none"
         placeholder="Escribe un comentario opcional..."
         value={comment}
         onChange={(e) => {
@@ -71,7 +76,7 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCan
           setComment(e.target.value)
         }}
       />
-      <div className="mt-2 flex gap-2">
+      <div className="mt-4 flex justify-end gap-2">
         <Button type="submit" variant="moderado">
           {editingReview ? "Actualizar Reseña" : "Enviar Valoración"}
         </Button>

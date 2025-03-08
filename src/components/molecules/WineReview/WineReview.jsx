@@ -39,7 +39,6 @@ export const WineReview = ({ wineId, onReviewSubmitted, editingReview, setEditin
 
   return (
     <section className="mt-6">
-      <h2 className="text-xl font-semibold">Tu valoración</h2>
       <ReviewForm
         wineId={wineId}
         onReviewSubmit={submitReview}
