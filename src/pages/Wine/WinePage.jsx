@@ -11,6 +11,7 @@ export const WinePage = () => {
   const [wine, setWine] = useState(null)
   const { user } = useContext(AuthContext)
   const { reviews, fetchReviews, handleReviewSubmit, handleReviewUpdate, handleReviewDelete } = useWineReview(id)
+  const [editingReview, setEditingReview] = useState(null)
 
   useEffect(() => {
     fetch(`http://localhost:3000/wines/${id}`)
@@ -50,7 +51,7 @@ export const WinePage = () => {
 
         <div className="mt-6">
           <h2 className="text-xl font-semibold">Valoraciones y comentarios</h2>
-          <ReviewList reviews={reviews} user={user} onEdit={handleReviewUpdate} onDelete={handleReviewDelete} />
+          <ReviewList reviews={reviews} user={user} onEdit={(review) => setEditingReview(review)} onDelete={handleReviewDelete} />
         </div>
       </div>
 
@@ -71,7 +72,7 @@ export const WinePage = () => {
         <p className="text-lg font-semibold">Precio: {wine.price}€ </p>
       </div>
     </div>
-    <WineReview wineId={wine._id} onReviewSubmitted={() => fetchReviews()} />
+    <WineReview wineId={wine._id} onReviewSubmitted={() => fetchReviews()} editingReview={editingReview} setEditingReview={setEditingReview}  />
     <Link to="/wines" className="flex items-center text-lg font-bold ml-5">
     <svg
       xmlns="http://www.w3.org/2000/svg"

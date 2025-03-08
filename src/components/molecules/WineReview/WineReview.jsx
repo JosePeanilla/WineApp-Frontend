@@ -3,15 +3,18 @@ import { AuthContext } from "/src/context/AuthContext"
 import { ReviewForm } from "./ReviewForm"
 import { useWineReview } from "/src/hooks/useWineReview"
 
-export const WineReview = ({ wineId, onReviewSubmitted }) => {
+export const WineReview = ({ wineId, onReviewSubmitted, editingReview, setEditingReview }) => {
   const { user } = useContext(AuthContext)
-  const { handleReviewSubmit } = useWineReview(wineId)
-
-  const [editingReview, setEditingReview] = useState(null)
+  const { handleReviewSubmit, handleReviewUpdate } = useWineReview(wineId)
 
   const submitReview = async (review) => {
-    await handleReviewSubmit(review)
-    onReviewSubmitted() 
+    if (editingReview) {
+      await handleReviewUpdate({ ...editingReview, rating: review.rating, comment: review.comment })
+    } else {
+      await handleReviewSubmit(review)
+    }
+    setEditingReview(null) 
+    onReviewSubmitted()
   }
 
   return (
