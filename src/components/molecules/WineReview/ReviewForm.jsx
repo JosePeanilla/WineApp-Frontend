@@ -1,6 +1,10 @@
+/************************************************** Internal logger ***************************************************/
+import { Logger } from "/src/utils/Logger.jsx"
 import React, { useState, useEffect } from "react"
 import StarRatings from "react-star-ratings"
 import { Button } from "/src/components/atoms/Form"
+
+const logger = new Logger("ReviewForm")
 
 export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCancelEdit }) => {
   const [rating, setRating] = useState(0)
@@ -8,9 +12,11 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCan
 
   useEffect(() => {
     if (editingReview) {
+      logger.info(`Cargando reseña en edición con ID: ${editingReview._id}`)
       setRating(editingReview.rating)
       setComment(editingReview.comment)
     } else {
+      logger.info("Formulario de nueva reseña cargado")
       setRating(0)
       setComment("")
     }
@@ -19,21 +25,29 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCan
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!rating) {
+      logger.warn("Intento de enviar una reseña sin estrellas")
       alert("Debes agregar una valoración con estrellas.")
       return
     }
-    onReviewSubmit({ 
+
+    const reviewData = { 
       wine: wineId, 
       rating, 
       comment, 
       _id: editingReview?._id 
-    })
-    
+    }
+
+    logger.info(`Enviando reseña para vino ID: ${wineId}`, reviewData)
+
+    onReviewSubmit(reviewData)
+
     if (!editingReview) {
       setRating(0)
       setComment("")
     }
-    onCancelEdit?.() 
+
+    logger.info("Formulario de reseña enviado con éxito")
+    onCancelEdit?.()
   }
 
   return (
@@ -41,7 +55,10 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCan
       <StarRatings
         rating={rating}
         starRatedColor="#ffd700"
-        changeRating={setRating}
+        changeRating={(newRating) => {
+          logger.debug(`Nueva valoración seleccionada: ${newRating}`)
+          setRating(newRating)
+        }}
         numberOfStars={5}
         name="rating"
       />
@@ -49,14 +66,20 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCan
         className="w-full p-2 mt-2 border rounded"
         placeholder="Escribe un comentario opcional..."
         value={comment}
-        onChange={(e) => setComment(e.target.value)}
+        onChange={(e) => {
+          logger.debug(`Comentario actualizado: ${e.target.value}`)
+          setComment(e.target.value)
+        }}
       />
       <div className="mt-2 flex gap-2">
         <Button type="submit" variant="moderado">
           {editingReview ? "Actualizar Reseña" : "Enviar Valoración"}
         </Button>
         {editingReview && (
-          <Button type="button" variant="ligero" onClick={onCancelEdit}>
+          <Button type="button" variant="ligero" onClick={() => {
+            logger.info("Edición de reseña cancelada")
+            onCancelEdit()
+          }}>
             Cancelar
           </Button>
         )}
