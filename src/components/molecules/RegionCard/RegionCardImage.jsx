@@ -13,12 +13,12 @@ export const RegionCardImage = ({ image, name }) => {
   logger.debug(`Cargando imagen para: ${name || "Desconocido"}`)
 
   return (
-    <figure>
-        <img
-            src={image || defaultImage}
-            alt={`Imagen de ${name}`}
-            className="w-full h-48 object-cover rounded-t-lg"
-        />
+    <figure className="w-full">
+      <img
+        src={image || defaultImage}
+        alt={`Imagen de ${name}`}
+        className="w-full h-52 object-cover rounded-t-lg"
+      />
     </figure>
   )
 }

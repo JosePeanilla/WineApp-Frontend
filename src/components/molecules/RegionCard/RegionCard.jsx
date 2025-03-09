@@ -24,9 +24,9 @@ export const RegionCard = ({ region }) => {
       <figure className="w-full h-48 object-cover">
         <RegionCardImage image={region.image} name={region.name} />
       </figure>
-      <div className="card-body flex flex-col justify-between w-full pl-6">
+      <div className="flex flex-col items-center text-center flex-grow">
         <RegionCardContent region={region} />
-        <div className="card-actions self-end">
+        <div className="w-full flex justify-center mt-2">
           <RegionCardActions regionId={region.id} />
         </div>
       </div>
