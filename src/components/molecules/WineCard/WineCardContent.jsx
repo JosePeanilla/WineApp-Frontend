@@ -23,8 +23,7 @@ export const WineCardContent = ({ wine, showActions, wineId, showEditDelete, onE
         <p className="text-sm text-gray-600">
           {wine.winery?.name || "Bodega desconocida"} - {typeof wine.region === "object" ? wine.region?.name : wine.region} - {wine.country || "País desconocido"}
         </p>
-
-        <p className="text-gray-500">{wine.description}</p>
+        <p className="text-gray-500 leading-relaxed text-justify">{wine.description}</p>
         <div className="flex items-center justify-between w-full mt-2">
         <div>
           <p className="text-gray-500">Precio: ${wine.price}</p>
