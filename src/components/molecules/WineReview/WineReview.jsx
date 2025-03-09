@@ -1,6 +1,6 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
-import React, { useContext } from "react"
+import React, { useContext, useRef, useEffect } from "react"
 import { AuthContext } from "/src/context/AuthContext"
 import { ReviewForm } from "./ReviewForm"
 import { useWineReview } from "/src/hooks/useWineReview"
@@ -10,6 +10,14 @@ const logger = new Logger("WineReview")
 export const WineReview = ({ wineId, onReviewSubmitted, editingReview, setEditingReview }) => {
   const { user } = useContext(AuthContext)
   const { handleReviewSubmit, handleReviewUpdate } = useWineReview(wineId)
+  const formRef = useRef(null) 
+
+  useEffect(() => {
+    if (editingReview && formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" }) 
+      logger.info("Desplazando vista al formulario de edición.")
+    }
+  }, [editingReview])
 
   if (!wineId) {
     logger.error("No se recibió un ID de vino válido en WineReview.")
@@ -39,6 +47,7 @@ export const WineReview = ({ wineId, onReviewSubmitted, editingReview, setEditin
 
   return (
     <section className="mt-6">
+      <div ref={formRef} />  
       <ReviewForm
         wineId={wineId}
         onReviewSubmit={submitReview}
