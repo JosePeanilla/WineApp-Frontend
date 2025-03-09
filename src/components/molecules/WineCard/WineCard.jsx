@@ -18,8 +18,7 @@ export const WineCard = ({ wine, showEditDelete = false, onEdit, onDelete }) => 
   logger.debug(`Renderizando WineCard para el vino: ${wine.name}`)
 
   return (
-    <div className="card card-side bg-base-100 shadow-xl px-6 py-0 m-0 w-full max-w-3xl mx-auto rounded-lg flex items-center">
-
+    <div className="card card-side bg-base-100 shadow-xl px-6 py-0 m-0 w-[768px] h-[400px] mx-auto rounded-lg flex items-stretch">
       <figure className="w-40 min-h-90 flex-shrink-0 rounded-lg overflow-visible flex justify-center items-center">
         <WineCardImage image={wine.image} name={wine.name} />
       </figure>
