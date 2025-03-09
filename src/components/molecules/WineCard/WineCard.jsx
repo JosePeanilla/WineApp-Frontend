@@ -18,12 +18,20 @@ export const WineCard = ({ wine, showEditDelete = false, onEdit, onDelete }) => 
   logger.debug(`Renderizando WineCard para el vino: ${wine.name}`)
 
   return (
-    <div className="card card-side bg-base-100 shadow-xl p-6 w-full max-w-3xl mx-auto rounded-lg flex items-center">
+    <div className="card card-side bg-base-100 shadow-xl px-6 py-0 m-0 w-full max-w-3xl mx-auto rounded-lg flex items-center">
+
       <figure className="w-40 min-h-90 flex-shrink-0 rounded-lg overflow-visible flex justify-center items-center">
         <WineCardImage image={wine.image} name={wine.name} />
       </figure>
       <div className="card-body flex flex-col justify-between w-full pl-6">
-        <WineCardContent wine={wine} />
+        <WineCardContent 
+        wine={wine}
+        showActions={true} 
+        wineId={wineId} 
+        showEditDelete={showEditDelete} 
+        onEdit={onEdit} 
+        onDelete={onDelete}
+        />
         <div className="card-actions self-end">
           <WineCardActions
             wineId={wineId}
