@@ -16,7 +16,7 @@ export const ReviewItem = ({ review, user, onEdit, onDelete }) => {
   return (
     <div className="p-2 border-b mt-2">
       <p>
-        <strong>{review.user?.name || "Anónimo"}</strong> - ⭐ {review.rating}
+        <strong>{`${review.user?.name || "Anónimo"} ${review.user?.surname || ""}`.trim()}</strong> - ⭐ {review.rating}
       </p>
       <p>{review.comment}</p>
 
