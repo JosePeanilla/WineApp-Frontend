@@ -19,17 +19,17 @@ export const WineCard = ({ wine, showEditDelete = false, onEdit, onDelete }) => 
 
   return (
     <div className="card card-side bg-base-100 shadow-xl p-6 w-full max-w-3xl mx-auto rounded-lg flex items-center">
-      <figure className="w-40 min-h-60 flex-shrink-0 rounded-lg overflow-visible flex justify-center items-center">
+      <figure className="w-40 min-h-90 flex-shrink-0 rounded-lg overflow-visible flex justify-center items-center">
         <WineCardImage image={wine.image} name={wine.name} />
       </figure>
       <div className="card-body flex flex-col justify-between w-full pl-6">
         <WineCardContent wine={wine} />
         <div className="card-actions self-end">
           <WineCardActions
-           wineId={wineId}
-           showEditDelete={showEditDelete}
-           onEdit={onEdit}
-           onDelete={onDelete}
+            wineId={wineId}
+            showEditDelete={showEditDelete}
+            onEdit={onEdit}
+            onDelete={onDelete}
           />
         </div>
       </div>
