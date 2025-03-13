@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 const logger = new Logger("FilterBar")
 
 export const FilterBar = ({ onFilterChange }) => {
-  const [localFilters, setLocalFilters] = useState({
+  const initialFilters = {
     name: "",
     type: "",
     region: "",
@@ -15,17 +15,17 @@ export const FilterBar = ({ onFilterChange }) => {
     minYear: "",
     maxYear: "",
     minRating: ""
-  })
+  }
 
-  const [scrollPosition, setScrollPosition] = useState(0)
+  const [localFilters, setLocalFilters] = useState(initialFilters)
+  const [scrollPosition, setScrollPosition] = useState(120)
 
   useEffect(() => {
     const handleScroll = () => {
-      // Límite superior (ajusta este valor según tu diseño)
       const minTop = 120
+      const targetPosition = Math.max(window.scrollY + 20, minTop)
 
-      // Ajusta la posición con un máximo superior
-      setScrollPosition(Math.max(window.scrollY, minTop))
+      setScrollPosition((prev) => prev + (targetPosition - prev) * 0.1) 
     }
 
     window.addEventListener("scroll", handleScroll)
@@ -44,26 +44,27 @@ export const FilterBar = ({ onFilterChange }) => {
     onFilterChange(localFilters)
   }
 
+  const handleClearFilters = () => {
+    logger.info("Restableciendo filtros")
+    setLocalFilters(initialFilters)
+    onFilterChange(initialFilters) 
+  }
+
   return (
     <div
-      style={{
-        position: "absolute",
-        top: `${scrollPosition}px`, // Se mueve pero limitado
-        left: "20px",
-        transition: "top 0.3s ease-in-out"
-      }}
-      className="flex flex-col gap-4 p-4 border rounded bg-[#3d1308] text-black w-64"
+      style={{ top: `${scrollPosition}px` }}
+      className="fixed left-5 p-4 border rounded-lg bg-[#3d1308] text-white w-64 shadow-lg transition-all ease-out duration-200"
     >
-      <input type="text" name="name" placeholder="Nombre" value={localFilters.name} onChange={handleChange} className="p-2 border rounded" />
-      <input type="text" name="region" placeholder="Región" value={localFilters.region} onChange={handleChange} className="p-2 border rounded" />
-      <input type="text" name="winery" placeholder="Bodega" value={localFilters.winery} onChange={handleChange} className="p-2 border rounded" />
-      <input type="number" name="minPrice" placeholder="Precio mínimo" value={localFilters.minPrice} onChange={handleChange} className="p-2 border rounded" />
-      <input type="number" name="maxPrice" placeholder="Precio máximo" value={localFilters.maxPrice} onChange={handleChange} className="p-2 border rounded" />
-      <input type="number" name="minYear" placeholder="Año mínimo" value={localFilters.minYear} onChange={handleChange} className="p-2 border rounded" />
-      <input type="number" name="maxYear" placeholder="Año máximo" value={localFilters.maxYear} onChange={handleChange} className="p-2 border rounded" />
-      <input type="number" name="minRating" placeholder="Valoración mínima (1-5)" value={localFilters.minRating} onChange={handleChange} className="p-2 border rounded" />
+      <input type="text" name="name" placeholder="Nombre" value={localFilters.name} onChange={handleChange} className="p-2 border rounded w-full bg-white text-black" />
+      <input type="text" name="region" placeholder="Región" value={localFilters.region} onChange={handleChange} className="p-2 border rounded w-full bg-white text-black" />
+      <input type="text" name="winery" placeholder="Bodega" value={localFilters.winery} onChange={handleChange} className="p-2 border rounded w-full bg-white text-black" />
+      <input type="number" name="minPrice" placeholder="Precio mínimo" value={localFilters.minPrice} onChange={handleChange} className="p-2 border rounded w-full bg-white text-black" />
+      <input type="number" name="maxPrice" placeholder="Precio máximo" value={localFilters.maxPrice} onChange={handleChange} className="p-2 border rounded w-full bg-white text-black" />
+      <input type="number" name="minYear" placeholder="Año mínimo" value={localFilters.minYear} onChange={handleChange} className="p-2 border rounded w-full bg-white text-black" />
+      <input type="number" name="maxYear" placeholder="Año máximo" value={localFilters.maxYear} onChange={handleChange} className="p-2 border rounded w-full bg-white text-black" />
+      <input type="number" name="minRating" placeholder="Valoración mínima (1-5)" value={localFilters.minRating} onChange={handleChange} className="p-2 border rounded w-full bg-white text-black" />
 
-      <select name="type" value={localFilters.type} onChange={handleChange} className="p-2 border rounded">
+      <select name="type" value={localFilters.type} onChange={handleChange} className="p-2 border rounded w-full bg-white text-black">
         <option value="">Todos los tipos</option>
         <option value="Tinto">Tinto</option>
         <option value="Blanco">Blanco</option>
@@ -71,14 +72,19 @@ export const FilterBar = ({ onFilterChange }) => {
         <option value="Espumoso">Espumoso</option>
       </select>
 
-      <div className="w-full">
-        <button
-          onClick={handleApplyFilters}
-          className="w-full p-2 rounded text-white font-semibold bg-[#9f2042] hover:bg-[#7b0d1e] hover:text-white transition-colors"
-        >
-          Aplicar Filtros
-        </button>
-      </div>
+      <button
+        onClick={handleApplyFilters}
+        className="w-full p-2 rounded font-semibold bg-[#9f2042] hover:bg-[#7b0d1e] text-white transition-all mt-2"
+      >
+        Aplicar Filtros
+      </button>
+
+      <button
+        onClick={handleClearFilters}
+        className="w-full p-2 rounded font-semibold bg-[#DC2626] hover:bg-red-700 text-white transition-all mt-2"
+      >
+        Quitar Filtros
+      </button>
     </div>
   )
 }
