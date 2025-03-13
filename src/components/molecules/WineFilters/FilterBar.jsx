@@ -1,6 +1,6 @@
-import { useState } from "react"
+/************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
-import { Button } from "/src/components/atoms/Form"
+import { useState, useEffect } from "react"
 
 const logger = new Logger("FilterBar")
 
@@ -17,6 +17,23 @@ export const FilterBar = ({ onFilterChange }) => {
     minRating: ""
   })
 
+  const [scrollPosition, setScrollPosition] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Límite superior (ajusta este valor según tu diseño)
+      const minTop = 120
+
+      // Ajusta la posición con un máximo superior
+      setScrollPosition(Math.max(window.scrollY, minTop))
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setLocalFilters((prev) => ({ ...prev, [name]: value }))
@@ -28,7 +45,15 @@ export const FilterBar = ({ onFilterChange }) => {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-4 border rounded bg-[#3d1308] text-black w-full max-w-xs">
+    <div
+      style={{
+        position: "absolute",
+        top: `${scrollPosition}px`, // Se mueve pero limitado
+        left: "20px",
+        transition: "top 0.3s ease-in-out"
+      }}
+      className="flex flex-col gap-4 p-4 border rounded bg-[#3d1308] text-black w-64"
+    >
       <input type="text" name="name" placeholder="Nombre" value={localFilters.name} onChange={handleChange} className="p-2 border rounded" />
       <input type="text" name="region" placeholder="Región" value={localFilters.region} onChange={handleChange} className="p-2 border rounded" />
       <input type="text" name="winery" placeholder="Bodega" value={localFilters.winery} onChange={handleChange} className="p-2 border rounded" />
@@ -47,7 +72,7 @@ export const FilterBar = ({ onFilterChange }) => {
       </select>
 
       <div className="w-full">
-      <button
+        <button
           onClick={handleApplyFilters}
           className="w-full p-2 rounded text-white font-semibold bg-[#9f2042] hover:bg-[#7b0d1e] hover:text-white transition-colors"
         >
