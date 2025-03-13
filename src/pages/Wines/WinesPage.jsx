@@ -62,7 +62,7 @@ export const WinesPage = () => {
 
       <div className="grid grid-cols-4 gap-6">
         
-        <div className="col-span-1 bg-gray-100 p-4 rounded-lg w-full self-start">
+        <div>
           <FilterBar onFilterChange={setFilters} />
         </div>
 
