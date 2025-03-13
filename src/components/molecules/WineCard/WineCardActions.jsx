@@ -1,12 +1,10 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
-import { useNavigate } from "react-router-dom"
 import { Button } from "/src/components/atoms/Form"
 
 const logger = new Logger("WineCardActions")
 
 export const WineCardActions = ({ wineId, showEditDelete = false, onEdit, onDelete }) => {
-  const navigate = useNavigate()
 
   if (!wineId) {
     logger.error("WineCardActions recibió un ID de vino inválido.")
@@ -27,16 +25,6 @@ export const WineCardActions = ({ wineId, showEditDelete = false, onEdit, onDele
           </Button>
         </>
       )}
-      
-      <Button
-        variant="moderado"
-        onClick={(e) => {
-          e.stopPropagation() 
-          navigate(`/wines/${wineId}`)
-        }}
-      >
-        Catar
-      </Button>
     </div>
   )
 }
