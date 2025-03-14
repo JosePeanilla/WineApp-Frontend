@@ -8,6 +8,7 @@ export const FilterBar = ({ onFilterChange }) => {
   const initialFilters = {
     name: "",
     type: "",
+    grapeType: "",
     region: "",
     winery: "",
     minPrice: "",
@@ -48,6 +49,7 @@ export const FilterBar = ({ onFilterChange }) => {
       <input type="text" name="name" placeholder="Nombre" value={localFilters.name} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="text" name="region" placeholder="Región" value={localFilters.region} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="text" name="winery" placeholder="Bodega" value={localFilters.winery} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
+      <input type="text" name="grapeType" placeholder="Tipo de Uva" value={localFilters.grapeVariety} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="number" name="minPrice" placeholder="Precio mínimo" value={localFilters.minPrice} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="number" name="maxPrice" placeholder="Precio máximo" value={localFilters.maxPrice} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="number" name="minYear" placeholder="Año mínimo" value={localFilters.minYear} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
@@ -57,8 +59,8 @@ export const FilterBar = ({ onFilterChange }) => {
       <select name="type" value={localFilters.type} onChange={handleChange} className="p-2 border rounded bg-white text-black">
         <option value="">Todos los tipos</option>
         <option value="Tinto">Tinto</option>
-        <option value="Blanco">Blanco</option>
         <option value="Rosado">Rosado</option>
+        <option value="Blanco">Blanco</option>
         <option value="Espumoso">Espumoso</option>
       </select>
 
