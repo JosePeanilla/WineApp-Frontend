@@ -66,8 +66,8 @@ export const WinesPage = () => {
           <FilterBar onFilterChange={setFilters} />
         </div>
 
-        <div className="col-span-3 flex justify-center">
-          <div className="w-3/4 grid grid-cols-1 gap-y-10">
+        <div className="flex justify-center">
+          <div className="w-3/4 grid grid-cols-1 gap-y-10 place-items-center">
             {wines.length > 0 ? (
               wines.map((wine) => <WineCard key={wine.id} wine={wine} />)
             ) : (

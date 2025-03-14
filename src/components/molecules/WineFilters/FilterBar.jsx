@@ -38,14 +38,13 @@ export const FilterBar = ({ onFilterChange }) => {
   return (
     <div
       style={{
-        position: "fixed", // 🔥 Lo deja fijo en la pantalla
-        top: "120px", // 🔥 Ajusta la altura para que no quede pegado arriba
-        left: "20px", // 🔥 Distancia desde la izquierda
-        width: "250px", // 🔥 Ancho fijo para que no cambie
+        position: "fixed", 
+        top: "120px", 
+        left: "20px", 
+        width: "250px", 
       }}
       className="flex flex-col gap-4 p-4 border rounded-lg bg-[#3d1308] text-white shadow-lg"
     >
-      {/* Campos de entrada */}
       <input type="text" name="name" placeholder="Nombre" value={localFilters.name} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="text" name="region" placeholder="Región" value={localFilters.region} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="text" name="winery" placeholder="Bodega" value={localFilters.winery} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
@@ -63,7 +62,6 @@ export const FilterBar = ({ onFilterChange }) => {
         <option value="Espumoso">Espumoso</option>
       </select>
 
-      {/* Botón de Aplicar Filtros */}
       <button
         onClick={handleApplyFilters}
         className="w-full p-2 rounded font-semibold bg-[#9f2042] hover:bg-[#7b0d1e] text-white transition-all mt-2"
@@ -71,12 +69,11 @@ export const FilterBar = ({ onFilterChange }) => {
         Aplicar Filtros
       </button>
 
-      {/* Botón de Quitar Filtros */}
       <button
         onClick={handleClearFilters}
         className="w-full p-2 rounded font-semibold bg-[#DC2626] hover:bg-red-700 text-white transition-all mt-2"
       >
-        Quitar Filtros
+        Eliminar Filtros
       </button>
     </div>
   )
