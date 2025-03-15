@@ -11,16 +11,14 @@ export const Footer = () => {
   }, [])
 
   return (
-    <footer className="bg-gray-900 text-white py-6">
+    <footer className="bg-gray-900 text-white py-6 mt-auto">
       <div className="container mx-auto flex flex-col items-center text-center space-y-4">
-        {/* Copyright */}
         <p className="text-sm">
           Copyright © {new Date().getFullYear()} - All rights reserved by  
           <span className="text-[#9f2042] font-semibold"> Grupo Rojo</span> 
           (Jose Peanilla, Nico Rende, Maria Zamora)
         </p>
 
-        {/* Navegación */}
         <nav>
           <ul className="flex space-x-4 text-sm">
             <li><a href="/about" className="hover:underline">Sobre Nosotros</a></li>
@@ -30,7 +28,6 @@ export const Footer = () => {
           </ul>
         </nav>
 
-        {/* Redes Sociales */}
         <div className="flex space-x-4">
           <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
             <i className="fab fa-facebook text-lg"></i>
@@ -43,7 +40,6 @@ export const Footer = () => {
           </a>
         </div>
 
-        {/* Formulario de Suscripción */}
         <form className="flex flex-col items-center">
           <label htmlFor="email" className="text-sm">Suscríbete a nuestras novedades:</label>
           <input 

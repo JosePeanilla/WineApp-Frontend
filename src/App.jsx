@@ -23,29 +23,30 @@ export const App = () => {
     document.documentElement.setAttribute("data-theme", "WineAppTheme")
   }, [])
 
-return (
-
-    <BrowserRouter>
-      <Header />
-      <main>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/wines' element={<WinesPage />} />
-          <Route path='/wines/:id' element={<WinePage />} />
-          <Route path='/regions' element={<RegionsPage />} />
-          <Route path='/news' element={<NewsPage />} />
-          <Route path='/profile/consumer' element={<ConsumerProfilePage />} />
-          <Route path='/profile/winery' element={<WineryProfilePage />} />
-          <Route path='/wines/manage' element={<WinesManagementPage />} />
-          <Route path='/about' element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route path='*' element={<h2>Add here the not-found page</h2>} />
-        </Routes>
-      </main>
-      <Footer />
-    </BrowserRouter>
+  return (
+    <div className="flex flex-col min-h-screen"> 
+      <BrowserRouter>
+        <Header />
+        <main className="flex-grow mb-20"> 
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/wines" element={<WinesPage />} />
+            <Route path="/wines/:id" element={<WinePage />} />
+            <Route path="/regions" element={<RegionsPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/profile/consumer" element={<ConsumerProfilePage />} />
+            <Route path="/profile/winery" element={<WineryProfilePage />} />
+            <Route path="/wines/manage" element={<WinesManagementPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="*" element={<h2>Add here the not-found page</h2>} />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </div>
   )
 }
