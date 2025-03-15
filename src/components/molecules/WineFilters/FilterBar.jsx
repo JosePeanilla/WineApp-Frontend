@@ -26,9 +26,15 @@ export const FilterBar = ({ onFilterChange }) => {
   }
 
   const handleApplyFilters = () => {
-    logger.info("Aplicando filtros:", localFilters)
-    onFilterChange(localFilters)
-  }
+    const normalizedFilters = Object.fromEntries(
+      Object.entries(localFilters).map(([key, value]) => [
+        key,
+        typeof value === "string" ? value.trim() : value
+      ])
+    )
+    logger.info("Aplicando filtros:", normalizedFilters)
+    onFilterChange(normalizedFilters)
+  }  
 
   const handleClearFilters = () => {
     logger.info("Restableciendo filtros")
