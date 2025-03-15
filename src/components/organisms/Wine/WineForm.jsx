@@ -9,6 +9,7 @@ import { AuthContext } from "/src/context/AuthContext"
 import { RegisterField } from "/src/components/atoms/Register/Field"
 import { FormContainer, Button } from "/src/components/atoms/Form"
 import { america, europa } from "/src/utils/countries"
+import { grapeVarieties } from "/src/utils/grapeVarieties"
 
 export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
   const logger = new Logger("WineForm")
@@ -133,6 +134,22 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
           ))}
         </select>
       </div>
+      ) : field.name === "grapeType" ? ( 
+        <div key={field.name}>
+          <label htmlFor={field.name} className="block font-normal">{field.text}:</label>
+          <select
+            id={field.name}
+            {...register(field.name, { required: field.required })}
+            className="p-2 w-full bg-white focus:outline-none"
+          >
+            <option value="">Selecciona una variedad de uva</option>
+            {grapeVarieties.map((grape) => (
+              <option key={grape} value={grape}>
+                {grape}
+              </option>
+            ))}
+          </select>
+        </div>
     ) : (
       <RegisterField
         key={field.name}

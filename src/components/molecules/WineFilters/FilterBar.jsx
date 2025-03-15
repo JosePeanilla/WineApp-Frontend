@@ -1,6 +1,7 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 import { useState } from "react"
+import { grapeVarieties } from "/src/utils/grapeVarieties"
 
 const logger = new Logger("FilterBar")
 
@@ -55,7 +56,19 @@ export const FilterBar = ({ onFilterChange }) => {
       <input type="text" name="name" placeholder="Nombre" value={localFilters.name} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="text" name="region" placeholder="Región" value={localFilters.region} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="text" name="winery" placeholder="Bodega" value={localFilters.winery} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
-      <input type="text" name="grapeType" placeholder="Tipo de Uva" value={localFilters.grapeType} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
+      <select
+        name="grapeType"
+        value={localFilters.grapeType}
+        onChange={handleChange}
+        className="p-2 border rounded bg-white text-black"
+      >
+        <option value="">Todas las variedades</option>
+        {grapeVarieties.map((grape) => (
+          <option key={grape} value={grape}>
+            {grape}
+          </option>
+        ))}
+      </select>
       <input type="number" name="minPrice" placeholder="Precio mínimo" value={localFilters.minPrice} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="number" name="maxPrice" placeholder="Precio máximo" value={localFilters.maxPrice} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
       <input type="number" name="minYear" placeholder="Año mínimo" value={localFilters.minYear} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
