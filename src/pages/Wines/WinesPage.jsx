@@ -57,27 +57,43 @@ export const WinesPage = () => {
   }, [filters]) 
 
   return (
-    <section id="wines_page" className="container mx-auto px-4">
-      <h1 className="text-center text-2xl font-bold my-6">Listado completo</h1>
+    <section id="wines_page" className="container mx-auto px-4 min-h-screen flex flex-col items-start">
+      <h1 className="text-center text-2xl font-bold my-6 w-full">Listado completo</h1>
 
-      <div className="grid grid-cols-4 gap-6">
-        
+      <div className="sm:flex sm:flex-col sm:gap-6 lg:hidden">
         <div>
           <FilterBar onFilterChange={setFilters} />
         </div>
 
-        <div className="flex justify-center">
-          <div className="w-3/4 grid grid-cols-1 gap-y-10 place-items-center">
+        <div className="flex justify-start">
+          <div className="w-full max-w-md flex flex-col gap-y-6 items-start">
             {wines.length > 0 ? (
               wines.map((wine) => <WineCard key={wine.id} wine={wine} />)
             ) : (
-              <p className="text-center text-lg col-span-full">
+              <p className="text-left text-lg col-span-full">
                 No hay vinos disponibles.
               </p>
             )}
           </div>
         </div>
+      </div>
 
+      <div className="hidden lg:flex lg:justify-start gap-6 w-full">
+        <div>
+          <FilterBar onFilterChange={setFilters} />
+        </div>
+
+        <div className="lg:w-3/4 flex flex-col items-start gap-y-6 ml-auto">
+          {wines.length > 0 ? (
+            wines.map((wine) => (
+              <div key={wine.id} className="w-full max-w-md">
+                <WineCard wine={wine} />
+              </div>
+            ))
+          ) : (
+            <p className="text-left text-lg">No hay vinos disponibles.</p>
+          )}
+        </div>
       </div>
     </section>
   )
