@@ -62,7 +62,7 @@ export const Footer = () => {
           <label htmlFor="email" className="text-sm">Suscríbete a nuestras novedades:</label>
           <input 
             type="email" 
-            id="email" 
+            id="email-secondary" 
             placeholder="Tu correo electrónico" 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
