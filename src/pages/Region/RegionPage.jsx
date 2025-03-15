@@ -40,31 +40,33 @@ export const RegionPage = () => {
 
   return (
     <>
-    {/* Imagen del pais de la región */}
-    <div className="w-full flex justify-center py-6">
+      {/* Bandera del país */}
+      <div className="w-full flex justify-center py-6">
         <img
           src={region.countryImage}
           alt={`Bandera de ${region.country}`}
-          className="h-40 w-auto object-contain border border-gray-300 rounded-lg shadow-md"
+          className="w-2/3 max-w-4xl h-32 object-contain"
         />
       </div>
-
-    {/* Imagen de la región */}
-    <div className="flex flex-col md:flex-row bg-base-100 shadow-lg rounded-lg overflow-hidden mt-6 max-w-5xl mx-auto">
-        <figure className="md:w-1/3">
+  
+      <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center gap-12">
+  
+        {/* Imagen de la región */}
+        <div className="md:w-1/2 flex justify-center">
           <img
             src={region.image}
             alt={`Imagen de ${region.name}`}
-            className="w-full h-full object-cover"
+            className="w-full max-w-lg h-auto object-cover rounded-md border border-gray-300 shadow-md"
           />
-        </figure>
-
-    {/* Contenido de la región */}
-    <div className="md:w-2/3 p-6 flex flex-col justify-center">
-          <h2 className="text-3xl font-semibold text-center md:text-left">{region.name}</h2>
-          <p className="text-gray-600 text-lg mt-4">{region.description}</p>
         </div>
+  
+        {/* Título y descripción de la región */}
+        <div className="md:w-2/3 p-6 flex flex-col justify-center">
+          <h2 className="text-2xl font-semibold text-left">{region.name}</h2>
+          <p className="text-gray-600 text-lg mt-4 text-justify">{region.description}</p>
+        </div>
+  
       </div>
     </>
-  )
+  )    
 }
