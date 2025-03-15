@@ -65,7 +65,7 @@ export const Header = () => {
 
           {isOpen && (
             <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-              <li><NavLink to="/" onClick={closeDropdown}>Como funciona?</NavLink></li>
+              <li><NavLink to="/" onClick={closeDropdown}>¿Como funciona?</NavLink></li>
               <li><NavLink to="/wines" onClick={closeDropdown}>Vinos</NavLink></li>
               <li><NavLink to="/regions" onClick={closeDropdown}>Regiones</NavLink></li>
               <li><NavLink to="/news" onClick={closeDropdown}>Noticias</NavLink></li>
@@ -121,7 +121,7 @@ export const Header = () => {
       {/* Menú principal en pantallas grandes */}
       <div className="hidden lg:flex flex-1 justify-center">
         <ul className="menu menu-horizontal px-2">
-          <li><NavLink to="/">Como funciona?</NavLink></li>
+          <li><NavLink to="/">¿Como funciona?</NavLink></li>
           <li><NavLink to="/wines">Vinos</NavLink></li>
           <li><NavLink to="/regions">Regiones</NavLink></li>
           <li><NavLink to="/news">Noticias</NavLink></li>
@@ -153,10 +153,10 @@ export const Header = () => {
         ) : (
           <>
             <NavLink className="btn bg-wineapp-moderado text-white" to="/register">
-              Registrarse
+              Registrate
             </NavLink>
             <NavLink className="btn bg-wineapp-ligero text-white" to="/login">
-              Iniciar Sesión
+              Inicia Sesión
             </NavLink>
           </>
         )}
