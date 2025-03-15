@@ -13,7 +13,7 @@ export const WinesPage = () => {
   useEffect(() => {
     logger.info("Fetching wines data...")
 
-    fetch("http://localhost:3000/wines") 
+    fetch(`${import.meta.env.VITE_SERVER_URL}/wines`) 
       .then((response) => response.json()) 
       .then((data) => {
         if (!data || !data.data) {
