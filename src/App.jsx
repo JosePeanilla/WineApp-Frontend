@@ -13,12 +13,15 @@ import { RegionsPage } from "/src/pages/Regions"
 import { NewsPage } from "/src/pages/News"
 import { ConsumerProfilePage, WineryProfilePage } from "/src/pages/Profile"
 import { WinesManagementPage } from "/src/pages/WinesManagement"
+import { AboutPage } from "/src/pages/AboutPage"
+import { ContactPage } from "/src/pages/Contact"
+import { TermsPage } from "/src/pages/TermsPage"
 
 export const App = () => {
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", "WineAppTheme"); // Force theme
-  }, []);
+    document.documentElement.setAttribute("data-theme", "WineAppTheme")
+  }, [])
 
 return (
 
@@ -36,6 +39,9 @@ return (
           <Route path='/profile/consumer' element={<ConsumerProfilePage />} />
           <Route path='/profile/winery' element={<WineryProfilePage />} />
           <Route path='/wines/manage' element={<WinesManagementPage />} />
+          <Route path='/about' element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route path='*' element={<h2>Add here the not-found page</h2>} />
         </Routes>
       </main>
