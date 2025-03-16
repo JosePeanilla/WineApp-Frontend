@@ -77,7 +77,7 @@ export const FilterBar = ({ onFilterChange }) => {
         </div>
       </div>
       
-      <div className="hidden lg:flex lg:flex-col gap-4 p-4 border rounded-lg bg-[#3d1308] text-white shadow-lg fixed top-[120px] left-[20px] w-[250px]">
+      <div className="hidden lg:flex lg:flex-col gap-4 p-4 border rounded-lg bg-[#3d1308] text-white shadow-lg sticky top-[120px] w-[250px]">
         <input type="text" name="name" placeholder="Nombre" value={localFilters.name} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
         <input type="text" name="region" placeholder="Región" value={localFilters.region} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
         <input type="text" name="winery" placeholder="Bodega" value={localFilters.winery} onChange={handleChange} className="p-2 border rounded bg-white text-black" />

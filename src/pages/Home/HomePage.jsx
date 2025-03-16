@@ -19,8 +19,8 @@ export const HomePage = () => {
   }, [])
 
   const wineImages = [ 
-    "https://okdiario.com/img/2018/09/30/bodega-en-casa-655x368.jpg",
     "https://media.architecturaldigest.com/photos/57c9a2aceb60378a7b40892c/master/w_1920%2Cc_limit/champagne-caves-wine-cellars-01.jpg",
+    "https://okdiario.com/img/2018/09/30/bodega-en-casa-655x368.jpg",
     "https://img.freepik.com/fotos-premium/cerca-manos-brindando-copas-vino-tinto-vinedo_109442-597.jpg",
   ]
 

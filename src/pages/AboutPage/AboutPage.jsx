@@ -24,11 +24,11 @@ export const AboutPage = () => {
           </div>
           <div className="text-center">
             <p className="font-semibold mt-2">Nico Rende</p>
-            <p className="text-gray-600">Backend Specialist</p>
+            <p className="text-gray-600">Full Stack Developer</p>
           </div>
           <div className="text-center">
             <p className="font-semibold mt-2">Maria Zamora</p>
-            <p className="text-gray-600">UI/UX Designer</p>
+            <p className="text-gray-600">Full Stack Developer</p>
           </div>
         </div>
       </div>
