@@ -71,7 +71,7 @@ export const FilterBar = ({ onFilterChange }) => {
           <input type="text" name="region" placeholder="Región" value={localFilters.region} onChange={handleChange} className="p-2 border rounded bg-white text-black w-full text-sm" />
           <input type="text" name="winery" placeholder="Bodega" value={localFilters.winery} onChange={handleChange} className="p-2 border rounded bg-white text-black w-full text-sm" />
           <select name="grapeType" value={localFilters.grapeType} onChange={handleChange} className="p-2 border rounded bg-white text-black w-full text-sm">
-            <option value="">Todas las variedades</option>
+            <option value="">Seleccione el tipo de uva</option>
             {grapeVarieties.map((grape) => (
               <option key={grape} value={grape}>{grape}</option>
             ))}
@@ -86,7 +86,7 @@ export const FilterBar = ({ onFilterChange }) => {
           </div>
           <input type="number" name="minRating" placeholder="Valoración mín." value={localFilters.minRating} onChange={handleChange} className="p-2 border rounded bg-white text-black w-full text-sm" />
           <select name="type" value={localFilters.type} onChange={handleChange} className="p-2 border rounded bg-white text-black w-full text-sm">
-            <option value="">Todos los tipos</option>
+            <option value="">Seleccione el tipo de vino</option>
             <option value="Tinto">Tinto</option>
             <option value="Rosado">Rosado</option>
             <option value="Blanco">Blanco</option>
@@ -110,7 +110,7 @@ export const FilterBar = ({ onFilterChange }) => {
         <input type="text" name="region" placeholder="Región" value={localFilters.region} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
         <input type="text" name="winery" placeholder="Bodega" value={localFilters.winery} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
         <select name="grapeType" value={localFilters.grapeType} onChange={handleChange} className="p-2 border rounded bg-white text-black">
-          <option value="">Todas las variedades</option>
+          <option value="">Seleccione el tipo de uva</option>
           {grapeVarieties.map((grape) => (
             <option key={grape} value={grape}>
               {grape}
@@ -133,7 +133,7 @@ export const FilterBar = ({ onFilterChange }) => {
         </div>
         <input type="number" name="minRating" placeholder="Valoración mínima (1-5)" value={localFilters.minRating} onChange={handleChange} className="p-2 border rounded bg-white text-black" />
         <select name="type" value={localFilters.type} onChange={handleChange} className="p-2 border rounded bg-white text-black">
-          <option value="">Todos los tipos</option>
+          <option value="">Seleccione el tipo de vino</option>
           <option value="Tinto">Tinto</option>
           <option value="Rosado">Rosado</option>
           <option value="Blanco">Blanco</option>
