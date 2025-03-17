@@ -86,9 +86,10 @@ export const WineCardImage = ({ image, name }) => {
       <img
         src={image || "/default-wine.jpg"}
         alt={name || "Vino desconocido"}
-        className={`w-auto max-h-[400px] object-contain rounded-lg transition-opacity duration-300 ease-in-out ${
-          isZooming ? "opacity-0" : "opacity-100"
-        }`}
+        className={`
+          w-full md:w-auto max-h-[400px] object-contain rounded-lg transition-opacity duration-300 ease-in-out 
+          ${isZooming ? "opacity-0" : "opacity-100"}
+        `}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onTouchStart={handleTouchStart}
