@@ -50,6 +50,7 @@ export const WineCardImage = ({ image, name }) => {
   }
 
   const handleTouchMove = (e) => {
+    e.preventDefault()  // Prevenir el comportamiento por defecto en movimiento táctil
     const touch = e.touches[0]
     if (!touch || !zoomContainerRef.current) return
 
@@ -81,15 +82,14 @@ export const WineCardImage = ({ image, name }) => {
   return (
     <figure
       ref={zoomContainerRef}
-      className="flex justify-center items-center w-auto h-auto rounded-lg overflow-hidden relative group"
+      className="flex justify-center items-center w-auto h-auto rounded-lg overflow-hidden relative group touch-none" // Agregamos touch-none
     >
       <img
         src={image || "/default-wine.jpg"}
         alt={name || "Vino desconocido"}
-        className={`
-          w-full md:w-auto max-h-[400px] object-contain rounded-lg transition-opacity duration-300 ease-in-out 
-          ${isZooming ? "opacity-0" : "opacity-100"}
-        `}
+        className={`w-full md:w-auto h-auto max-h-[400px] object-contain rounded-lg transition-opacity duration-300 ease-in-out ${
+          isZooming ? "opacity-0" : "opacity-100"
+        }`}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onTouchStart={handleTouchStart}
