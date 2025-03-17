@@ -1,9 +1,11 @@
 import "./App.css"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { useEffect } from "react"
-
+import { BrowserRouter, Route, Routes, useNavigate, useLocation } from "react-router-dom"
+import { useEffect, useContext, useState } from "react"
+import { AuthContext } from "/src/context/AuthContext"
+import { AgeConfirmationModal } from "/src/components/modals"
 import { Header } from "/src/components/atoms/Header"
 import { Footer } from "/src/components/atoms/Footer"
+
 import { HomePage } from "/src/pages/Home"
 import { LoginPage } from "/src/pages/Login"
 import { RegisterPage } from "/src/pages/Register"
@@ -16,18 +18,41 @@ import { WinesManagementPage } from "/src/pages/WinesManagement"
 import { AboutPage } from "/src/pages/AboutPage"
 import { ContactPage } from "/src/pages/Contact"
 import { TermsPage } from "/src/pages/TermsPage"
+import { AccessDeniedPage } from "/src/pages/AccessDenied"
 
-export const App = () => {
+export const AppContent = () => {
+  const { user } = useContext(AuthContext)
+  const [isAgeConfirmed, setIsAgeConfirmed] = useState(false)
+  const [isAgeDenied, setIsAgeDenied] = useState(false)
+
+  const navigate = useNavigate()
+  const location = useLocation() 
+
+  const handleAgeConfirm = (confirmed) => {
+    if (confirmed) {
+      setIsAgeConfirmed(true)
+    } else {
+      alert("Debes ser mayor de 18 años para acceder a la aplicación.")
+      setIsAgeDenied(true)
+      navigate("/access-denied")
+    }
+  }
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", "WineAppTheme")
   }, [])
 
+  const isAccessDeniedPage = location.pathname === "/access-denied"
+
   return (
-    <div className="flex flex-col min-h-screen"> 
-      <BrowserRouter>
-        <Header />
-        <main className="flex-grow mb-20"> 
+    <>
+      {(!user && !isAgeConfirmed && !isAgeDenied) && (
+        <AgeConfirmationModal onConfirm={handleAgeConfirm} />
+      )}
+
+      <div className="flex flex-col min-h-screen">
+        {!isAccessDeniedPage && <Header />} 
+        <main className="flex-grow mb-20">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -42,11 +67,20 @@ export const App = () => {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/access-denied" element={<AccessDeniedPage />} />
             <Route path="*" element={<h2>Add here the not-found page</h2>} />
           </Routes>
         </main>
-        <Footer />
-      </BrowserRouter>
-    </div>
+        {!isAccessDeniedPage && <Footer />} 
+      </div>
+    </>
+  )
+}
+
+export const App = () => {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   )
 }
