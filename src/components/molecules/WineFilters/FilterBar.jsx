@@ -60,7 +60,7 @@ export const FilterBar = ({ onFilterChange }) => {
           className="bg-[#3d1308] text-white p-3 rounded-md w-full flex justify-between items-center"
         >
           <span className="font-medium">Filtros</span>
-          <span>{isFilterVisible ? '↑' : '↓'}</span>
+          <span>{isFilterVisible ? '▲' : '▼'}</span>
         </button>
       </div>
 

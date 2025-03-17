@@ -33,7 +33,7 @@ export const HomePage = () => {
           <p className="py-6">
             Explora los mejores vinos, descubre nuevas bodegas y comparte tu experiencia con otros amantes del vino.
           </p>
-          {!user && ( // ✅ Mostrar botón solo si el usuario NO está autenticado
+          {!user && ( 
             <NavLink className="btn bg-wineapp-ligero text-white" to="/register">
               Registrarse
             </NavLink>
@@ -47,7 +47,7 @@ export const HomePage = () => {
         <p className="text-gray-700">
           Nuestra plataforma conecta consumidores y bodegas para ofrecer la mejor experiencia en vinos.
         </p>
-        <div className="flex justify-center gap-10 mt-6">
+        <div className="flex flex-col md:flex-row justify-center gap-10 mt-6">
           <div className="flex flex-col items-center">
             <FaWineBottle className="text-4xl text-wineapp-muyfuerte" />
             <p className="text-gray-700 mt-2">Descubre vinos</p>
