@@ -30,7 +30,7 @@ export const WinesPage = () => {
       if (value) queryParams.append(key, value)
     })
 
-    fetch(`http://localhost:3000/wines?${queryParams.toString()}`) 
+    fetch(`${import.meta.env.VITE_SERVER_URL}/wines?${queryParams.toString()}`) 
       .then((response) => response.json()) 
       .then((data) => {
         if (!data || !data.data) {
