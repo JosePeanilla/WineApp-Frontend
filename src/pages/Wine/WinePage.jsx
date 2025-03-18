@@ -89,6 +89,7 @@ export const WinePage = () => {
           <h3 className="text-lg font-semibold">Año: {wine.year}</h3>
           <h2 className="text-lg font-semibold">Bodega: {wine.winery?.name || "Desconocida"}</h2>
           <h2 className="text-lg font-semibold">Región: {wine.region?.name || "Desconocida"}</h2>
+          <h2 className="text-lg font-semibold">País: {wine.country}</h2> 
           <p className="mt-2">{wine.description}</p>
           <div className="mt-4">
             <h2 className="text-xl font-semibold">Información adicional</h2>
@@ -109,7 +110,7 @@ export const WinePage = () => {
         setEditingReview={setEditingReview} 
       />
 
-      <Link to="/wines" className="flex items-center text-lg font-bold ml-5">
+      <Link to="/wines" className="flex items-center text-lg font-bold ml-5 mt-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

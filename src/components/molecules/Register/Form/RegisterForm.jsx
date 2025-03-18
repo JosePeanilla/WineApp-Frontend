@@ -40,6 +40,8 @@ export const RegisterForm = ({ formFields, formTitle, handleOnSubmit }) => {
             <RegisterField
               register={register}
               required={field.required}
+              type={field.type}
+              options={field.options || []}
               {...field}
             />
             <FieldErrorP error={formState.errors[field.name]} />

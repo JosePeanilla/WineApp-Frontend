@@ -40,7 +40,7 @@ export const ProfileForm = ({ formFields, formTitle, user, handleOnSubmit }) => 
         <section id="profile_form">
             <h4>{formTitle}</h4>
             <FormContainer onSubmit={handleSubmit(onSubmit, onError)} noValidate>
-                {formFields.map(({ name, text, required = true, type = "text" }) => (
+                {formFields.map(({ name, text, required = true, type = "text", options = [] }) => (
                     <div key={name}>
                         <RegisterField
                             name={name}
@@ -50,6 +50,7 @@ export const ProfileForm = ({ formFields, formTitle, user, handleOnSubmit }) => 
                             formState={formState}
                             validate={type === "phone" ? validatePhone : undefined} 
                             type={type} 
+                            options={options}
                         />
                         {formState.errors[name] && <FieldErrorP message={formState.errors[name].message} />}
                     </div>
