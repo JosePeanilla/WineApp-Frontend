@@ -93,7 +93,7 @@ export const WinePage = () => {
           <p className="mt-2">{wine.description}</p>
           <div className="mt-4">
             <h2 className="text-xl font-semibold">Información adicional</h2>
-            <p>{wine.additionalDescription || "Información adicional no disponible."}</p>
+            <p className="whitespace-pre-line">{wine.additionalDescription || "Información adicional no disponible."}</p>
           </div>
           <p className="text-lg font-semibold">Precio: {wine.price}€</p>
         </div>
