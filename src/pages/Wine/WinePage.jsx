@@ -100,6 +100,7 @@ export const WinePage = () => {
 
       <WineReview 
         wineId={wine._id} 
+        reviews={reviews}
         onReviewSubmitted={() => {
           logger.info("Nueva valoración enviada, recargando reseñas.")
           fetchReviews()
