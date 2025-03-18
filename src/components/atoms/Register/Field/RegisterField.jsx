@@ -49,8 +49,18 @@ export const RegisterField = ({
     return required ? validateNonBlankTextInTextField : undefined
   }
 
-  const fieldId = `field-${name}`
+  const combinedValidation = (value) => {
+    if (validate) {
+      const customResult = validate(value)
+      if (customResult !== true) {
+        return customResult
+      }
+    }
+    const defaultValidation = getValidationFunction()
+    return defaultValidation ? defaultValidation(value) : true
+  }
 
+  const fieldId = `field-${name}`
   const useDefaultCountries = type === "select" && options.length === 0
   
   return (
@@ -70,12 +80,12 @@ export const RegisterField = ({
 
           {useDefaultCountries ? (
             <>
-              <optgroup label="Europa">
+              <optgroup label="🌍 Europa">
                 {europa.map((country, index) => (
                   <option key={`eu-${index}`} value={country}>{country}</option>
                 ))}
               </optgroup>
-              <optgroup label="América">
+              <optgroup label="🌍 América">
                 {america.map((country, index) => (
                   <option key={`am-${index}`} value={country}>{country}</option>
                 ))}
@@ -110,7 +120,7 @@ export const RegisterField = ({
           autoComplete="off"
           {...register(name, {
             required: required ? { message: requiredFieldErrorMessage, value: true } : undefined,
-            validate: getValidationFunction(),
+            validate: combinedValidation,
           })}
         />
       )}
