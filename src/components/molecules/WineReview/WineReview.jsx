@@ -4,6 +4,7 @@ import React, { useContext, useRef, useEffect } from "react"
 import { AuthContext } from "/src/context/AuthContext"
 import { ReviewForm } from "./ReviewForm"
 import { useWineReview } from "/src/hooks/useWineReview"
+import { Link } from "react-router-dom"
 
 const logger = new Logger("WineReview")
 
@@ -43,6 +44,21 @@ export const WineReview = ({ wineId, onReviewSubmitted, editingReview, setEditin
       logger.error("Error al enviar la reseña:", error)
       alert("Hubo un problema al enviar la reseña. Inténtalo de nuevo.")
     }
+  }
+
+  if (!user) {
+    logger.info("Usuario no logueado intentando ver la sección de reseñas")
+    return (
+      <section className="mt-6">
+        <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md text-center">
+          <h2 className="text-lg font-semibold mb-4">¿Quieres dejar tu valoración?</h2>
+          <p className="mb-4">Para comentar este vino necesitas iniciar sesión.</p>
+          <Link to="/login" className="inline-block bg-[#7b0d1e] hover:bg-[#f8e5ee] text-white font-bold py-2 px-4 rounded transition duration-300">
+            Iniciar Sesión
+          </Link>
+        </div>
+      </section>
+    )
   }
 
   return (

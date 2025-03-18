@@ -98,17 +98,15 @@ export const WinePage = () => {
         </div>
       </div>
 
-      {user?.role === "consumers" && (
-        <WineReview 
-          wineId={wine._id} 
-          onReviewSubmitted={() => {
-            logger.info("Nueva valoración enviada, recargando reseñas.")
-            fetchReviews()
-          }} 
-          editingReview={editingReview} 
-          setEditingReview={setEditingReview} 
-        />
-      )}
+      <WineReview 
+        wineId={wine._id} 
+        onReviewSubmitted={() => {
+          logger.info("Nueva valoración enviada, recargando reseñas.")
+          fetchReviews()
+        }} 
+        editingReview={editingReview} 
+        setEditingReview={setEditingReview} 
+      />
 
       <Link to="/wines" className="flex items-center text-lg font-bold ml-5">
         <svg
