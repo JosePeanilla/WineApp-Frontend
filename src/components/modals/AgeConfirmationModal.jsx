@@ -1,6 +1,20 @@
-import React from "react"
+/************************************************** Internal logger ***************************************************/
+import { Logger } from "/src/utils/Logger.jsx"
+import React, { useEffect } from "react"
+
+const logger = new Logger("AgeConfirmationModal")
 
 export const AgeConfirmationModal = ({ onConfirm }) => {
+
+  useEffect(() => {
+    logger.info("Modal de verificación de edad mostrado")
+  }, [])
+
+  const handleConfirm = (isAdult) => {
+    logger.info(`Usuario seleccionó: ${isAdult ? "Sí, soy mayor" : "No, no soy mayor"}`)
+    onConfirm(isAdult)
+  }
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
       <div className="bg-[#3d1308] text-[#f8e5ee] p-6 rounded-xl shadow-xl max-w-sm mx-auto">
@@ -12,13 +26,13 @@ export const AgeConfirmationModal = ({ onConfirm }) => {
         </p>
         <div className="flex justify-between">
           <button
-            onClick={() => onConfirm(true)}
+            onClick={() => handleConfirm(true)}
             className="bg-[#059669] hover:bg-[#047857] text-white px-6 py-3 rounded-lg transition-all shadow-lg"
           >
             Sí, soy mayor
           </button>
           <button
-            onClick={() => onConfirm(false)}
+            onClick={() => handleConfirm(false)}
             className="bg-[#DC2626] hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all shadow-lg"
           >
             No, no soy mayor

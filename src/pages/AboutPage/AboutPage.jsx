@@ -1,11 +1,13 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
-import React from "react"
+import React, { useEffect } from "react"
 
 const logger = new Logger("AboutPage")
 
 export const AboutPage = () => {
-  logger.info("Página 'Sobre Nosotros' cargada correctamente.")
+  useEffect(() => {
+    logger.info("Página 'Sobre Nosotros' cargada correctamente.")
+  }, []) // Se ejecuta solo una vez cuando el componente se monta
 
   return (
     <div className="container mx-auto p-6 text-center">

@@ -1,14 +1,23 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { FormContainer, Button } from "/src/components/atoms/Form"
 
 const logger = new Logger("ContactPage")
 
 export const ContactPage = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  useEffect(() => {
+    logger.info("Página de contacto cargada correctamente.")
+  }, []) 
+
+  const { register, handleSubmit, formState: { errors }, setError } = useForm()
 
   const onSubmit = (data) => {
+    if (Object.keys(errors).length > 0) {
+      logger.warn("Intento de envío con errores:", errors)
+      return
+    }
     logger.info("Formulario de contacto enviado con:", data)
     alert("¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.")
   }
