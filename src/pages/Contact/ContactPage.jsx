@@ -65,7 +65,7 @@ export const ContactPage = () => {
 
         {/* Redes Sociales */}
         <div className="flex justify-center gap-4 mt-4">
-          <a href="https://www.instagram.com/wineissocial" target="_blank" rel="noopener noreferrer" className="hover:underline">📷 Instagram</a>
+          <a href="https://www.instagram.com/thekeyofwineok" target="_blank" rel="noopener noreferrer" className="hover:underline">📷 Instagram</a>
           <a href="https://twitter.com/wineapp" target="_blank" rel="noopener noreferrer" className="hover:underline">🐦 Twitter</a>
         </div>
       </div>

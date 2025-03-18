@@ -36,7 +36,7 @@ export const Footer = () => {
         <p className="text-xs sm:text-sm">
           Copyright © {new Date().getFullYear()} - All rights reserved by 
           <span className="text-[#9f2042] font-semibold"> Grupo Rojo</span>
-          <span className="block xs:inline mt-1 xs:mt-0"> (Jose Peanilla, Nico Rende, Maria Zamora)</span>
+          <span className="block xs:inline mt-1 xs:mt-0"> (Jose Peanilla, Nicolas Rende, Maria Zamora)</span>
         </p>
         
         <nav className="w-full">

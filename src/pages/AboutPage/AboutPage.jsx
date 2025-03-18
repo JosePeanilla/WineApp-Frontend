@@ -23,7 +23,7 @@ export const AboutPage = () => {
             <p className="text-gray-600">Full Stack Developer</p>
           </div>
           <div className="text-center">
-            <p className="font-semibold mt-2">Nico Rende</p>
+            <p className="font-semibold mt-2">Nicolas Rende</p>
             <p className="text-gray-600">Full Stack Developer</p>
           </div>
           <div className="text-center">
