@@ -61,6 +61,21 @@ export const WineReview = ({ wineId, reviews, onReviewSubmitted, editingReview, 
     )
   }
 
+  if (user.role !== "consumers") {
+    logger.info("Usuario con rol distinto de 'consumer' intentando comentar")
+    return (
+      <section className="mt-6">
+        <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md text-center">
+          <h2 className="text-lg font-semibold mb-4">Acceso Restringido</h2>
+          <p className="mb-4">
+          Lo sentimos, pero esta acción está disponible solo para usuarios con perfil <strong>consumidor</strong>.
+          Si crees que deberías tener acceso, por favor, contacta con soporte.
+          </p>
+        </div>
+      </section>
+    )
+  }
+
   const userHasReviewed = reviews?.length > 0 && reviews.some((review) => review.user?._id === user.id)
 
   if (userHasReviewed && !editingReview) {
