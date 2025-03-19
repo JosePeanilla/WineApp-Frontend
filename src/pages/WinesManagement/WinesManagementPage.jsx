@@ -70,7 +70,7 @@ export const WinesManagementPage = () => {
           </div>
           ))
         ) : (
-          <p>No tienes vinos registrados aún.</p>
+          <p className="text-center font-bold">No tienes vinos registrados aún.</p>
         )}
       </div>
     </section>

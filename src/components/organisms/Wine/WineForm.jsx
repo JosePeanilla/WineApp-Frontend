@@ -9,6 +9,7 @@ import { AuthContext } from "/src/context/AuthContext"
 import { RegisterField } from "/src/components/atoms/Register/Field"
 import { FormContainer, Button } from "/src/components/atoms/Form"
 import { america, europa } from "/src/utils/countries"
+import { grapeVarieties } from "/src/utils/grapeVarieties"
 
 export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
   const logger = new Logger("WineForm")
@@ -19,6 +20,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
   const [regions, setRegions] = useState([])
   const [regionCountryMap, setRegionCountryMap] = useState({}) 
   const [isManualCountrySelection, setIsManualCountrySelection] = useState(false)
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/regions`)
       .then((res) => res.json())
@@ -103,78 +105,113 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
     }
   }
 
-  const fields = [
-    { name: "name", text: "Nombre del Vino", required: true },
-    { name: "type", text: "Tipo de Vino", required: true },
-    { name: "year", text: "Año", required: true, type: "number" },
-    { name: "description", text: "Descripción", required: false },
-    { name: "additionalDescription", text: "Descripción Adicional", required: false },
-    { name: "price", text: "Precio (€)", required: true, type: "number" },
-  ]
-
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)} noValidate>
+      {/* Nombre del Vino */}
+      <RegisterField
+        name="name"
+        text="Nombre del Vino"
+        type="text"
+        required={true}
+        register={register}
+        formState={formState}
+      />
 
-      {fields.map((field) => (
-        <RegisterField
-          key={field.name}
-          register={register}
-          formState={formState}
-          {...field}
-        />
-      ))}
+      {/* Tipo de Vino */}
+      <RegisterField
+        name="type"
+        text="Tipo de Vino"
+        type="select"
+        required={true}
+        register={register}
+        formState={formState}
+        options={[
+          { value: "Tinto", label: "Tinto" },
+          { value: "Rosado", label: "Rosado" },
+          { value: "Blanco", label: "Blanco" },
+          { value: "Espumoso", label: "Espumoso" }
+        ]}
+      />
 
-      <div>
-        <label htmlFor="region" className="block font-normal">
-          Región:
-        </label>
-        <select
-          id="region"
-          {...register("region", { required: true })}
-          className="p-2 w-full bg-white focus:outline-none"
-        >
-          <option value="">Selecciona una región</option>
-          {regions.map((region) => (
-            <option key={region._id} value={region._id}>
-              {region.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      {/* Tipo de Uva */}
+      <RegisterField
+        name="grapeType"
+        text="Tipo de Uva"
+        type="select"
+        required={true}
+        register={register}
+        formState={formState}
+        options={grapeVarieties.map(grape => ({ value: grape, label: grape }))}
+      />
 
-      <div>
-        <label htmlFor="country" className="block font-normal">
-          País:
-        </label>
-        <select
-          id="country"
-          {...register("country", { required: true, onChange: handleCountryChange })}
-          className="p-2 w-full bg-white focus:outline-none"
-        >
-          <option value="">Selecciona un país</option>
+      {/* Año */}
+      <RegisterField
+        name="year"
+        text="Año"
+        type="number"
+        required={true}
+        register={register}
+        formState={formState}
+      />
 
-          <optgroup label="🌍 Europa">
-            {europa.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </optgroup>
+      {/* Descripción */}
+      <RegisterField
+        name="description"
+        text="Descripción"
+        type="textarea"
+        required={true}
+        register={register}
+        formState={formState}
+      />
 
-          <optgroup label="🌎 América">
-            {america.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </optgroup>
-        </select>
-      </div>
+      {/* Descripción Adicional */}
+      <RegisterField
+        name="additionalDescription"
+        text="Descripción Adicional"
+        type="textarea"
+        required={false} // No es obligatorio
+        register={register}
+        formState={formState}
+      />
 
+      {/* Precio */}
+      <RegisterField
+        name="price"
+        text="Precio (€)"
+        type="number"
+        required={true}
+        register={register}
+        formState={formState}
+      />
+
+      {/* Región */}
+      <RegisterField
+        name="region"
+        text="Región"
+        type="select"
+        required={true}
+        register={register}
+        formState={formState}
+        options={regions.map(region => ({ value: region._id, label: region.name }))}
+      />
+
+      {/* País */}
+      <RegisterField
+        name="country"
+        text="País"
+        type="select"
+        required={true}
+        register={register}
+        formState={formState}
+        onChange={handleCountryChange}
+      />
+
+      {/* Imagen */}
       <div>
         <label htmlFor="image">Imagen del vino:</label>
         <input type="file" {...register("image")} />
       </div>
+
       <Button type="submit" variant="moderado">
         {wine ? "Actualizar Vino" : "Agregar Vino"}
       </Button>

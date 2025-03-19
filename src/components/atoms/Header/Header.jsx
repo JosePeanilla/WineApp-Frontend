@@ -157,7 +157,7 @@ export const Header = () => {
       {/* Menú principal en pantallas grandes */}
       <div className="hidden lg:flex flex-1 justify-center">
         <ul className="menu menu-horizontal px-2">
-          <li><NavLink to="/">Como funciona?</NavLink></li>
+          <li><NavLink to="/">¿Como funciona?</NavLink></li>
           <li><NavLink to="/wines">Vinos</NavLink></li>
           <li><NavLink to="/regions">Regiones</NavLink></li>
           <li><NavLink to="/news">Noticias</NavLink></li>
@@ -187,10 +187,10 @@ export const Header = () => {
         ) : (
           <>
             <NavLink className="btn bg-wineapp-moderado text-white" to="/register">
-              Registrarse
+              Registrate
             </NavLink>
             <NavLink className="btn bg-wineapp-ligero text-white" to="/login">
-              Iniciar Sesión
+              Inicia Sesión
             </NavLink>
           </>
         )}

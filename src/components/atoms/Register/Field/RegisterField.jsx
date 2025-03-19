@@ -5,11 +5,20 @@ import { useValidateEmail } from "/src/hooks/useValidateEmail"
 import { useValidatePhone } from "/src/hooks/useValidatePhone"
 import { useValidatePassword } from "/src/hooks/useValidatePassword"
 import { useValidateWebsite } from "/src/hooks/useValidateWebsite"
-import { america, europa } from "/src/utils/countries"
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
 import { Input } from "/src/components/atoms/Form"
+import { america, europa } from "/src/utils/countries"
 
-export const RegisterField = ({ name, required = true, register = () => {}, text, type = "text", validate, formState }) => {
+export const RegisterField = ({ 
+  name, 
+  required = true, 
+  register = () => {}, 
+  text, 
+  type = "text", 
+  validate, 
+  formState, 
+  options = [] 
+}) => {
   const logger = new Logger("RegisterField")
   const { validateEmail } = useValidateEmail()
   const { validatePhone } = useValidatePhone()
@@ -40,47 +49,82 @@ export const RegisterField = ({ name, required = true, register = () => {}, text
     return required ? validateNonBlankTextInTextField : undefined
   }
 
-  const fieldId = `field-${name}`
+  const combinedValidation = (value) => {
+    if (validate) {
+      const customResult = validate(value)
+      if (customResult !== true) {
+        return customResult
+      }
+    }
+    const defaultValidation = getValidationFunction()
+    return defaultValidation ? defaultValidation(value) : true
+  }
 
+  const fieldId = `field-${name}`
+  const useDefaultCountries = type === "select" && options.length === 0
+  
   return (
     <div>
-      <label htmlFor={fieldId}>{text}:</label>
+      <label htmlFor={fieldId} className="block font-medium">{text}:</label>
+      
       {type === "select" ? (
-        <select id={fieldId} name={name} {...register(name, {
-          required: required ? { message: "Debes seleccionar un país.", value: true } : undefined
-        })}
-        className="p-2 w-full bg-white focus:outline-none"
-        defaultValue="" 
-      >
-        <option value="">Selecciona un país</option>
+        <select 
+          id={fieldId} 
+          name={name} 
+          {...register(name, {
+            required: required ? { message: "Este campo es obligatorio.", value: true } : undefined
+          })}
+          className="p-2 w-full bg-white border rounded focus:outline-none"
+        >
+          <option value="">Selecciona una opción</option>
 
-        {/* Grupo: Europa */}
-        <optgroup label="🌍 Europa">
-          {europa.map((country) => (
-            <option key={country} value={country}>{country}</option>
-          ))}
-        </optgroup>
+          {useDefaultCountries ? (
+            <>
+              <optgroup label="🌍 Europa">
+                {europa.map((country, index) => (
+                  <option key={`eu-${index}`} value={country}>{country}</option>
+                ))}
+              </optgroup>
+              <optgroup label="🌍 América">
+                {america.map((country, index) => (
+                  <option key={`am-${index}`} value={country}>{country}</option>
+                ))}
+              </optgroup>
+            </>
+          ) : (
+            options.map((option, index) => (
+              <option key={index} value={option.value || option}>
+                {option.label || option}
+              </option>
+            ))
+          )}
+        </select>
 
-        {/* Grupo: América */}
-        <optgroup label="🌎 América">
-          {america.map((country) => (
-            <option key={country} value={country}>{country}</option>
-          ))}
-        </optgroup>
-      </select>
+      ) : type === "textarea" ? (
+        <textarea
+          id={fieldId}
+          name={name}
+          className="p-2 w-full bg-white border rounded focus:outline-none"
+          {...register(name, {
+            required: required ? { message: requiredFieldErrorMessage, value: true } : undefined,
+          })}
+          rows="4"
+        />
+
       ) : (
         <Input
-        id={fieldId}
-        name={name}
-        type={type}
-        className="input input-bordered w-full max-w-xs"
-        autoComplete="off"
-        {...register(name, {
-          required: required ? { message: requiredFieldErrorMessage, value: true } : undefined,
-          validate: getValidationFunction(),
-        })}
-      />
+          id={fieldId}
+          name={name}
+          type={type}
+          className="input input-bordered w-full max-w-xs"
+          autoComplete="off"
+          {...register(name, {
+            required: required ? { message: requiredFieldErrorMessage, value: true } : undefined,
+            validate: combinedValidation,
+          })}
+        />
       )}
+
       <FieldErrorP error={formState?.errors[name]} />
     </div>
   )

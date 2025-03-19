@@ -52,7 +52,6 @@ export const WinePage = () => {
   return (
     <>
       <div className="flex flex-col sm:flex-row gap-8 p-6 max-w-5xl mx-auto">
-        {/* Columna Izquierda - Imagen */}
         <div className="lg:w-1/2 pt-10">
           <img
             src={wine.image || "https://picsum.photos/200"}
@@ -83,35 +82,35 @@ export const WinePage = () => {
           </div>
         </div>
 
-        {/* Columna Derecha - Contenido */}
         <div className="lg:w-1/2 space-y-4 pt-10">
           <h1 className="text-3xl font-bold">{wine.name}</h1>
           <h3 className="text-lg font-semibold">Tipo de Vino: {wine.type}</h3>
+          <h3 className="text-lg font-semibold">Tipo de Uva: {wine.grapeType || "No especificado"}</h3>
           <h3 className="text-lg font-semibold">Año: {wine.year}</h3>
           <h2 className="text-lg font-semibold">Bodega: {wine.winery?.name || "Desconocida"}</h2>
           <h2 className="text-lg font-semibold">Región: {wine.region?.name || "Desconocida"}</h2>
+          <h2 className="text-lg font-semibold">País: {wine.country}</h2> 
           <p className="mt-2">{wine.description}</p>
           <div className="mt-4">
             <h2 className="text-xl font-semibold">Información adicional</h2>
-            <p>{wine.additionalDescription || "Información adicional no disponible."}</p>
+            <p className="whitespace-pre-line">{wine.additionalDescription || "Información adicional no disponible."}</p>
           </div>
           <p className="text-lg font-semibold">Precio: {wine.price}€</p>
         </div>
       </div>
 
-      {user?.role === "consumers" && (
-        <WineReview 
-          wineId={wine._id} 
-          onReviewSubmitted={() => {
-            logger.info("Nueva valoración enviada, recargando reseñas.")
-            fetchReviews()
-          }} 
-          editingReview={editingReview} 
-          setEditingReview={setEditingReview} 
-        />
-      )}
+      <WineReview 
+        wineId={wine._id} 
+        reviews={reviews}
+        onReviewSubmitted={() => {
+          logger.info("Nueva valoración enviada, recargando reseñas.")
+          fetchReviews()
+        }} 
+        editingReview={editingReview} 
+        setEditingReview={setEditingReview} 
+      />
 
-      <Link to="/wines" className="flex items-center text-lg font-bold ml-5">
+      <Link to="/wines" className="flex items-center text-lg font-bold ml-5 mt-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
