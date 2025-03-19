@@ -1,32 +1,32 @@
 /************************************************** Internal logger ***************************************************/
-import { Logger } from "/src/utils/Logger.jsx";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "/src/context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { WineForm } from "/src/components/organisms/Wine/WineForm";
-import { useUpsertWine } from "/src/hooks/useUpsertWine";
-import { WineCard } from "/src/components/molecules/WineCard";
-import { Button } from "/src/components/atoms/Form";
+import { Logger } from "/src/utils/Logger.jsx"
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "/src/context/AuthContext"
+import { useNavigate } from "react-router-dom"
+import { WineForm } from "/src/components/organisms/Wine/WineForm"
+import { useUpsertWine } from "/src/hooks/useUpsertWine"
+import { WineCard } from "/src/components/molecules/WineCard"
+import { Button } from "/src/components/atoms/Form"
 
 export const WinesManagementPage = () => {
-  const logger = new Logger("WinesManagementPage");
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const [wines, setWines] = useState([]);
-  const [wineToEdit, setWineToEdit] = useState(null);
-  const { deleteWine } = useUpsertWine();
+  const logger = new Logger("WinesManagementPage")
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate()
+  const [wines, setWines] = useState([])
+  const [wineToEdit, setWineToEdit] = useState(null)
+  const { deleteWine } = useUpsertWine()
 
   useEffect(() => {
     if (!user || user.role !== "wineries") {
       logger.warn("Acceso no autorizado a WinesManagementPage.")
-      navigate("/");
+      navigate("/")
     } else {
       fetch(`${import.meta.env.VITE_SERVER_URL}/wines/winery/${user.id}`)
         .then((res) => res.json())
         .then((data) => setWines(data.data || []))
         .catch((error) => logger.error("Error fetching wines:", error))
     }
-  }, [user, navigate]);
+  }, [user, navigate])
 
   const handleDelete = async (wineId) => {
     const confirmed = confirm("¿Seguro deseas eliminar este vino?")
@@ -70,7 +70,7 @@ export const WinesManagementPage = () => {
           </div>
           ))
         ) : (
-          <p>No tienes vinos registrados aún.</p>
+          <p className="text-center font-bold">No tienes vinos registrados aún.</p>
         )}
       </div>
     </section>

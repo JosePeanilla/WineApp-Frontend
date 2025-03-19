@@ -1,6 +1,5 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
-
 import { WineCardImage } from "./WineCardImage.jsx"
 import { WineCardContent } from "./WineCardContent.jsx"
 import { WineCardActions } from "./WineCardActions.jsx"
@@ -18,18 +17,25 @@ export const WineCard = ({ wine, showEditDelete = false, onEdit, onDelete }) => 
   logger.debug(`Renderizando WineCard para el vino: ${wine.name}`)
 
   return (
-    <div className="card card-side bg-base-100 shadow-xl p-6 w-full max-w-3xl mx-auto rounded-lg flex items-center">
-      <figure className="w-40 h-40 flex-shrink-0 rounded-lg overflow-hidden">
+    <div className="card card-side bg-base-100 shadow-xl px-6 py-0 m-0 w-full h-auto md:w-[768px] md:h-[400px] mx-auto rounded-lg flex flex-col md:flex-row items-stretch mt-8">
+      <figure className="w-full md:w-40 flex-shrink-0 rounded-lg overflow-visible flex justify-center items-center">
         <WineCardImage image={wine.image} name={wine.name} />
       </figure>
-      <div className="card-body flex flex-col justify-between w-full pl-6">
-        <WineCardContent wine={wine} />
+      <div className="card-body flex flex-col justify-between w-full md:pl-6">
+        <WineCardContent 
+          wine={wine}
+          showActions={true} 
+          wineId={wineId} 
+          showEditDelete={showEditDelete} 
+          onEdit={onEdit} 
+          onDelete={onDelete}
+        />
         <div className="card-actions self-end">
           <WineCardActions
-           wineId={wineId}
-           showEditDelete={showEditDelete}
-           onEdit={onEdit}
-           onDelete={onDelete}
+            wineId={wineId}
+            showEditDelete={showEditDelete}
+            onEdit={onEdit}
+            onDelete={onDelete}
           />
         </div>
       </div>
