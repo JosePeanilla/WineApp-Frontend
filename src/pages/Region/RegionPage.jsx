@@ -32,9 +32,10 @@ export const RegionPage = () => {
 
         setRegion(formattedRegion)
 
-        fetch(`http://localhost:3000/wines/region/${data.data.name}`)
+        fetch(`http://localhost:3000/regions/${data.data.name}/wines`)
           .then((res) => res.json())
           .then((wineData) => {
+            console.log("Datos de vinos recibidos:", wineData)
             if (wineData.data) {
               setWines(wineData.data)
             }
