@@ -24,16 +24,16 @@ export const AgeConfirmationModal = ({ onConfirm }) => {
         <p className="mb-6 text-[#f8e5ee] text-center">
           ¿Eres mayor de 18 años?
         </p>
-        <div className="flex justify-between">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
           <button
             onClick={() => handleConfirm(true)}
-            className="bg-[#059669] hover:bg-[#047857] text-white px-6 py-3 rounded-lg transition-all shadow-lg"
+            className="bg-[#059669] hover:bg-[#047857] text-white px-6 py-3 rounded-lg transition-all shadow-lg min-w-[140px]"
           >
             Sí, soy mayor
           </button>
           <button
             onClick={() => handleConfirm(false)}
-            className="bg-[#DC2626] hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all shadow-lg"
+            className="bg-[#DC2626] hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all shadow-lg min-w-[140px]"
           >
             No, no soy mayor
           </button>
