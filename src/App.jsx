@@ -22,13 +22,16 @@ import { ContactPage } from "/src/pages/Contact"
 import { TermsPage } from "/src/pages/TermsPage"
 import { AccessDeniedPage } from "/src/pages/AccessDenied"
 
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
 export const AppContent = () => {
   const { user } = useContext(AuthContext)
   const [isAgeConfirmed, setIsAgeConfirmed] = useState(false)
   const [isAgeDenied, setIsAgeDenied] = useState(false)
 
   const navigate = useNavigate()
-  const location = useLocation() 
+  const location = useLocation()
 
   const handleAgeConfirm = (confirmed) => {
     if (confirmed) {
@@ -48,14 +51,17 @@ export const AppContent = () => {
 
   return (
     <>
+      {/* Age Modal */}
       {(!user && !isAgeConfirmed && !isAgeDenied) && (
         <AgeConfirmationModal onConfirm={handleAgeConfirm} />
       )}
 
+      {/* Socket Notifications */}
       {user && user.role === "wineries" && <SocketNotifications user={user} />}
 
+      {/* Layout */}
       <div className="flex flex-col min-h-screen">
-        {!isAccessDeniedPage && <Header />} 
+        {!isAccessDeniedPage && <Header />}
         <main className="flex-grow mb-20">
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -64,7 +70,7 @@ export const AppContent = () => {
             <Route path="/wines" element={<WinesPage />} />
             <Route path="/wines/:id" element={<WinePage />} />
             <Route path="/regions" element={<RegionsPage />} />
-            <Route path='/regions/:id' element={<RegionPage />} />
+            <Route path="/regions/:id" element={<RegionPage />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/profile/consumer" element={<ConsumerProfilePage />} />
             <Route path="/profile/winery" element={<WineryProfilePage />} />
@@ -76,13 +82,26 @@ export const AppContent = () => {
             <Route path="*" element={<h2>Add here the not-found page</h2>} />
           </Routes>
         </main>
-        {!isAccessDeniedPage && <Footer />} 
+        {!isAccessDeniedPage && <Footer />}
       </div>
+
+      {/* Toast container global */}
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   )
 }
 
-  export const App = () => {
+export const App = () => {
   return (
     <BrowserRouter>
       <AppContent />
