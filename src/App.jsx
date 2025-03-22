@@ -28,18 +28,20 @@ import "react-toastify/dist/ReactToastify.css"
 
 export const AppContent = () => {
   const { user } = useContext(AuthContext)
-  const [isAgeConfirmed, setIsAgeConfirmed] = useState(false)
-  const [isAgeDenied, setIsAgeDenied] = useState(false)
-
   const navigate = useNavigate()
   const location = useLocation()
 
-  const handleAgeConfirm = (confirmed) => {
-    if (confirmed) {
-      setIsAgeConfirmed(true)
+  const [showAgeModal, setShowAgeModal] = useState(() => {
+    return sessionStorage.getItem("isAdult") !== "true"
+  })
+
+  const handleAgeConfirm = (isAdult) => {
+    if (isAdult) {
+      sessionStorage.setItem("isAdult", "true")
+      setShowAgeModal(false)
     } else {
-      notify.success("Debes ser mayor de 18 años para acceder a la aplicación.")
-      setIsAgeDenied(true)
+      sessionStorage.setItem("isAdult", "false")
+      notify.warning("Debes ser mayor de 18 años para acceder a la aplicación.")
       navigate("/access-denied")
     }
   }
@@ -52,15 +54,15 @@ export const AppContent = () => {
 
   return (
     <>
-      {/* Age Modal */}
-      {(!user && !isAgeConfirmed && !isAgeDenied) && (
+      {/* Modal de edad solo si no está logueado y no ha confirmado la edad */}
+      {!user && showAgeModal && (
         <AgeConfirmationModal onConfirm={handleAgeConfirm} />
       )}
 
-      {/* Socket Notifications */}
+      {/* Notificaciones para bodegas */}
       {user && user.role === "wineries" && <SocketNotifications user={user} />}
 
-      {/* Layout */}
+      {/* Layout principal */}
       <div className="flex flex-col min-h-screen">
         {!isAccessDeniedPage && <Header />}
         <main className="flex-grow mb-20">

@@ -12,6 +12,9 @@ export const AgeConfirmationModal = ({ onConfirm }) => {
 
   const handleConfirm = (isAdult) => {
     logger.info(`Usuario seleccionó: ${isAdult ? "Sí, soy mayor" : "No, no soy mayor"}`)
+    if (isAdult) {
+      sessionStorage.setItem("isAdult", "true")
+    }
     onConfirm(isAdult)
   }
 
