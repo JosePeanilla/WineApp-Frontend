@@ -3,6 +3,7 @@ import { Logger } from '/src/utils/Logger.jsx'
 import { useEffect } from 'react'
 import { useSocket } from '/src/context/SocketContext'
 import { toast } from 'react-toastify'
+import { notify } from "/src/utils/notifications"
 
 const logger = new Logger("SocketNotifications")
 
@@ -19,7 +20,7 @@ export const SocketNotifications = ({ user }) => {
     // Escucha el evento "new-review" que emite el backend
     socket.on("new-review", (data) => {
       logger.info("Nueva review recibida:", data)
-      alert(`¡Nueva valoración para "${data.wine.name}"!`)
+      notify.info(`¡Nueva valoración para "${data.wine.name}"!`)
     })
 
     // Limpieza: remueve el listener cuando el componente se desmonte

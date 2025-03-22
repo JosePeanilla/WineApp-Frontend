@@ -1,3 +1,4 @@
+import { notify } from "/src/utils/notifications"
 import "./App.css"
 import { BrowserRouter, Route, Routes, useNavigate, useLocation } from "react-router-dom"
 import { useEffect, useContext, useState } from "react"
@@ -37,7 +38,7 @@ export const AppContent = () => {
     if (confirmed) {
       setIsAgeConfirmed(true)
     } else {
-      alert("Debes ser mayor de 18 años para acceder a la aplicación.")
+      notify.success("Debes ser mayor de 18 años para acceder a la aplicación.")
       setIsAgeDenied(true)
       navigate("/access-denied")
     }
