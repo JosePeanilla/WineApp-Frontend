@@ -46,9 +46,12 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCan
       setRating(0)
       setComment("")
     }
-
+  
+    if (editingReview && onCancelEdit) {
+      onCancelEdit()
+    }
+  
     logger.info("Formulario de reseña enviado con éxito")
-    onCancelEdit?.()
   }
 
   return (
