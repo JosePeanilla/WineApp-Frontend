@@ -5,6 +5,7 @@ import { AuthContext } from "/src/context/AuthContext"
 import { AgeConfirmationModal } from "/src/components/modals"
 import { Header } from "/src/components/atoms/Header"
 import { Footer } from "/src/components/atoms/Footer"
+import { SocketNotifications } from "./components/molecules/Socket/SocketNotification"
 
 import { HomePage } from "/src/pages/Home"
 import { LoginPage } from "/src/pages/Login"
@@ -50,6 +51,8 @@ export const AppContent = () => {
       {(!user && !isAgeConfirmed && !isAgeDenied) && (
         <AgeConfirmationModal onConfirm={handleAgeConfirm} />
       )}
+
+      {user && user.role === "wineries" && <SocketNotifications user={user} />}
 
       <div className="flex flex-col min-h-screen">
         {!isAccessDeniedPage && <Header />} 
