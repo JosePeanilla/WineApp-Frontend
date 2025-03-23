@@ -27,10 +27,10 @@ export const HomePage = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* HERO SECTION */}
-      <div className="hero bg-gray-100 text-center py-10">
+      <div className="hero bg-wineapp-fuerte bg-100 text-center py-20">
         <div className="max-w-md mx-auto">
-          <h1 className="text-5xl font-bold text-wineapp-muyfuerte">Bienvenidos</h1>
-          <p className="py-6">
+          <h1 className="text-5xl font-bold text-wineapp-muyligero">Bienvenidos</h1>
+          <p className="py-6 text-wineapp-muyligero">
             Explora los mejores vinos, descubre nuevas bodegas y comparte tu experiencia con otros amantes del vino.
           </p>
           {!user && ( 
@@ -66,7 +66,7 @@ export const HomePage = () => {
       {/* CARRUSEL DE IMÁGENES */}
       <div className="my-10 text-center">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">🍷 Descubre el Mundo del Vino</h2>
-        <div className="w-full max-w-4xl mx-auto">
+        <div className="mx-auto w-3/4 rounded-lg shadow-lg overflow-hidden">
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
             spaceBetween={10}

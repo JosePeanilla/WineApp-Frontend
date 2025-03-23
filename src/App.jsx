@@ -43,7 +43,6 @@ export const AppContent = () => {
       navigate("/access-denied")
     }
   }
-  
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", "WineAppTheme")

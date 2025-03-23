@@ -59,9 +59,11 @@ export const NewsPage = () => {
   return (
     <section id="news_page" className="flex flex-col">
       {/* Sección Hero */}
-      <div className="relative bg-[url('https://via.placeholder.com/1200x400?text=Noticias+Hero')] bg-cover bg-center h-64 flex items-center justify-center">
-        <div className="absolute inset-0 bg-black/40"></div>
-        <h1 className="relative text-white text-4xl font-bold">Noticias</h1>
+      <div className="hero bg-wineapp-fuerte bg-100 text-center py-20">
+        <div className="relative z-10 text-white text-center">
+          <h2 className="text-3xl font-bold">Últimas Noticias</h2>
+          <p className="text-lg">Mantente informado con las novedades del mundo del vino 🍇</p>
+        </div>
       </div>
 
       <div className="container mx-auto px-6 py-10">
@@ -96,11 +98,8 @@ export const NewsPage = () => {
           )}
         </div>
 
-        {/* Separador */}
-        <hr className="my-10 border-t-2 border-gray-200" />
-
         {/* Otras noticias */}
-        <h2 className="text-2xl font-bold mb-4 text-[#9f2042]">Otras Noticias</h2>
+        <h2 className="text-2xl font-bold mt-10 mb-4 text-[#9f2042]">Otras Noticias</h2>
         <div className="bg-gray-50 p-6 rounded-lg shadow-inner">
           {otherNews.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
