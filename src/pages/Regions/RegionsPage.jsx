@@ -12,7 +12,7 @@ export const RegionsPage = () => {
   useEffect(() => {
     logger.info("Fetching regions data...")
 
-    fetch("http://localhost:3000/regions") 
+    fetch(`${import.meta.env.VITE_SERVER_URL}/regions`) 
       .then((response) => response.json()) 
       .then((data) => {
         if (!data || !data.data) {
