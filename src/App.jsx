@@ -61,7 +61,7 @@ export const AppContent = () => {
             <Route path="/wines" element={<WinesPage />} />
             <Route path="/wines/:id" element={<WinePage />} />
             <Route path="/regions" element={<RegionsPage />} />
-            <Route path='/regions/:id' element={<RegionPage />} />
+            <Route path="/regions/:id" element={<RegionPage />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/profile/consumer" element={<ConsumerProfilePage />} />
             <Route path="/profile/winery" element={<WineryProfilePage />} />
@@ -79,7 +79,7 @@ export const AppContent = () => {
   )
 }
 
-  export const App = () => {
+export const App = () => {
   return (
     <BrowserRouter>
       <AppContent />
