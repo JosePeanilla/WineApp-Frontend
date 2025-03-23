@@ -78,9 +78,8 @@ export const AppContent = () => {
     </>
   )
 }
-
-export const App = () => {
-  return (
+      export const App = () => {
+        return (
     <BrowserRouter>                             
       <AppContent />
     </BrowserRouter>
