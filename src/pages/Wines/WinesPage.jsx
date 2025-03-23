@@ -93,7 +93,7 @@ export const WinesPage = () => {
               </div>
             ))
           ) : (
-            <p className="text-left text-lg">No hay vinos disponibles.</p>
+            <p className="text-center font-bold">No hay vinos disponibles.</p>
           )}
         </div>
       </div>
