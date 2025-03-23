@@ -19,7 +19,7 @@ export const RegionPage = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/regions/${id}`)
+    fetch(`${import.meta.env.VITE_SERVER_URL}/regions/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (!data || !data.data) return;
@@ -32,7 +32,7 @@ export const RegionPage = () => {
 
         setRegion(formattedRegion)
 
-        fetch(`http://localhost:3000/regions/${data.data.name}/wines`)
+        fetch(`${import.meta.env.VITE_SERVER_URL}/regions/${data.data.name}/wines`)
           .then((res) => res.json())
           .then((wineData) => {
             console.log("Datos de vinos recibidos:", wineData)
