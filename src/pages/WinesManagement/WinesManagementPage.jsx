@@ -20,7 +20,6 @@ export const WinesManagementPage = () => {
   useEffect(() => {
     if (!user || user.role !== "wineries") {
       logger.warn("Acceso no autorizado a WinesManagementPage.")
-      notify.warning("Acceso no autorizado.")
       navigate("/")
     } else {
       fetch(`${import.meta.env.VITE_SERVER_URL}/wines/winery/${user.id}`)

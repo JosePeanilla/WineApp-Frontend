@@ -1,51 +1,57 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 
 const logger = new Logger("NewsPage")
 
-export const NewsPage = () => {
+export const NewsPage = ({ user }) => {
   const [news, setNews] = useState([])
+
+    useEffect(() => {
+      window.scrollTo(0, 0)
+      logger.info("Desplazamiento al inicio de la página de noticias.")
+    }, [])
 
   useEffect(() => {
     logger.info("Página de Noticias cargada correctamente.")
-    
-    // Datos de ejemplo
+
+    // Datos ficticios ilustrativos
     const fakeNews = [
       {
         id: "1",
         title: "Nueva Bodega en Argentina",
-        summary: "Conoce la nueva bodega que está revolucionando el mercado del vino en Argentina.",
-        imageUrl: "https://via.placeholder.com/400x250?text=Noticia+1",
+        summary: "Una innovadora bodega en Argentina fusiona tradición y tecnología para revolucionar el mercado del vino.",
+        imageUrl: "https://infonegocios.info/content/images/2024/08/27/483589/Dise%C3%B1o-sin-t%C3%ADtulo---2024-08-27T214610.890.jpg",
         isRecent: true,
       },
       {
         id: "2",
         title: "Ranking de Vinos 2024",
-        summary: "Descubre cuáles son los vinos más valorados por los usuarios en el ranking 2024.",
-        imageUrl: "https://via.placeholder.com/400x250?text=Noticia+2",
+        summary: "Expertos publican el ranking de los vinos más destacados para el próximo año, marcando tendencias en el sector.",
+        imageUrl: "https://hips.hearstapps.com/hmg-prod/images/cabeceravinosesquire3-676e733000705.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*",
         isRecent: true,
       },
       {
         id: "3",
         title: "Evento Exclusivo en España",
-        summary: "Participa en una cata exclusiva con los mejores vinos del año en España.",
-        imageUrl: "https://via.placeholder.com/400x250?text=Noticia+3",
+        summary: "Una cata exclusiva reúne a reconocidos sommeliers en España para descubrir vinos de alta gama.",
+        imageUrl: "https://www.plateamadrid.com/wp-content/uploads/2024/02/CATA-DE-VINOS-EN-MADRID-PARA-EVENTOS-DE-EMPRESA-UNA-EXPERIENCIA-INOLVIDABLE-2.jpg",
         isRecent: false,
       },
       {
         id: "4",
         title: "Nuevo Maridaje de Quesos",
-        summary: "Te presentamos una selección de quesos perfectos para maridar con vinos tintos.",
-        imageUrl: "https://via.placeholder.com/400x250?text=Noticia+4",
+        summary:
+          "Descubre la combinación perfecta entre quesos artesanales y vinos tintos selectos.",
+        imageUrl: "https://elcoto.com/wp-content/uploads/2022/01/maridar_vino_y_queso.jpg",
         isRecent: false,
       },
       {
         id: "5",
         title: "Top 5 Bodegas Europeas",
-        summary: "Un recorrido por las bodegas más destacadas de Europa este año.",
-        imageUrl: "https://via.placeholder.com/400x250?text=Noticia+5",
+        summary:
+          "Un recorrido por las bodegas más prestigiosas de Europa, destacadas por su innovación y calidad.",
+        imageUrl: "https://phantom-expansion.unidadeditorial.es/c0a05d8c2e37374300c5553fc94f7e71/crop/63x0/828x510/resize/660/f/webp/assets/multimedia/imagenes/2024/11/05/17308277068161.jpg",
         isRecent: false,
       },
     ]
@@ -58,37 +64,35 @@ export const NewsPage = () => {
 
   return (
     <section id="news_page" className="flex flex-col">
-      {/* Sección Hero */}
+      {/* HERO SECTION con el diseño solicitado */}
       <div className="hero bg-wineapp-fuerte bg-100 text-center py-20">
-        <div className="relative z-10 text-white text-center">
-          <h2 className="text-3xl font-bold">Últimas Noticias</h2>
-          <p className="text-lg">Mantente informado con las novedades del mundo del vino 🍇</p>
+        <div className="max-w-md mx-auto">
+          <h1 className="text-5xl font-bold text-wineapp-muyligero">Últimas Noticias</h1>
+          <p className="py-6 text-wineapp-muyligero">
+          Mantente informado con las novedades del mundo del vino🍇
+          </p>
         </div>
       </div>
 
       <div className="container mx-auto px-6 py-10">
-        {/* Recent News */}
-        <h2 className="text-2xl font-bold mb-4 text-[#9f2042]">Noticias Recientes</h2>
+        {/* Sección de Noticias Recientes */}
+        <h2 className="text-2xl font-bold mb-4 text-[#9f2042]">
+          Noticias Recientes
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {recentNews.length > 0 ? (
             recentNews.map((item) => (
               <article
                 key={item.id}
-                className="bg-white shadow-md rounded-xl p-6 flex flex-col hover:shadow-2xl hover:-translate-y-1 transform transition-all duration-300"
+                className="bg-white shadow-md rounded-xl p-6 flex flex-col hover:shadow-2xl hover:-translate-y-1 transform transition duration-300"
               >
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full h-40 object-cover rounded-md"
+                  className="w-full h-48 object-cover rounded-md"
                 />
                 <h3 className="text-xl font-semibold mt-4">{item.title}</h3>
                 <p className="text-gray-700 mt-2 flex-grow">{item.summary}</p>
-                <Link
-                  to={`/news/${item.id}`}
-                  className="mt-4 text-[#9f2042] hover:underline font-medium"
-                >
-                  Leer más
-                </Link>
               </article>
             ))
           ) : (
@@ -98,15 +102,17 @@ export const NewsPage = () => {
           )}
         </div>
 
-        {/* Otras noticias */}
-        <h2 className="text-2xl font-bold mt-10 mb-4 text-[#9f2042]">Otras Noticias</h2>
+        {/* Sección de Otras Noticias */}
+        <h2 className="text-2xl font-bold mt-10 mb-4 text-[#9f2042]">
+          Otras Noticias
+        </h2>
         <div className="bg-gray-50 p-6 rounded-lg shadow-inner">
           {otherNews.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {otherNews.map((item) => (
                 <article
                   key={item.id}
-                  className="bg-white shadow-md rounded-xl p-6 flex flex-col hover:shadow-2xl hover:-translate-y-1 transform transition-all duration-300"
+                  className="bg-white shadow-md rounded-xl p-4 flex flex-col hover:shadow-2xl hover:-translate-y-1 transform transition duration-300"
                 >
                   <img
                     src={item.imageUrl}
@@ -115,17 +121,13 @@ export const NewsPage = () => {
                   />
                   <h3 className="text-lg font-semibold mt-4">{item.title}</h3>
                   <p className="text-gray-700 mt-2 flex-grow">{item.summary}</p>
-                  <Link
-                    to={`/news/${item.id}`}
-                    className="mt-4 text-[#9f2042] hover:underline font-medium"
-                  >
-                    Leer más
-                  </Link>
                 </article>
               ))}
             </div>
           ) : (
-            <p className="text-gray-500 text-center">No hay más noticias disponibles.</p>
+            <p className="text-gray-500 text-center">
+              No hay más noticias disponibles.
+            </p>
           )}
         </div>
       </div>
