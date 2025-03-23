@@ -1,20 +1,49 @@
-/************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
+import { notify } from "/src/utils/notifications"
 
 const logger = new Logger("AgeConfirmationModal")
 
 export const AgeConfirmationModal = ({ onConfirm }) => {
+  // Estados para los campos de día, mes y año
+  const [day, setDay] = useState("")
+  const [month, setMonth] = useState("")
+  const [year, setYear] = useState("")
 
   useEffect(() => {
     logger.info("Modal de verificación de edad mostrado")
   }, [])
 
-  const handleConfirm = (isAdult) => {
-    logger.info(`Usuario seleccionó: ${isAdult ? "Sí, soy mayor" : "No, no soy mayor"}`)
-    if (isAdult) {
-      sessionStorage.setItem("isAdult", "true")
+  const handleAccept = () => {
+    // Validar que no queden campos vacíos
+    if (!day || !month || !year) {
+      notify.error("Por favor, completa todos los campos.")
+      return
     }
+
+    // Construir la fecha (recordar: en JavaScript enero es 0)
+    const birthDate = new Date(year, month - 1, day)
+    const hoy = new Date()
+
+    // Calcular la edad
+    let edad = hoy.getFullYear() - birthDate.getFullYear()
+    const mes = hoy.getMonth() - birthDate.getMonth()
+    if (mes < 0 || (mes === 0 && hoy.getDate() < birthDate.getDate())) {
+      edad--
+    }
+
+    const isAdult = edad >= 18
+    logger.info(`Usuario ingresó ${day}/${month}/${year}. Edad calculada: ${edad}`)
+
+    // Guardar el resultado en sessionStorage y llamar a onConfirm
+    sessionStorage.setItem("isAdult", isAdult ? "true" : "false")
+
+    if (!isAdult) {
+      notify.warning("Debes tener al menos 18 años para continuar.")
+    } else {
+      notify.success("Edad verificada correctamente.")
+    }
+
     onConfirm(isAdult)
   }
 
@@ -25,20 +54,38 @@ export const AgeConfirmationModal = ({ onConfirm }) => {
           Verificación de Edad
         </h2>
         <p className="mb-6 text-[#f8e5ee] text-center">
-          ¿Eres mayor de 18 años?
+          Inserta tu fecha de nacimiento:
         </p>
-        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
+
+        <div className="flex flex-col items-center space-y-3">
+          <div className="flex space-x-2">
+            <input
+              type="number"
+              placeholder="Día"
+              className="w-16 p-2 text-black text-center rounded"
+              value={day}
+              onChange={(e) => setDay(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Mes"
+              className="w-16 p-2 text-black text-center rounded"
+              value={month}
+              onChange={(e) => setMonth(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Año"
+              className="w-20 p-2 text-black text-center rounded"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+            />
+          </div>
           <button
-            onClick={() => handleConfirm(true)}
-            className="bg-[#059669] hover:bg-[#047857] text-white px-6 py-3 rounded-lg transition-all shadow-lg min-w-[140px]"
+            onClick={handleAccept}
+            className="bg-[#7b0d1e] hover:bg-[#9f2042] text-white px-6 py-3 rounded-lg transition-all shadow-lg min-w-[140px]"
           >
-            Sí, soy mayor
-          </button>
-          <button
-            onClick={() => handleConfirm(false)}
-            className="bg-[#DC2626] hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all shadow-lg min-w-[140px]"
-          >
-            No, no soy mayor
+            Aceptar
           </button>
         </div>
       </div>

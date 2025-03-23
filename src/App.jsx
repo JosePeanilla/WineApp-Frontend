@@ -36,15 +36,14 @@ export const AppContent = () => {
   })
 
   const handleAgeConfirm = (isAdult) => {
-    if (isAdult) {
-      sessionStorage.setItem("isAdult", "true")
-      setShowAgeModal(false)
-    } else {
-      sessionStorage.setItem("isAdult", "false")
+    sessionStorage.setItem("isAdult", isAdult ? "true" : "false")
+    setShowAgeModal(false)  // Oculta el modal siempre
+    if (!isAdult) {
       notify.warning("Debes ser mayor de 18 años para acceder a la aplicación.")
       navigate("/access-denied")
     }
   }
+  
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", "WineAppTheme")
@@ -54,7 +53,7 @@ export const AppContent = () => {
 
   return (
     <>
-      {/* Modal de edad solo si no está logueado y no ha confirmado la edad */}
+      {/* Se muestra el modal de verificación si el usuario no está logueado y aún no ha confirmado */}
       {!user && showAgeModal && (
         <AgeConfirmationModal onConfirm={handleAgeConfirm} />
       )}
