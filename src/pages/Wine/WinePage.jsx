@@ -1,5 +1,6 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
+import { notify } from "/src/utils/notifications"
 import React, { useEffect, useState, useContext } from "react"
 import { useParams, Link } from "react-router-dom"
 import { AuthContext } from "/src/context/AuthContext"
@@ -29,6 +30,7 @@ export const WinePage = () => {
       .then((data) => {
         if (!data || !data.data) {
           logger.warn(`No se encontró información del vino con ID: ${id}`)
+          notify.warning("No se encontró información del vino.")
           return
         }
 
@@ -60,7 +62,7 @@ export const WinePage = () => {
           />
           <h2 className="mt-4 mb-2">Mapa de la región: {wine.region?.name || "Desconocida"}</h2>
           <img
-            src="https://picsum.photos/150"
+            src={wine.region?.image || "https://picsum.photos/150"} 
             alt={wine.region?.name || "Región desconocida"}
             className="rounded-lg shadow-lg h-auto"
           />
@@ -76,6 +78,7 @@ export const WinePage = () => {
               }} 
               onDelete={(reviewId) => {
                 logger.warn(`Usuario eliminó la reseña ID: ${reviewId}`)
+                notify.warning("Se ha elñiminado la reseña.")
                 handleReviewDelete(reviewId)
               }} 
             />

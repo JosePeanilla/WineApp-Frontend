@@ -1,5 +1,6 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
+import { notify } from "/src/utils/notifications"
 
 import { useState, useEffect } from "react"
 import { WineCard } from "../../components/molecules/WineCard"
@@ -35,6 +36,7 @@ export const WinesPage = () => {
       .then((data) => {
         if (!data || !data.data) {
           logger.warn("No wine data received from API")
+          notify.warning("No se han recibido datos de ningún vino.")
           return
         }
 
@@ -91,7 +93,7 @@ export const WinesPage = () => {
               </div>
             ))
           ) : (
-            <p className="text-left text-lg">No hay vinos disponibles.</p>
+            <p className="text-center font-bold">No hay vinos disponibles.</p>
           )}
         </div>
       </div>
