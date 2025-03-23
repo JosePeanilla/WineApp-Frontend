@@ -62,7 +62,7 @@ export const WinePage = () => {
           />
           <h2 className="mt-4 mb-2">Mapa de la región: {wine.region?.name || "Desconocida"}</h2>
           <img
-            src="https://picsum.photos/150"
+            src={wine.region?.image || "https://picsum.photos/150"} 
             alt={wine.region?.name || "Región desconocida"}
             className="rounded-lg shadow-lg h-auto"
           />

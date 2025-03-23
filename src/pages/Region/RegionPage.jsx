@@ -84,7 +84,7 @@ export const RegionPage = () => {
               <WineCard key={wine._id} wine={wine} />
             ))
           ) : (
-            <p>No hay vinos disponibles para esta región.</p>
+            <p className="text-center font-bold">No hay vinos disponibles para esta región.</p>
           )}
         </div>
       </div>
