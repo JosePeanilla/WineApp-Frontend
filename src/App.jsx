@@ -61,6 +61,7 @@ export const AppContent = () => {
             <Route path="/wines" element={<WinesPage />} />
             <Route path="/wines/:id" element={<WinePage />} />
             <Route path="/regions" element={<RegionsPage />} />
+            <Route path="/regions/:id" element={<RegionPage />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/profile/consumer" element={<ConsumerProfilePage />} />
             <Route path="/profile/winery" element={<WineryProfilePage />} />
@@ -80,26 +81,6 @@ export const AppContent = () => {
 
 export const App = () => {
   return (
-
-      <Header />
-      <main>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/wines' element={<WinesPage />} />
-          <Route path='/wines/:id' element={<WinePage />} />
-          <Route path='/regions' element={<RegionsPage />} />
-          <Route path='/regions/:id' element={<RegionPage />} />
-          <Route path='/news' element={<NewsPage />} />
-          <Route path='/profile/consumer' element={<ConsumerProfilePage />} />
-          <Route path='/profile/winery' element={<WineryProfilePage />} />
-          <Route path='/wines/manage' element={<WinesManagementPage />} />
-          <Route path='*' element={<h2>Add here the not-found page</h2>} />
-        </Routes>
-      </main>
-      <Footer />
-
     <BrowserRouter>                             
       <AppContent />
     </BrowserRouter>
