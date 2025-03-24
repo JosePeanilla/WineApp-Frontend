@@ -37,7 +37,7 @@ export const AppContent = () => {
 
   const handleAgeConfirm = (isAdult) => {
     sessionStorage.setItem("isAdult", isAdult ? "true" : "false")
-    setShowAgeModal(false)  // Oculta el modal siempre
+    setShowAgeModal(false)  
     if (!isAdult) {
       notify.warning("Debes ser mayor de 18 años para acceder a la aplicación.")
       navigate("/access-denied")

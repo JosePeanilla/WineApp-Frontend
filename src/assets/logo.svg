@@ -1,0 +1,73 @@
+<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Degradados y demás definiciones -->
+    <linearGradient id="gradientText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9f2042"/>
+      <stop offset="100%" stop-color="#f8e5ee"/>
+    </linearGradient>
+
+    <linearGradient id="leafGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8bc34a"/>
+      <stop offset="100%" stop-color="#558b2f"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .logo-text {
+      font-family: 'Cinzel', serif;
+      font-size: 64px;
+      font-weight: bold;
+      fill: url(#gradientText);
+    }
+    .swirl {
+      fill: none;
+      stroke: #9f2042;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 4,2;
+    }
+  </style>
+
+  <!-- Agrupamos todo en un <g> -->
+  <g id="contenedor" transform="translate(-35, 0)">
+    <!-- Texto "WineApp" -->
+    <text x="180" y="100" class="logo-text">WineApp</text>
+    
+    <!-- Línea ondulada debajo del texto -->
+    <path class="swirl" d="
+      M180,110 C200,130 250,90 280,110
+      S320,130 340,110
+    "/>
+
+    <!-- Racimo de uvas a la derecha -->
+    <g transform="translate(450,75)">
+      <!-- Zarcillo -->
+      <path d="M 20,-15 
+               q 5,-10 10,0 
+               q -5,5 0,10" 
+            stroke="#7b0d1e" 
+            fill="none" 
+            stroke-width="2" 
+            stroke-linecap="round"/>
+      
+      <!-- Hoja -->
+      <path fill="url(#leafGradient)" d="
+        M 12,-8
+        C 0,-20,  30,-25,  22,-5
+        C 35,-10,  30,  0,  15,  2
+        C  0,  5,   2, -2, 12,-8
+        Z
+      "/>
+
+      <!-- Uvas (color #9f2042) -->
+      <circle fill="#9f2042" cx="10" cy="10" r="6"/>
+      <circle fill="#9f2042" cx="25" cy="10" r="6"/>
+      <circle fill="#9f2042" cx="5"  cy="24" r="6"/>
+      <circle fill="#9f2042" cx="20" cy="24" r="6"/>
+      <circle fill="#9f2042" cx="35" cy="24" r="6"/>
+      <circle fill="#9f2042" cx="12" cy="38" r="6"/>
+      <circle fill="#9f2042" cx="28" cy="38" r="6"/>
+      <circle fill="#9f2042" cx="20" cy="52" r="6"/>
+    </g>
+  </g>
+</svg>

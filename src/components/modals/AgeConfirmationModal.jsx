@@ -1,6 +1,7 @@
 import { Logger } from "/src/utils/Logger.jsx"
 import React, { useEffect, useState } from "react"
 import { notify } from "/src/utils/notifications"
+import logo from '/src/assets/logo.svg'
 
 const logger = new Logger("AgeConfirmationModal")
 
@@ -49,10 +50,20 @@ export const AgeConfirmationModal = ({ onConfirm }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-      <div className="bg-[#3d1308] text-[#f8e5ee] p-6 rounded-xl shadow-xl max-w-sm mx-auto">
+      <div className="bg-[#3d1308] text-[#f8e5ee] p-6 rounded-xl shadow-xl mx-auto">
+      <div className="flex justify-center mb-4">
+          <img 
+            src={logo} 
+            alt="Logo WineApp" 
+            className="w-[600px] h-auto" 
+          />
+        </div>
         <h2 className="text-2xl font-bold mb-4 text-[#9f2042] text-center">
-          Verificación de Edad
+          ¡Bienvenido a WineApp!
         </h2>
+        <p className="mb-4 text-center text-sm ">
+        Para usar la aplicación debes de ser mayor de 18 años.
+      </p>
         <p className="mb-6 text-[#f8e5ee] text-center">
           Inserta tu fecha de nacimiento:
         </p>
