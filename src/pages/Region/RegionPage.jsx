@@ -32,7 +32,7 @@ export const RegionPage = () => {
 
         setRegion(formattedRegion)
 
-        fetch(`${import.meta.env.VITE_SERVER_URL}/regions/${data.data.name}/wines`)
+        fetch(`${import.meta.env.VITE_SERVER_URL}/wines/region/${data.data.name}`)
           .then((res) => res.json())
           .then((wineData) => {
             console.log("Datos de vinos recibidos:", wineData)
