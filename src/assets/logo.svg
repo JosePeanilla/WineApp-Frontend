@@ -14,7 +14,7 @@
 
   <style>
     .logo-text {
-      font-family: 'Cinzel', serif;
+      font-family: 'Open Sans', sans-serif;
       font-size: 64px;
       font-weight: bold;
       fill: url(#gradientText);
@@ -29,9 +29,9 @@
   </style>
 
   <!-- Agrupamos todo en un <g> -->
-  <g id="contenedor" transform="translate(-35, 0)">
+  <g id="contenedor" transform="translate(-30, 0)">
     <!-- Texto "WineApp" -->
-    <text x="180" y="100" class="logo-text">WineApp</text>
+    <text x="160" y="100" class="logo-text">WineApp</text>
     
     <!-- Línea ondulada debajo del texto -->
     <path class="swirl" d="
