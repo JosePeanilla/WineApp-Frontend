@@ -36,7 +36,7 @@ export const WinePage = () => {
 
         const formattedWine = {
           ...data.data,
-          region: typeof data.data.region === "object" ? data.data.region : { name: data.data.region || "" },
+          region: data.data.region || { name: "Desconocida", image: "" },
         }
 
         setWine(formattedWine)
@@ -61,11 +61,15 @@ export const WinePage = () => {
             className="rounded-lg shadow-lg w-full h-auto"
           />
           <h2 className="mt-4 mb-2">Mapa de la región: {wine.region?.name || "Desconocida"}</h2>
-          <img
-            src={wine.region?.image || "https://picsum.photos/150"} 
-            alt={wine.region?.name || "Región desconocida"}
-            className="rounded-lg shadow-lg h-auto"
-          />
+          {wine.region?.image ? (
+            <img
+              src={wine.region.image}
+              alt={`Mapa de la región ${wine.region.name}`}
+              className="rounded-lg shadow-lg w-48"
+            />
+          ) : (
+            <p className="text-sm italic text-gray-500">Mapa de la región no disponible.</p>
+          )}
 
           <div className="mt-6">
             <h2 className="text-xl font-semibold">Valoraciones y comentarios</h2>
