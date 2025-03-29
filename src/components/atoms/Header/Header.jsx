@@ -89,50 +89,23 @@ export const Header = () => {
       
       {/* Mobile Hamburger Menu Button */}
       <div className="lg:hidden">
-        <button 
+      <button 
           id="mobile-menu-button"
           onClick={toggleDropdown}
           className="btn btn-ghost lg:hidden p-3 z-20"
         >
-          {/************************************************** Animated Icon ***************************************************/}
-          <motion.svg
+          <svg
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
             className="h-6 w-6"
-          >
-            {/* Top Line: rotates to top-left */}
-            <motion.line
-              x1="4"
-              y1="6"
-              x2="20"
-              y2="6"
-              animate={isOpen ? { x1: 6, y1: 6, x2: 18, y2: 18 } : { x1: 4, y1: 6, x2: 20, y2: 6 }}
-              transition={{ duration: 0.3 }}
-            />
-            {/* Middle Line: fades out */}
-            <motion.line
-              x1="4"
-              y1="12"
-              x2="20"
-              y2="12"
-              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.2 }}
-            />
-            {/* Bottom Line: rotates to bottom-left */}
-            <motion.line
-              x1="4"
-              y1="18"
-              x2="20"
-              y2="18"
-              animate={isOpen ? { x1: 6, y1: 18, x2: 18, y2: 6 } : { x1: 4, y1: 18, x2: 20, y2: 18 }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.svg>
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h8m-8 6h16" />
+          </svg>
         </button>
 
         {/* Mobile Menu Dropdown */}
