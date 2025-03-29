@@ -1,38 +1,50 @@
 /************************************************** Internal logger ***************************************************/
-import { Logger } from '/src/utils/Logger.jsx'
-// src/context/SocketContext.jsx
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import { io } from 'socket.io-client'
+import { Logger } from "/src/utils/Logger.jsx"
 
+/************************************************** External Dependencies ***************************************************/
+import React, { createContext, useContext, useEffect, useState } from "react"
+import { io } from "socket.io-client"
+
+/**************************************************************************************************
+ * SocketContext:
+ * Provides a global WebSocket connection (via Socket.io) across the entire application.
+ * - Initializes and manages the socket lifecycle
+ * - Shares the socket instance through React Context
+ * - Logs connection events and errors
+ **************************************************************************************************/
 const logger = new Logger("SocketContext")
 
-// Crea el contexto
+/****************************************** Context Creation ******************************************/
 const SocketContext = createContext()
 
-// Proveedor del contexto que inicializa el socket
+/**************************************************************************************************
+ * SocketProvider:
+ * Wraps the app and sets up the socket connection using environment configuration.
+ * - Listens to connection and error events
+ * - Cleans up socket on unmount
+ **************************************************************************************************/
 export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null)
 
   useEffect(() => {
-    logger.info("Inicializando conexión de Socket.io...")
-    // Inicializa el socket usando la URL del servidor (usando tu variable de entorno)
+    logger.info("Initializing Socket.io connection...")
+
     const newSocket = io(import.meta.env.VITE_SERVER_URL, {
-      transports: ['websocket'], // opcional, para forzar WebSocket
+      transports: ["websocket"], // Optional: enforce WebSocket only
     })
 
     newSocket.on("connect", () => {
-      logger.info(`Socket conectado: ${newSocket.id}`)
+      logger.info(`Socket connected successfully: ${newSocket.id}`)
     })
 
     newSocket.on("connect_error", (error) => {
-      logger.error("Error de conexión de socket:", error)
+      logger.error("Socket connection error:", error)
     })
 
     setSocket(newSocket)
 
-    // Limpieza: cierra la conexión cuando se desmonte el proveedor
     return () => {
-      logger.info("Cerrando conexión de Socket.io...")
+      logger.info("Closing Socket.io connection...")
       newSocket.close()
     }
   }, [])
@@ -44,7 +56,10 @@ export const SocketProvider = ({ children }) => {
   )
 }
 
-// Hook para acceder fácilmente al socket
+/**************************************************************************************************
+ * useSocket:
+ * Custom hook to access the current socket instance from any component.
+ **************************************************************************************************/
 export const useSocket = () => {
   return useContext(SocketContext)
 }

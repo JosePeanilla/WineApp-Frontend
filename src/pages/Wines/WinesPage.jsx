@@ -2,16 +2,26 @@
 import { Logger } from "/src/utils/Logger.jsx"
 import { notify } from "/src/utils/notifications"
 
+/************************************************** External Dependencies ***************************************************/
 import { useState, useEffect } from "react"
-import { WineCard } from "../../components/molecules/WineCard"
-import { FilterBar } from "../../components/molecules/WineFilters"  
 
+/************************************************** Internal Components ***************************************************/
+import { WineCard } from "../../components/molecules/WineCard"
+import { FilterBar } from "../../components/molecules/WineFilters"
+
+/**************************************************************************************************
+ * WinesPage Component:
+ * Displays a complete list of wines fetched from the API, with filtering capabilities.
+ * - Users can filter by name, type, region, winery, price, year, and rating.
+ * - The list updates automatically as filters change.
+ * - Uses logger for tracking and notify for warnings/errors.
+ **************************************************************************************************/
 const logger = new Logger("WinesPage")
 
 export const WinesPage = () => {
-  
+  /****************************** Local State ******************************/
   const [wines, setWines] = useState([])
-  const [filters, setFilters] = useState({ 
+  const [filters, setFilters] = useState({
     name: "",
     type: "",
     region: "",
@@ -23,6 +33,7 @@ export const WinesPage = () => {
     minRating: ""
   })
 
+  /****************************** Fetch Wines from API ******************************/
   const fetchWines = () => {
     logger.info("Fetching wines data...")
 
@@ -31,8 +42,8 @@ export const WinesPage = () => {
       if (value) queryParams.append(key, value)
     })
 
-    fetch(`${import.meta.env.VITE_SERVER_URL}/wines?${queryParams.toString()}`) 
-      .then((response) => response.json()) 
+    fetch(`${import.meta.env.VITE_SERVER_URL}/wines?${queryParams.toString()}`)
+      .then((response) => response.json())
       .then((data) => {
         if (!data || !data.data) {
           logger.warn("No wine data received from API")
@@ -42,7 +53,7 @@ export const WinesPage = () => {
 
         const winesWithCorrectID = data.data.map(wine => ({
           ...wine,
-          id: wine.id || wine._id 
+          id: wine.id || wine._id
         }))
 
         setWines(winesWithCorrectID)
@@ -54,19 +65,25 @@ export const WinesPage = () => {
       })
   }
 
+  /****************************** Trigger Fetch on Filters Change ******************************/
   useEffect(() => {
     fetchWines()
-  }, [filters]) 
+  }, [filters])
 
+  /****************************** Render Wines Page ******************************/
   return (
     <section id="wines_page" className="container mx-auto px-4 min-h-screen flex flex-col items-start">
+      {/* Title */}
       <h1 className="text-center text-2xl font-bold my-6 w-full">Listado completo</h1>
 
+      {/* Mobile & Tablet View */}
       <div className="sm:flex sm:flex-col sm:gap-6 lg:hidden">
+        {/* Filters */}
         <div>
           <FilterBar onFilterChange={setFilters} />
         </div>
 
+        {/* Wine Cards */}
         <div className="flex justify-start">
           <div className="w-full max-w-md flex flex-col gap-y-6 items-start">
             {wines.length > 0 ? (
@@ -80,11 +97,14 @@ export const WinesPage = () => {
         </div>
       </div>
 
+      {/* Desktop View */}
       <div className="hidden lg:flex lg:justify-start gap-6 w-full">
+        {/* Filters */}
         <div>
           <FilterBar onFilterChange={setFilters} />
         </div>
 
+        {/* Wine Cards */}
         <div className="lg:w-3/4 flex flex-col items-start gap-y-6 ml-auto">
           {wines.length > 0 ? (
             wines.map((wine) => (

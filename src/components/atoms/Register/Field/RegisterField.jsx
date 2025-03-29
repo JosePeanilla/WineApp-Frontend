@@ -1,46 +1,67 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 
+/************************************************** Validation Hooks ***************************************************/
 import { useValidateEmail } from "/src/hooks/useValidateEmail"
 import { useValidatePhone } from "/src/hooks/useValidatePhone"
 import { useValidatePassword } from "/src/hooks/useValidatePassword"
 import { useValidateWebsite } from "/src/hooks/useValidateWebsite"
+
+/************************************************** UI Components & Utils ***************************************************/
 import { FieldErrorP } from "/src/components/protons/FieldErrorP"
 import { Input } from "/src/components/atoms/Form"
 import { america, europa } from "/src/utils/countries"
 
+/**************************************************************************************************
+ * RegisterField:
+ * Reusable input component that handles various field types:
+ * - Input, Select, Textarea
+ * - Auto-validates depending on type (email, phone, password, etc.)
+ * - Allows custom validation via props
+ * - Supports default country list for selects
+ * - Displays error messages using FieldErrorP
+ **************************************************************************************************/
 export const RegisterField = ({ 
-  name, 
-  required = true, 
-  register = () => {}, 
-  text, 
-  type = "text", 
-  validate, 
-  formState, 
-  options = [] 
+  name,                  // Field name (used in register & error access)
+  required = true,       // Is the field required
+  register = () => {},   // react-hook-form register function
+  text,                  // Label text
+  type = "text",         // Field type (text, email, password, select, etc.)
+  validate,              // Optional custom validate function
+  formState,             // react-hook-form state object (to access errors)
+  options = []           // Options for select input
 }) => {
   const logger = new Logger("RegisterField")
+
+  // Custom validators
   const { validateEmail } = useValidateEmail()
   const { validatePhone } = useValidatePhone()
   const { validatePassword } = useValidatePassword()
   const { validateWebsite } = useValidateWebsite()
 
+  // Default required messages
   const requiredFieldErrorMessage = "Este campo es necesario, por favor rellénalo."
   const requiredNonBlankTextMessage = "Este campo debe ser rellenado, al menos, por algún carácter que no sea un espacio."
 
+  /**
+   * Basic non-empty string validator
+   */
   const validateNonBlankTextInTextField = (field_text) => {
     if (typeof field_text === "number") {
       field_text = String(field_text)
     }
     if (typeof field_text !== "string") {
-      logger.error("Error: El valor del campo no es un string válido.", field_text)
+      logger.error("Invalid value type for field:", field_text)
       return "Error: Valor inválido."
     }
     if (field_text.trim().length > 0) return true
-    logger.error(`${requiredNonBlankTextMessage}`)
+    logger.error(requiredNonBlankTextMessage)
     return requiredNonBlankTextMessage
   }
 
+  /**
+   * Get default validator based on field type
+   */
   const getValidationFunction = () => {
     if (type === "email") return validateEmail
     if (type === "phone") return validatePhone
@@ -49,12 +70,13 @@ export const RegisterField = ({
     return required ? validateNonBlankTextInTextField : undefined
   }
 
+  /**
+   * Combines custom validate function with default validation logic
+   */
   const combinedValidation = (value) => {
     if (validate) {
       const customResult = validate(value)
-      if (customResult !== true) {
-        return customResult
-      }
+      if (customResult !== true) return customResult
     }
     const defaultValidation = getValidationFunction()
     return defaultValidation ? defaultValidation(value) : true
@@ -62,22 +84,26 @@ export const RegisterField = ({
 
   const fieldId = `field-${name}`
   const useDefaultCountries = type === "select" && options.length === 0
-  
+
+  /*************************************** Field Rendering ***************************************/
   return (
     <div>
+      {/* Label */}
       <label htmlFor={fieldId} className="block font-medium">{text}:</label>
       
+      {/* Select Field */}
       {type === "select" ? (
         <select 
           id={fieldId} 
           name={name} 
           {...register(name, {
-            required: required ? { message: "Este campo es obligatorio.", value: true } : undefined
+            required: required ? { message: requiredFieldErrorMessage, value: true } : undefined
           })}
           className="p-2 w-full bg-white border rounded focus:outline-none"
         >
           <option value="">Selecciona una opción</option>
 
+          {/* Default Country List */}
           {useDefaultCountries ? (
             <>
               <optgroup label="🌍 Europa">
@@ -101,6 +127,7 @@ export const RegisterField = ({
         </select>
 
       ) : type === "textarea" ? (
+        // Textarea Field
         <textarea
           id={fieldId}
           name={name}
@@ -110,8 +137,8 @@ export const RegisterField = ({
           })}
           rows="4"
         />
-
       ) : (
+        // Input Field (text, email, password, etc.)
         <Input
           id={fieldId}
           name={name}
@@ -125,6 +152,7 @@ export const RegisterField = ({
         />
       )}
 
+      {/* Display validation errors */}
       <FieldErrorP error={formState?.errors[name]} />
     </div>
   )

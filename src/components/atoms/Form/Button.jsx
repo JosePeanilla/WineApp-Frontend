@@ -1,12 +1,22 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
+
+/************************************************** External Dependencies ***************************************************/
 import React from "react"
 
+/**************************************************************************************************
+ * Button Component:
+ * Reusable button component with support for multiple visual variants.
+ * - Applies consistent base styles and predefined color variants
+ * - Logs button render and click events for traceability
+ * - Accepts custom className, children and other native props
+ **************************************************************************************************/
 const logger = new Logger("Button")
 
 export const Button = ({ children, className, variant = "primary", ...props }) => {
+  /*************************************** Base + Variant Styles ***************************************/
   const baseStyles = "rounded-md py-2 px-4 transition-colors duration-300"
-  
+
   const variants = {
     muyFuerte: "bg-[#211103] hover:bg-[#3d1308] text-white",
     fuerte: "bg-[#3d1308] hover:bg-[#7b0d1e] text-white",
@@ -16,20 +26,23 @@ export const Button = ({ children, className, variant = "primary", ...props }) =
     eliminar: "bg-red-600 hover:bg-red-700 text-white",
   }
 
+  /*************************************** Click Handler with Logging ***************************************/
   const handleClick = (event) => {
-    logger.info(`Botón "${children}" clickeado. Variante: ${variant}`)
+    logger.info(`Button "${children}" clicked. Variant: ${variant}`)
     if (props.onClick) {
       props.onClick(event)
     }
   }
 
-  logger.debug(`Renderizando botón con variante: ${variant}`)
+  /*************************************** Debug Render ***************************************/
+  logger.debug(`Rendering button with variant: ${variant}`)
 
+  /*************************************** Render Element ***************************************/
   return (
     <button
       className={`${baseStyles} ${variants[variant]} ${className || ''}`}
-      {...props}
       onClick={handleClick}
+      {...props}
     >
       {children}
     </button>

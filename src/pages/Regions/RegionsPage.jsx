@@ -1,28 +1,46 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
+
+/************************************************** External Dependencies ***************************************************/
 import { useState, useEffect } from "react"
+
+/************************************************** Internal Components ***************************************************/
 import { RegionCard } from "../../components/molecules/RegionCard"
 
+/**************************************************************************************************
+ * RegionsPage Component:
+ * This page displays a grid of wine regions retrieved from the backend.
+ * Each region includes:
+ * - Name
+ * - Description
+ * - Associated image (custom or placeholder)
+ * It logs the loading process and errors using the custom logger.
+ **************************************************************************************************/
 const logger = new Logger("RegionsPage")
 
 export const RegionsPage = () => {
-  
+  /****************************** Local State ******************************/
   const [regions, setRegions] = useState([])
 
+  /****************************** Fetch Regions Data on Mount ******************************/
   useEffect(() => {
     logger.info("Fetching regions data...")
 
-    fetch(`${import.meta.env.VITE_SERVER_URL}/regions`) 
-      .then((response) => response.json()) 
+    fetch(`${import.meta.env.VITE_SERVER_URL}/regions`)
+      .then((response) => response.json())
       .then((data) => {
         if (!data || !data.data) {
           logger.warn("No region data received from API")
           return
         }
 
+        /****************************** Normalize Region Data ******************************/
+        /*
+         * Ensures each region has a proper `id` and assigns custom images.
+         */
         const regionsWithCorrectID = data.data.map(region => ({
           ...region,
-          id: region.id || region._id 
+          id: region.id || region._id
         }))
 
         const regionImages = {
@@ -46,24 +64,32 @@ export const RegionsPage = () => {
       })
       .catch((error) => {
         logger.error("Error fetching regions:", error)
-      }) 
+      })
   }, [])
 
+  /****************************** Render Regions Page ******************************/
   return (
     <section id="regions_page" className="container mx-auto px-4">
-      <h1 className="text-center text-2xl font-bold my-6">Descubre las regiones y sus características</h1>
-      
-      {/* Tarjetas */}
+      {/* Page Title */}
+      <h1 className="text-center text-2xl font-bold my-6">
+        Descubre las regiones y sus características
+      </h1>
+
+      {/* Regions Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {regions.length > 0 ? (
           regions.map((region, index) => (
-            <div key={region.id}
-            className={index === 9 ? "col-span-3 flex justify-center" : ""}>
-            <RegionCard region={region} />
+            <div
+              key={region.id}
+              className={index === 9 ? "col-span-3 flex justify-center" : ""}
+            >
+              <RegionCard region={region} />
             </div>
           ))
         ) : (
-          <p className="text-center text-lg col-span-full">No hay regiones disponibles.</p>
+          <p className="text-center text-lg col-span-full">
+            No hay regiones disponibles.
+          </p>
         )}
       </div>
     </section>

@@ -1,26 +1,32 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
+
+/************************************************** External dependencies ***************************************************/
 import React, { useContext, useRef, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { notify } from "/src/utils/notifications"
+
+/************************************************** Internal components ***************************************************/
 import { AuthContext } from "/src/context/AuthContext"
 import { ReviewForm } from "./ReviewForm"
 import { useWineReview } from "/src/hooks/useWineReview"
-import { Link } from "react-router-dom"
-import { notify } from "/src/utils/notifications"
 
 const logger = new Logger("WineReview")
 
 export const WineReview = ({ wineId, reviews, onReviewSubmitted, editingReview, setEditingReview }) => {
   const { user } = useContext(AuthContext)
   const { handleReviewSubmit, handleReviewUpdate } = useWineReview(wineId)
-  const formRef = useRef(null) 
+  const formRef = useRef(null)
 
+  /*************************************** Scroll to review form when editing ***************************************/
   useEffect(() => {
     if (editingReview && formRef.current) {
-      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" }) 
+      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
       logger.info("Desplazando vista al formulario de edición.")
     }
   }, [editingReview])
 
+  /*************************************** Validate wine ID ***************************************/
   if (!wineId) {
     logger.error("No se recibió un ID de vino válido en WineReview.")
     return <p className="text-red-500">Error: No se puede cargar la sección de reseñas.</p>
@@ -28,6 +34,7 @@ export const WineReview = ({ wineId, reviews, onReviewSubmitted, editingReview, 
 
   logger.info(`Renderizando WineReview para el vino ID: ${wineId}`)
 
+  /*************************************** Submit review logic ***************************************/
   const submitReview = async (review) => {
     try {
       if (editingReview) {
@@ -48,6 +55,7 @@ export const WineReview = ({ wineId, reviews, onReviewSubmitted, editingReview, 
     }
   }
 
+  /*************************************** Check user authentication ***************************************/
   if (!user) {
     logger.info("Usuario no logueado intentando ver la sección de reseñas")
     return (
@@ -63,6 +71,7 @@ export const WineReview = ({ wineId, reviews, onReviewSubmitted, editingReview, 
     )
   }
 
+  /*************************************** Check user role ***************************************/
   if (user.role !== "consumers") {
     logger.info("Usuario con rol distinto de 'consumer' intentando comentar")
     return (
@@ -70,14 +79,15 @@ export const WineReview = ({ wineId, reviews, onReviewSubmitted, editingReview, 
         <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md text-center">
           <h2 className="text-lg font-semibold mb-4">Acceso Restringido</h2>
           <p className="mb-4">
-          Lo sentimos, pero esta acción está disponible solo para usuarios con perfil <strong>consumidor</strong>.
-          Si crees que deberías tener acceso, por favor, contacta con soporte.
+            Lo sentimos, pero esta acción está disponible solo para usuarios con perfil <strong>consumidor</strong>.
+            Si crees que deberías tener acceso, por favor, contacta con soporte.
           </p>
         </div>
       </section>
     )
   }
 
+  /*************************************** Check if user already reviewed ***************************************/
   const userHasReviewed = reviews?.length > 0 && reviews.some((review) => review.user?._id === user.id)
 
   if (userHasReviewed && !editingReview) {
@@ -94,6 +104,7 @@ export const WineReview = ({ wineId, reviews, onReviewSubmitted, editingReview, 
     )
   }
 
+  /*************************************** Render Review Form ***************************************/
   return (
     <section className="mt-6">
       <div ref={formRef} />  
@@ -103,7 +114,6 @@ export const WineReview = ({ wineId, reviews, onReviewSubmitted, editingReview, 
         editingReview={editingReview}
         onCancelEdit={() => {
           logger.info("El usuario canceló la edición de la reseña.")
-          notify.info("El usuario canceló la edición de la reseña.")
           setEditingReview(null)
         }}
       />

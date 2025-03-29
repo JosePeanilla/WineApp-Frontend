@@ -1,7 +1,11 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
+
+/************************************************** External Dependencies ***************************************************/
 import React, { useState, useEffect } from "react"
 import StarRatings from "react-star-ratings"
+
+/************************************************** Internal Components ***************************************************/
 import { Button } from "/src/components/atoms/Form"
 import { notify } from "/src/utils/notifications"
 
@@ -11,6 +15,7 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCan
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState("")
 
+  /*************************************** Load the review for editing if applicable ***************************************/
   useEffect(() => {
     if (editingReview) {
       logger.info(`Cargando reseña en edición con ID: ${editingReview._id}`)
@@ -23,6 +28,7 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCan
     }
   }, [editingReview])
 
+  /*************************************** Handle form submission ***************************************/
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!rating) {
@@ -54,6 +60,7 @@ export const ReviewForm = ({ wineId, onReviewSubmit, editingReview = null, onCan
     logger.info("Formulario de reseña enviado con éxito")
   }
 
+  /*************************************** Render the review form UI ***************************************/
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-lg font-semibold text-center mb-2">Tu valoración</h2>

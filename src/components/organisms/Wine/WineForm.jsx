@@ -1,6 +1,7 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 
+/************************************************** External Dependencies ***************************************************/
 import { useContext, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useCloudinaryUpload } from "/src/hooks/useCloudinaryUpload"
@@ -12,6 +13,7 @@ import { america, europa } from "/src/utils/countries"
 import { grapeVarieties } from "/src/utils/grapeVarieties"
 import { notify } from "/src/utils/notifications"
 
+/************************************************** WineForm Component ***************************************************/
 export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
   const logger = new Logger("WineForm")
   const { register, handleSubmit, formState, reset, setValue, watch } = useForm({ defaultValues: wine || {} })
@@ -22,6 +24,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
   const [regionCountryMap, setRegionCountryMap] = useState({}) 
   const [isManualCountrySelection, setIsManualCountrySelection] = useState(false)
 
+  /*************************************** Fetch Regions from Server ***************************************/
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/regions`)
       .then((res) => res.json())
@@ -38,6 +41,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
       .catch((error) => console.error("Error al obtener regiones:", error))
   }, [])
 
+  /*************************************** Reset form values when the wine changes ***************************************/
   useEffect(() => {
     if (wine) {
       Object.keys(wine).forEach((key) => {
@@ -53,6 +57,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
     }
   }, [wine, setValue, reset])
 
+  /*************************************** Handle country change when region is selected manually ***************************************/
   const selectedRegion = watch("region")
   useEffect(() => {
     if (selectedRegion && regionCountryMap[selectedRegion] && !isManualCountrySelection) {
@@ -60,18 +65,22 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
     }
   }, [selectedRegion, setValue, regionCountryMap, isManualCountrySelection])
 
+  /*************************************** Handle when country is changed manually ***************************************/
   const handleCountryChange = () => {
     setIsManualCountrySelection(true) 
   }
 
+  /*************************************** Form submission handler ***************************************/
   const onSubmit = async (data) => {
     try {
+      // Check if user is authenticated and has winery role
       if (!user || user.role !== "wineries") {
         throw new Error("Solo las bodegas pueden agregar vinos. Asegúrate de estar autenticado correctamente.")
       }
 
       const wineryId = user.id
 
+      // Get the selected region data
       const selectedRegionData = regions.find(region => region._id === data.region)
       if (!selectedRegionData) {
         throw new Error("La región ingresada no existe en la base de datos.")
@@ -79,6 +88,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
 
       let imageUrl = wine?.image || ""
 
+      // Handle image upload if a new image is provided
       if (data.image && data.image.length > 0 && data.image[0] instanceof File) {
         const imageResult = await uploadImage(data.image[0])
         if (imageResult.error) throw imageResult.error
@@ -92,6 +102,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
         image: imageUrl, 
       }
 
+      // Check if the wine already exists and update or insert it
       const wineId = wine?.id || wine?._id
       const result = await upsertWine(wineData, wineId)
       
@@ -106,9 +117,10 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
     }
   }
 
+  /*************************************** Render the wine form UI ***************************************/
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)} noValidate>
-      {/* Nombre del Vino */}
+      {/* Wine Name */}
       <RegisterField
         name="name"
         text="Nombre del Vino"
@@ -118,7 +130,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
         formState={formState}
       />
 
-      {/* Tipo de Vino */}
+      {/* Wine Type */}
       <RegisterField
         name="type"
         text="Tipo de Vino"
@@ -134,7 +146,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
         ]}
       />
 
-      {/* Tipo de Uva */}
+      {/* Grape Type */}
       <RegisterField
         name="grapeType"
         text="Tipo de Uva"
@@ -145,7 +157,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
         options={grapeVarieties.map(grape => ({ value: grape, label: grape }))}
       />
 
-      {/* Año */}
+      {/* Year */}
       <RegisterField
         name="year"
         text="Año"
@@ -155,7 +167,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
         formState={formState}
       />
 
-      {/* Descripción */}
+      {/* Description */}
       <RegisterField
         name="description"
         text="Descripción"
@@ -165,17 +177,17 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
         formState={formState}
       />
 
-      {/* Descripción Adicional */}
+      {/* Additional Description */}
       <RegisterField
         name="additionalDescription"
         text="Descripción Adicional"
         type="textarea"
-        required={false} // No es obligatorio
+        required={false} // Not mandatory
         register={register}
         formState={formState}
       />
 
-      {/* Precio */}
+      {/* Price */}
       <RegisterField
         name="price"
         text="Precio (€)"
@@ -185,7 +197,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
         formState={formState}
       />
 
-      {/* Región */}
+      {/* Region */}
       <RegisterField
         name="region"
         text="Región"
@@ -196,7 +208,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
         options={regions.map(region => ({ value: region._id, label: region.name }))}
       />
 
-      {/* País */}
+      {/* Country */}
       <RegisterField
         name="country"
         text="País"
@@ -207,7 +219,7 @@ export const WineForm = ({ wine = null, onSuccess, onCancel }) => {
         onChange={handleCountryChange}
       />
 
-      {/* Imagen */}
+      {/* Image */}
       <div>
         <label htmlFor="image">Imagen del vino:</label>
         <input type="file" {...register("image")} />

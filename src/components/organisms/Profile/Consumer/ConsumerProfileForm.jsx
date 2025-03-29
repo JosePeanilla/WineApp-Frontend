@@ -1,17 +1,20 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
 
+/************************************************** External dependencies ***************************************************/
 import { useContext } from "react"
 import { AuthContext } from "/src/context/AuthContext"
 import { ProfileForm } from "/src/components/molecules/Profile/Form"
-import { america, europa } from "/src/utils/countries" 
 import { notify } from "/src/utils/notifications"
 
+/************************************************** ConsumerProfileForm Component ***************************************************/
 export const ConsumerProfileForm = ({ user, navigate }) => {
   const logger = new Logger("ConsumerProfileForm")
   const { setUser } = useContext(AuthContext) 
 
+  /*************************************** Handle form submission ***************************************/
   const handleOnSubmit = async (formData) => {
+    // Check if the new form data is the same as the current user data
     const isSameData = Object.keys(formData).every(key => formData[key] === user[key])
 
     if (isSameData) {
@@ -22,6 +25,7 @@ export const ConsumerProfileForm = ({ user, navigate }) => {
     try {
       logger.debug("Enviando datos al backend:", formData)
 
+      // Make an API call to update the user's profile data
       const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/users/consumers/${user.id}`, {
         method: "PUT",
         headers: {
@@ -38,6 +42,7 @@ export const ConsumerProfileForm = ({ user, navigate }) => {
 
       notify.success("Perfil actualizado correctamente!")
 
+      // Update user state with the new profile data
       setUser((prevUser) => ({ 
         ...prevUser, 
         ...formData,
@@ -47,13 +52,14 @@ export const ConsumerProfileForm = ({ user, navigate }) => {
 
       logger.info("Perfil actualizado con éxito")
       
-      navigate("/")
+      navigate("/") // Redirect to home page after successful update
     } catch (err) {
       logger.error("Error en la actualización del perfil:", err)
       notify.error(`${err?.msg || "Error desconocido"}`)
     }
   }
 
+  // Define the fields for the profile form
   const formFields = [
     { /* Name */
       name: "name",
@@ -80,6 +86,7 @@ export const ConsumerProfileForm = ({ user, navigate }) => {
    }
   ]
 
+  /*************************************** Render Profile Form ***************************************/
   return (
     <ProfileForm
       formFields={formFields}
