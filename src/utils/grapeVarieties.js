@@ -1,3 +1,10 @@
+/**************************************************************************************************
+ * Grape Varieties Array:
+ * This module exports a constant 'grapeVarieties' which is an array containing the names of
+ * various grape varieties commonly used in wine production. These varieties are useful for filtering,
+ * selection, or displaying detailed information in the application.
+ **************************************************************************************************/
+
 export const grapeVarieties = [
     "Albariño",
     "Barbera",
@@ -23,4 +30,5 @@ export const grapeVarieties = [
     "Vermentino",
     "Viognier",
     "Zinfandel"
-]
+  ]
+  

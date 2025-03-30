@@ -1,15 +1,26 @@
 /************************************************** Internal logger ***************************************************/
 import { Logger } from "/src/utils/Logger.jsx"
+
+/************************************************** External Dependencies ***************************************************/
 import { useState, useContext, useCallback } from "react"
 import { AuthContext } from "/src/context/AuthContext"
 
+/**************************************************************************************************
+ * useWineReview Hook:
+ * Encapsula toda la lógica para:
+ * - Obtener, crear, actualizar y eliminar reseñas de un vino
+ * - Calcular la valoración media
+ * - Añadir el flag `isOwner` a cada reseña si pertenece al usuario actual
+ **************************************************************************************************/
 export const useWineReview = (wineId) => {
-  const { user } = useContext(AuthContext) 
+  const logger = new Logger("useWineReview")
+  const { user } = useContext(AuthContext)
+
+  /****************************** Local State ******************************/
   const [reviews, setReviews] = useState([])
   const [averageRating, setAverageRating] = useState(0)
-  
-  const logger = new Logger("useWineReview")
 
+  /****************************** Fetch All Reviews ******************************/
   const fetchReviews = useCallback(async () => {
     try {
       if (!wineId) {
@@ -29,13 +40,13 @@ export const useWineReview = (wineId) => {
 
       const updatedReviews = data.data.map((review) => ({
         ...review,
-        isOwner: user && review.user?._id === user._id, 
+        isOwner: user && review.user?._id === user._id,
       }))
 
       setReviews(updatedReviews)
-      setAverageRating(
-        updatedReviews.length > 0 ? updatedReviews.reduce((sum, r) => sum + r.rating, 0) / updatedReviews.length : 0
-      )
+
+      const totalRating = updatedReviews.reduce((sum, r) => sum + r.rating, 0)
+      setAverageRating(updatedReviews.length > 0 ? totalRating / updatedReviews.length : 0)
 
       logger.info(`Cargadas ${updatedReviews.length} reseñas para el vino ID: ${wineId}`)
     } catch (err) {
@@ -43,6 +54,7 @@ export const useWineReview = (wineId) => {
     }
   }, [wineId, user])
 
+  /****************************** Submit New Review ******************************/
   const handleReviewSubmit = async (newReview) => {
     try {
       logger.info(`Enviando nueva reseña para el vino ID: ${wineId}`)
@@ -60,7 +72,8 @@ export const useWineReview = (wineId) => {
       if (!response.ok) throw new Error(responseData.error || "Error al enviar la valoración")
 
       logger.info(`Reseña enviada correctamente para el vino ID: ${wineId}`)
-      
+
+      // Actualizamos lista y recargamos desde backend
       setReviews((prevReviews) => [...prevReviews, responseData.data])
       fetchReviews()
     } catch (err) {
@@ -68,6 +81,7 @@ export const useWineReview = (wineId) => {
     }
   }
 
+  /****************************** Update Existing Review ******************************/
   const handleReviewUpdate = async (updatedReview) => {
     try {
       logger.info(`Actualizando reseña ID: ${updatedReview._id} para el vino ID: ${wineId}`)
@@ -86,12 +100,15 @@ export const useWineReview = (wineId) => {
 
       logger.info(`Reseña ID: ${updatedReview._id} actualizada con éxito para el vino ID: ${wineId}`)
 
-      setReviews(reviews.map((rev) => (rev._id === updatedReview._id ? updatedData.data : rev)))
+      setReviews((prev) =>
+        prev.map((rev) => (rev._id === updatedReview._id ? updatedData.data : rev))
+      )
     } catch (error) {
       logger.error("Error al actualizar la reseña:", error)
     }
   }
 
+  /****************************** Delete Review ******************************/
   const handleReviewDelete = async (reviewId) => {
     try {
       logger.warn(`Eliminando reseña ID: ${reviewId} para el vino ID: ${wineId}`)
@@ -101,12 +118,21 @@ export const useWineReview = (wineId) => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
 
-      setReviews(reviews.filter((rev) => rev._id !== reviewId))
+      setReviews((prev) => prev.filter((rev) => rev._id !== reviewId))
+
       logger.info(`Reseña ID: ${reviewId} eliminada con éxito para el vino ID: ${wineId}`)
     } catch (error) {
       logger.error("Error al eliminar la reseña:", error)
     }
   }
 
-  return { reviews, averageRating, fetchReviews, handleReviewSubmit, handleReviewUpdate, handleReviewDelete }
+  /****************************** Return API ******************************/
+  return {
+    reviews,
+    averageRating,
+    fetchReviews,
+    handleReviewSubmit,
+    handleReviewUpdate,
+    handleReviewDelete,
+  }
 }
