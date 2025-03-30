@@ -31,6 +31,7 @@ import { SocketNotifications } from "./components/molecules/Socket/SocketNotific
 import { HomePage } from "/src/pages/Home"
 import { LoginPage } from "/src/pages/Login"
 import { RegisterPage } from "/src/pages/Register"
+import { EmailVerificationPage } from "/src/pages/EmailVerification"
 import { WinesPage } from "/src/pages/Wines"
 import { WinePage } from "/src/pages/Wine"
 import { RegionsPage } from "/src/pages/Regions"
@@ -42,6 +43,7 @@ import { AboutPage } from "/src/pages/AboutPage"
 import { ContactPage } from "/src/pages/Contact"
 import { TermsPage } from "/src/pages/TermsPage"
 import { AccessDeniedPage } from "/src/pages/AccessDenied"
+import { NotFoundPage } from "/src/pages/NotFound"
 
 /* ToastContainer for displaying transient notifications across the app */
 import { ToastContainer } from "react-toastify"
@@ -132,6 +134,7 @@ export const AppContent = () => {
             {/* User authentication routes */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/email-verified" element={<EmailVerificationPage />} />
             {/* Wine-related routes */}
             <Route path="/wines" element={<WinesPage />} />
             <Route path="/wines/:id" element={<WinePage />} />
@@ -152,7 +155,7 @@ export const AppContent = () => {
             {/* Access Denied page for users failing age verification or lacking permissions */}
             <Route path="/access-denied" element={<AccessDeniedPage />} />
             {/* Fallback route: displays a not-found message for undefined paths */}
-            <Route path="*" element={<h2>Add here the not-found page</h2>} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
         {!isAccessDeniedPage && <Footer />}

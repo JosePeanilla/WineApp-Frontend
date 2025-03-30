@@ -5,9 +5,10 @@ import { notify } from "/src/utils/notifications"
 /************************************************** Internal components ***************************************************/
 import { FormContainer, Button } from "/src/components/atoms/Form"
 import { UserCredentials } from "/src/components/atoms/Register/Credentials"
+import { ResendVerificationButton } from "/src/components/atoms/ResendVerificationButton" // ⬅️ Nuevo
 
 /************************************************** External Dependencies ***************************************************/
-import { useEffect, useCallback, useContext } from "react"
+import { useEffect, useCallback, useContext, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
@@ -32,11 +33,11 @@ export const LoginPage = () => {
   const { login } = useLogin()
   const navigate = useNavigate()
 
+  /****************************** State for Resend Verification ******************************/
+  const [submittedEmail, setSubmittedEmail] = useState(null)
+  const [showResend, setShowResend] = useState(false)
+
   /****************************** Redirect if Already Logged In ******************************/
-  /*
-   * When the component mounts or when `user` changes,
-   * if a user session exists, redirect to the homepage.
-   */
   useEffect(() => {
     if (user) {
       navigate("/")
@@ -44,13 +45,8 @@ export const LoginPage = () => {
   }, [user, navigate])
 
   /****************************** Handle Form Submission ******************************/
-  /*
-   * handleOnSubmit is triggered on form submission.
-   * - Calls the login function from useLogin hook.
-   * - If successful, retrieves the token, sets it in context, logs the success, and navigates home.
-   * - If failed, logs the error and shows a notification.
-   */
   const handleOnSubmit = useCallback(async (formsData) => {
+    setSubmittedEmail(formsData.email) // Guardamos el email
     const { error } = await login(formsData)
 
     if (!error) {
@@ -61,6 +57,10 @@ export const LoginPage = () => {
     } else {
       logger.error("Error en el inicio de sesión:", error)
       notify.error(`${error || "No se pudo iniciar sesión. Verifique sus credenciales e inténtelo de nuevo."}`)
+
+      if (error.includes("no está verificada")) {
+        setShowResend(true)
+      }
     }
   }, [])
 
@@ -81,6 +81,16 @@ export const LoginPage = () => {
           Iniciar Sesión
         </Button>
       </FormContainer>
+
+      {/* Resend Verification Button */}
+      {showResend && submittedEmail && (
+        <div className="mt-4 text-center">
+          <p className="mb-2 text-sm text-gray-600">
+            ¿No recibiste el correo de verificación?
+          </p>
+          <ResendVerificationButton email={submittedEmail} />
+        </div>
+      )}
     </section>
   )
 }
