@@ -12,7 +12,7 @@ import { notify } from "/src/utils/notifications"
  **************************************************************************************************/
 
 // Determine the backend URL depending on environment (local or deployed)
-const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000"
+const backendUrl = import.meta.env.VITE_SERVER_URL || "http://localhost:3000"
 
 export const ResendVerificationButton = ({ email }) => {
   const [loading, setLoading] = useState(false)  // Track loading state for the request
